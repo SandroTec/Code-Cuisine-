@@ -36,8 +36,34 @@ header {
     box-sizing: border-box;
 }
 
+.image-container {
+    width: 480px;
+    position: relative;
+    
+}
+
 .design-img {
-    width: 400px;
+    width: 480px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: -15%;
+}
+
+.design-img-2 {
+    width: 480px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 26.5%;
+}
+
+.design-img-3 {
+    width: 480px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 65%;
 }
 
 .left-hand-side {
@@ -48,15 +74,32 @@ header {
 }
 
 .left-hand-side button {
-    width: 183px;
+    width: auto;
     height: 60px;
     gap: 10px;
     padding-top: 16px;
     padding-right: 26px;
     padding-bottom: 16px;
     padding-left: 26px;
-    color: #396039;
+    color: #008000;
+    
+    margin-top: 70px;
+    background: #FAF0E6;
+
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.left-hand-side button:hover {
+    background: #FAE0C6;
     font-style: Bold;
+    color: #008000;
 }
 
 h1 {
