@@ -1,0 +1,111 @@
+body {
+    background: #396039;
+    box-sizing: border-box;
+    height: 100dvh;
+    width: 100dvw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    max-width: 1440px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content {
+    height: 100%;
+    max-width: 1440px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.design-img {
+    width: 400px;
+}
+
+.left-hand-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    color: white;
+}
+
+.left-hand-side button {
+    width: 183px;
+    height: 60px;
+    gap: 10px;
+    padding-top: 16px;
+    padding-right: 26px;
+    padding-bottom: 16px;
+    padding-left: 26px;
+    color: #396039;
+    font-style: Bold;
+}
+
+h1 {
+    font-family: Ubuntu;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 104px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+p {
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 48px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.cookbook-container {
+    display: flex;
+    gap: 20px;
+}
+
+.cookbook-container p {
+    font-family: Ubuntu;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 32px;
+    line-height: 104%;
+    letter-spacing: 0%;
+}
+
+.cookbook-container a {
+    color: #FAF0E6;
+    text-decoration: none;
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.white-arrow {
+    width: 40px;
+    height: 20px;
+}
