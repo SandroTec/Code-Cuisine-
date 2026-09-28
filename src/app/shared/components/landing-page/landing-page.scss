@@ -120,6 +120,7 @@ p {
 
 .cookbook-container {
     display: flex;
+    align-items: center;
     gap: 20px;
 }
 
@@ -132,7 +133,7 @@ p {
     letter-spacing: 0%;
 }
 
-.cookbook-container a {
+.cookbook-container-link {
     color: #FAF0E6;
     text-decoration: none;
     font-family: Quicksand;
@@ -144,6 +145,11 @@ p {
     display: flex;
     gap: 8px;
     align-items: center;
+    padding: 20px;
+}
+
+.cookbook-container-link:hover {
+    background: #0505051a;
 }
 
 .white-arrow {
