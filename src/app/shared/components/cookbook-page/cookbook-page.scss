@@ -1,0 +1,83 @@
+
+header {
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+header div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+header div a {
+    text-decoration: none;
+}
+
+.logo {
+    width: 120px;
+}
+
+main {
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+.cookbook-container {
+    display: flex;
+}
+
+.description-container {
+    max-width: 450px;
+    width: 100%;
+}
+
+h1 {
+    font-family: Quicksand;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 64px;
+    line-height: 65px;
+    letter-spacing: 0%;
+    color: #1e5515;
+}
+
+.liked-recipes-container {
+    display: flex;
+}
+
+.heart {
+    height: 26px;
+    width: 26px;
+}
+
+.cuisine-container {
+    margin-top: 50px;
+    display: grid; 
+    grid-template-columns: auto auto auto;
+    gap: 50px;
+}
+
+.cuisine-hl {
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 28px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+.footer-link-arrow {
+    transform: rotate(180deg);
+}
