@@ -1,1 +1,54 @@
-<p>generate-recipe-page works!</p>
+<body>
+    <header class="max-content">
+        <img src="/assets/img/logo-green.png" alt="green logo">
+    </header>
+
+    <div class="content max-content">
+        <div class="hl-desc">
+            <h1>Generate recipe</h1>
+            <p>Got random stuff in your kitchen? Pop it in-we've got the perfect recipe waiting.</p>
+        </div>
+
+        <main>
+            <form class="max-content generate-form" action="">
+                <div class="generate-form-div">
+                    <label for="">
+                        Ingredient
+                    </label>
+                    <input type="text">
+                    
+                </div>
+                <div class="generate-form-div">
+                    <label for="">
+                        Serving size
+                    </label>
+                    <div class="flex-container">
+                        <input type="number">
+                        <select name="" id="">
+                            <option value="gramm">gramm</option>
+                            <option value="gramm">ml</option>
+                            <option value="gramm">piece</option>
+                        </select>
+                        <button><img class="add-icon" src="/assets/img/add-buttons/button-default.png" alt="plus icon"></button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="ingedients-container">
+                <ul>
+                    @if (ingredients != []) {
+                        <p>List of your ingredients.</p>
+                        @for (ingredient of ingredients; track ingredient) {
+                            <li>
+                                {{ ingredient }}
+                            </li>
+                        }
+                    } @else {
+                        <p>List of your ingredients.</p>
+                    }
+                    
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>

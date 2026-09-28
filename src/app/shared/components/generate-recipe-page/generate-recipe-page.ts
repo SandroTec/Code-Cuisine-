@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './generate-recipe-page.html',
   styleUrl: './generate-recipe-page.scss',
 })
-export class GenerateRecipePage {}
+export class GenerateRecipePage {
+
+  ingredients = ['Butter', 'Nudeln'];
+
+}
