@@ -1,0 +1,154 @@
+body {
+    background: #396039;
+    box-sizing: border-box;
+    min-height: 100dvh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+header {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+main {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+h1 {
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 54px;
+    line-height: 65px;
+    letter-spacing: 0%;
+
+}
+
+.card-row {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card {
+    background: #dbe0db;
+    width: 411px;
+    height: 338px;
+    top: 21px;
+    left: 20px;
+    border-radius: 20px;
+    gap: 48px;
+    padding-top: 32px;
+    padding-right: 24px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    color: #365239;
+}
+
+.recipe-indicator {
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.recipe-title {
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.result-desc {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+
+.result-desc p {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+}
+
+.desc-image {
+    width: 100%;
+    max-width: 500px;
+    height: 200px;
+    border-radius: 25px;
+}
+
+.settings-container {
+    margin-top: 20px;
+    margin-bottom: 70px;
+    display: flex;
+    gap: 12px;
+}
+
+.setting-state {
+    padding: 10px;
+    border-radius: 50px;
+    background: #faf0e6;
+    color: #396039;
+}
+
+button {
+    width: 106px;
+    height: 60px;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 16px;
+    padding-right: 26px;
+    padding-bottom: 16px;
+    padding-left: 26px;
+
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #008000;
+}
+
+footer {
+    box-sizing: border-box;
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    gap: 8px;
+    padding: 25px;
+}
+
+footer a {
+    display: flex;
+    align-items: center;
+    gap: 8px;   
+}
