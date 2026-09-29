@@ -1,3 +1,15 @@
+body {
+    box-sizing: border-box;
+    height: 100dvh;
+    width: 100dvw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header {
     width: 100%;
     display: flex;
@@ -9,7 +21,14 @@ header {
 main {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.flex-container-space {
+    display: flex;
+    justify-content: space-between;
 }
 
 .content {
@@ -39,6 +58,7 @@ main {
     padding-top: 25px;
     padding-bottom: 25px;
     background: #3960394D;
+    padding: 20px;
 }
 
 .generate-form input {
@@ -46,6 +66,7 @@ main {
     height: 36px;
     gap: 16px;
     border-radius: 20px;
+    padding-left: 8px;
 
 }
 
@@ -105,3 +126,34 @@ main {
     background: #3960394D;
     padding-left: 30px;
 }
+
+.edit-icon:hover {
+    content: url('/assets/img/edit-icon-hover.png');
+}
+
+
+.edit-icon:active {
+    content: url('/assets/img/edit-icon-on-click.png');
+}
+
+.delete-icon:hover {
+    content: url('/assets/img/delete-icon-hover.png');
+}
+
+.delete-icon:active {
+    content: url('/assets/img/delete-icon-on-click.png');
+}
+
+.btn-container {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.next-step-btn {
+    background: #396039;
+    color: white;
+    padding: 10px;
+}
+
