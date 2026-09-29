@@ -42,6 +42,9 @@ h1 {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     background: #dbe0db;
     width: 411px;
     height: 338px;
@@ -53,6 +56,10 @@ h1 {
     padding-right: 24px;
     padding-bottom: 32px;
     padding-left: 24px;
+}
+
+.card:hover {
+    background: #D7DFD7E5;
 }
 
 .flex-container {
@@ -116,16 +123,25 @@ h1 {
     color: #396039;
 }
 
+.time-indicator {
+    display: flex;
+    align-items: center;
+    color: #396039;
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+}
+
 button {
     width: 106px;
     height: 60px;
-    opacity: 1;
     gap: 10px;
     padding-top: 16px;
     padding-right: 26px;
     padding-bottom: 16px;
     padding-left: 26px;
-
+    cursor: pointer;
     font-family: Quicksand;
     font-weight: 600;
     font-style: SemiBold;
@@ -134,11 +150,18 @@ button {
     letter-spacing: 0%;
     text-align: center;
     color: #008000;
+    border: none;
+    outline: none;
+}
+
+button:hover {
+    background: #faf0e6;
 }
 
 footer {
     box-sizing: border-box;
-    margin-top: 70px;
+    margin-top: 50px;
+    margin-bottom: 70px;
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -148,7 +171,13 @@ footer {
 }
 
 footer a {
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;   
+    padding: 12px;
+}
+
+footer a:hover {
+    background: #69856975;
 }
