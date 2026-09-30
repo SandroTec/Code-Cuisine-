@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
-interface Ingredient {
-  name: string;
-  amount: number;
-  unit: 'g' | 'ml' | 'piece';
-}
+import { Ingredient } from '../../interfaces/ingredient';
+//import { RecipeSettings } from '../../interfaces/recipe-settings.interface';
+//import { RecipeRequest } from '../../interfaces/recipe-request.interface';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -17,6 +14,9 @@ interface Ingredient {
 export class GenerateRecipePage {
 
   ingredients: Ingredient[] = [];
+  portionCounter = signal(1);
+  personCounter = signal(1);
+
 
   ingredientForm = new FormGroup({
     name: new FormControl('', {
@@ -71,4 +71,23 @@ export class GenerateRecipePage {
     }
   }
 
+  setSetting() {
+    
+  }
+
+  addToPersonCounter() {
+    this.personCounter.update(value => value + 1);
+  }
+
+  addToPortionCounter() {
+    this.portionCounter.update(value => value + 1);
+  }
+
+  reducePortionCounter() {
+    this.portionCounter.update(value => Math.max(0, value - 1));
+  }
+
+  reducePersonCounter() {
+    this.personCounter.update(value => Math.max(0, value - 1));
+  }
 }

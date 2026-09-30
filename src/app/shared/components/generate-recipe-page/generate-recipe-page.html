@@ -68,7 +68,49 @@
         </main>
 
         <main id="settingsForm" class="d-none">
-            settings form works!
+            <form ngSubmit="">
+                <h2>Choose your preferences</h2>
+                <div class="grid-container">
+                    <div>
+                        <p>
+                            How many portions you need?
+                        </p>
+                        <div>
+                            <button type="button" (click)="addToPortionCounter()"><img src="" alt="">+</button>
+                            <p> 
+                                {{ portionCounter() }} 
+                            </p>
+                            <button type="button" (click)="reducePortionCounter()"><img src="" alt="">-</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            How many are cooking?
+                        </p>
+                        <div>
+                            <button type="button" (click)="addToPersonCounter()"><img src="" alt="">+</button>
+                            <p>
+                                {{ personCounter() }}
+                            </p>
+                            <button type="button" (click)="reducePersonCounter()"><img src="" alt="">-</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="cooking-time-container">
+
+                    </div>
+
+                    <div class="cuisine-container">
+
+                    </div>
+
+                    <div class="preferences-container">
+
+                    </div>
+                </div>
+            </form>
         </main>
     </div>
 </body>

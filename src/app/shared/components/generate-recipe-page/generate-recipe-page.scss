@@ -96,6 +96,11 @@ main {
     flex-direction: column;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
 .flex-container {
     display: flex;
     gap: 8px;
