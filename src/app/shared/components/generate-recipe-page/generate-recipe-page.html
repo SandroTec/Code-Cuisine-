@@ -9,53 +9,66 @@
             <p>Got random stuff in your kitchen? Pop it in-we've got the perfect recipe waiting.</p>
         </div>
 
-        <main>
+        <main id="ingredientsForm">
             <div class="flex-container-space">
-                <form class="max-content generate-form" action="">
+                <form class="max-content generate-form"[formGroup]="ingredientForm"(ngSubmit)="addIngredient()">
                     <div class="generate-form-div">
-                        <label for="">
-                            Ingredient
+                        <label for="ingredient">
+                        Ingredient
                         </label>
-                        <input type="text">
+
+                        <input id="ingredient" type="text" formControlName="name">
                     </div>
 
                     <div class="generate-form-div">
-                        <label for="">
-                            Serving size
+                        <label for="size">
+                        Serving size
                         </label>
+
                         <div class="flex-container">
-                            <input type="number">
-                            <select name="" id="">
-                                <option value="gramm">gramm</option>
-                                <option value="gramm">ml</option>
-                                <option value="gramm">piece</option>
-                            </select>
-                            <button><img class="add-icon" src="/assets/img/add-buttons/button-default.png" alt="plus icon"></button>
+                        <input id="size" type="number" formControlName="amount">
+
+                        <select formControlName="unit">
+                            <option value="g">gram</option>
+                            <option value="ml">ml</option>
+                            <option value="piece">piece</option>
+                        </select>
+
+                        <button type="submit">
+                            <img class="add-icon" src="/assets/img/add-buttons/button-default.png" alt="plus icon">
+                        </button>
                         </div>
                     </div>
                 </form>
 
                 <div class="ingedients-container">
+                    <p>List of your ingredients.</p>
+
                     <ul>
-                        @if (ingredients != []) {
-                            <p>List of your ingredients.</p>
-                            @for (ingredient of ingredients; track ingredient) {
-                                <li>
-                                    {{ ingredient }} <img class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon"> <img class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
-                                </li>
-                            }
-                        } @else {
-                            <p>List of your ingredients.</p>
+                        @for (ingredient of ingredients; track $index) {
+                        <li>
+                            {{ ingredient.name }}
+                            -
+                            {{ ingredient.amount }}
+                            {{ ingredient.unit }}
+
+                            <img class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon">
+
+                            <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
+                        </li>
                         }
-                        
                     </ul>
                 </div>
             </div>
-            @if (ingredients != []) {
+            @if (ingredients.length > 0) {
                 <div class="btn-container">
-                    <button class="next-step-btn">Next step</button>
+                    <button (click)="toggleDesign()" class="next-step-btn">Next step</button>
                 </div>
             }
+        </main>
+
+        <main id="settingsForm" class="d-none">
+            settings form works!
         </main>
     </div>
 </body>
