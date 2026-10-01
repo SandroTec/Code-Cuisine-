@@ -84,10 +84,11 @@ export class GenerateRecipePage {
   }
 
   reducePortionCounter() {
-    this.portionCounter.update(value => Math.max(0, value - 1));
+    this.portionCounter.update(value => Math.max(1, value - 1));
   }
 
   reducePersonCounter() {
-    this.personCounter.update(value => Math.max(0, value - 1));
+    
+    this.personCounter.update(value => Math.max(1, value - 1));
   }
 }

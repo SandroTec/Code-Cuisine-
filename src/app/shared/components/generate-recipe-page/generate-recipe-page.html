@@ -4,12 +4,12 @@
     </header>
 
     <div class="content max-content">
-        <div class="hl-desc">
-            <h1>Generate recipe</h1>
-            <p>Got random stuff in your kitchen? Pop it in-we've got the perfect recipe waiting.</p>
-        </div>
-
         <main id="ingredientsForm">
+            <div class="hl-desc">
+                <h1>Generate recipe</h1>
+                <p>Got random stuff in your kitchen? Pop it in-we've got the perfect recipe waiting.</p>
+            </div>
+
             <div class="flex-container-space">
                 <form class="max-content generate-form"[formGroup]="ingredientForm"(ngSubmit)="addIngredient()">
                     <div class="generate-form-div">
@@ -34,7 +34,7 @@
                             <option value="piece">piece</option>
                         </select>
 
-                        <button type="submit">
+                        <button class="add-ingredient-btn" type="submit">
                             <img class="add-icon" src="/assets/img/add-buttons/button-default.png" alt="plus icon">
                         </button>
                         </div>
@@ -68,46 +68,106 @@
         </main>
 
         <main id="settingsForm" class="d-none">
-            <form ngSubmit="">
+            <form class="settings-form" ngSubmit="">
                 <h2>Choose your preferences</h2>
                 <div class="grid-container">
-                    <div>
-                        <p>
+                    <div class="gap-10">
+                        <p class="settings-p">
                             How many portions you need?
                         </p>
-                        <div>
-                            <button type="button" (click)="addToPortionCounter()"><img src="" alt="">+</button>
-                            <p> 
-                                {{ portionCounter() }} 
+                        <div class="flex-container">
+                            <button class="counter-btn" type="button" (click)="reducePortionCounter()"><img src="" alt="">-</button>
+                            <p class="settings-p"> 
+                                <span class="bg-counter">{{ portionCounter() }}</span> Portions
                             </p>
-                            <button type="button" (click)="reducePortionCounter()"><img src="" alt="">-</button>
+                            <button class="counter-btn" type="button" (click)="addToPortionCounter()"><img src="" alt="">+</button>
                         </div>
                     </div>
-                    <div>
-                        <p>
+                    <div class="gap-10">
+                        <p class="settings-p">
                             How many are cooking?
                         </p>
-                        <div>
-                            <button type="button" (click)="addToPersonCounter()"><img src="" alt="">+</button>
-                            <p>
-                                {{ personCounter() }}
+                        <div class="flex-container">
+                            <button class="counter-btn" type="button" (click)="reducePersonCounter()"><img src="" alt="">-</button>
+                            <p class="settings-p">
+                                <span class="bg-counter">{{ personCounter() }}</span> Person
                             </p>
-                            <button type="button" (click)="reducePersonCounter()"><img src="" alt="">-</button>
+                            <button class="counter-btn" type="button" (click)="addToPersonCounter()"><img src="" alt="">+</button>
                         </div>
                     </div>
                 </div>
 
-                <div>
+                <div class="bg-color-form">
                     <div class="cooking-time-container">
-
+                        <h3><img src="/assets/img/time-icon.png" alt="cooking-time-icon"> Cooking time:</h3>
+                        <div class="flex-container">
+                            <div class="fld-c-container">
+                                <button type="button" class="settings-btn">
+                                    Quick
+                                </button>
+                                <span>
+                                    ab to 20min
+                                </span>
+                            </div>
+                            <div class="fld-c-container">
+                                <button type="button" class="settings-btn">
+                                    Medium
+                                </button>
+                                <span>
+                                    25-40min
+                                </span>
+                            </div>
+                            <div class="fld-c-container">
+                                <button type="button" class="settings-btn">
+                                    Complex
+                                </button>
+                                <span>
+                                    over 45min
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="cuisine-container">
-
+                        <h3><img src="/assets/img/world-icon.png" alt="world-icon"> Cuisine</h3>
+                        <div class="flex-container">
+                            <button type="button" class="settings-btn">
+                                German
+                            </button>
+                            <button type="button" class="settings-btn">
+                                Italian
+                            </button>
+                            <button type="button" class="settings-btn">
+                                Indian
+                            </button>
+                            <button type="button" class="settings-btn">
+                                Japanese
+                            </button>
+                            <button type="button" class="settings-btn">
+                                Gourmet
+                            </button>
+                            <button type="button" class="settings-btn">
+                                Fusion
+                            </button>
+                        </div>
                     </div>
 
                     <div class="preferences-container">
-
+                        <h3><img src="/assets/img/fork_spoon.png" alt="cuterly-icon"> Diet preferences</h3>
+                        <div class="flex-container">
+                            <button type="button" class="settings-btn">
+                                Vegetarian
+                            </button>
+                            <button type="button" class="settings-btn">
+                                Vegan
+                            </button>
+                            <button type="button" class="settings-btn">
+                                Keto
+                            </button>
+                            <button type="button" class="settings-btn">
+                                No preferences
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
