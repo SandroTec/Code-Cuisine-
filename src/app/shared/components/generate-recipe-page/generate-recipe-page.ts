@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ingredient } from '../../interfaces/ingredient';
 import { RecipeSettings } from '../../interfaces/recipe-settings';
-//import { RecipeRequest } from '../../interfaces/recipe-request';
+import { RecipeRequest } from '../../interfaces/recipe-request';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -106,6 +106,28 @@ export class GenerateRecipePage {
 
   setPreferences(preferenceValue: RecipeSettings['preferences']) {
     this.preferences.set(preferenceValue);
+  }
+
+  getSettigns(): RecipeSettings | null {
+    if (!this.complexity() || !this.cuisine) return null;
+    
+    return {
+      portions: this.portionCounter(),
+      persons: this.personCounter(),
+      complexity: this.complexity()!,
+      cuisine: this.cuisine()!,
+      preferences: this.preferences(),
+    }
+  }
+
+  generateRecipe() {
+    const settings = this.getSettigns();
+    if (!settings) return;
+    const request: RecipeRequest = {
+      ingredients: this.ingredients,
+      settings: settings
+    }
+    console.log(request);
   }
 
 }
