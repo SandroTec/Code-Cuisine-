@@ -99,6 +99,7 @@ button {
     height: 36px;
     gap: 16px;
     border-radius: 20px;
+    padding: 8px;
 }
 
 .generate-form select:focus {
@@ -210,9 +211,13 @@ h2 {
 }
 
 .counter-btn {
-    border: 1px solid black !important;
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+    gap: 10px;
+    background: none;
 }
 
 .counter-btn p {
@@ -229,6 +234,15 @@ h2 {
     padding-bottom: 1px;
     padding-left: 5px;
 }
+
+.counter-btn:hover {
+    background: #E7ECE7;
+}
+
+.counter-btn:active {
+    background: #C4D0C4;
+}
+
 
 .bg-color-form {
     background: #39603933;

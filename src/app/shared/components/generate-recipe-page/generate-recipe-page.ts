@@ -100,6 +100,12 @@ export class GenerateRecipePage {
     this.complexity.set(complexityLevel);
   }
 
-  
+  setCusine(cusineValue: RecipeSettings['cuisine']) {
+    this.cuisine.set(cusineValue);
+  }
+
+  setPreferences(preferenceValue: RecipeSettings['preferences']) {
+    this.preferences.set(preferenceValue);
+  }
 
 }

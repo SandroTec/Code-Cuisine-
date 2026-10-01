@@ -77,11 +77,11 @@
                             How many portions you need?
                         </p>
                         <div class="flex-container">
-                            <button class="counter-btn" type="button" (click)="reducePortionCounter()"><img src="" alt="">-</button>
+                            <button class="counter-btn" type="button" (click)="reducePortionCounter()"><img class="minus-icon" src="/assets/img/minus-default.png" alt="minus-icon"></button>
                             <p class="settings-p"> 
                                 <span class="bg-counter">{{ portionCounter() }}</span> Portions
                             </p>
-                            <button class="counter-btn" type="button" (click)="addToPortionCounter()"><img src="" alt="">+</button>
+                            <button class="counter-btn" type="button" (click)="addToPortionCounter()"><img class="plus-icon" src="/assets/img/plus-icon-default.png" alt="plus icon"></button>
                         </div>
                     </div>
                     <div class="gap-10">
@@ -89,11 +89,11 @@
                             How many are cooking?
                         </p>
                         <div class="flex-container">
-                            <button class="counter-btn" type="button" (click)="reducePersonCounter()"><img src="" alt="">-</button>
+                            <button class="counter-btn" type="button" (click)="reducePersonCounter()"><img class="minus-icon" src="/assets/img/minus-default.png" alt="minus-icon"></button>
                             <p class="settings-p">
                                 <span class="bg-counter">{{ personCounter() }}</span> Person
                             </p>
-                            <button class="counter-btn" type="button" (click)="addToPersonCounter()"><img src="" alt="">+</button>
+                            <button class="counter-btn" type="button" (click)="addToPersonCounter()"><img class="plus-icon" src="/assets/img/plus-icon-default.png" alt="plus icon"></button>
                         </div>
                     </div>
                 </div>
@@ -132,22 +132,22 @@
                     <div class="cuisine-container">
                         <h3><img src="/assets/img/world-icon.png" alt="world-icon"> Cuisine</h3>
                         <div class="flex-container">
-                            <button type="button" class="settings-btn">
+                            <button (click)="setCusine('German')" [class.selected]="cuisine() === 'German'" type="button" class="settings-btn">
                                 German
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setCusine('Italian')" [class.selected]="cuisine() === 'Italian'" type="button" class="settings-btn">
                                 Italian
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setCusine('Indian')" [class.selected]="cuisine() === 'Indian'" type="button" class="settings-btn">
                                 Indian
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setCusine('Japanese')" [class.selected]="cuisine() === 'Japanese'" type="button" class="settings-btn">
                                 Japanese
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setCusine('Gourmet')" [class.selected]="cuisine() === 'Gourmet'" type="button" class="settings-btn">
                                 Gourmet
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setCusine('Fusion')" [class.selected]="cuisine() === 'Fusion'" type="button" class="settings-btn">
                                 Fusion
                             </button>
                         </div>
@@ -156,16 +156,16 @@
                     <div class="preferences-container">
                         <h3><img src="/assets/img/fork_spoon.png" alt="cuterly-icon"> Diet preferences</h3>
                         <div class="flex-container">
-                            <button type="button" class="settings-btn">
+                            <button (click)="setPreferences('Vegetarian')" [class.selected]="preferences() === 'Vegetarian'" type="button" class="settings-btn">
                                 Vegetarian
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setPreferences('Vegan')" [class.selected]="preferences() === 'Vegan'" type="button" class="settings-btn">
                                 Vegan
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setPreferences('Keto')" [class.selected]="preferences() === 'Keto'" type="button" class="settings-btn">
                                 Keto
                             </button>
-                            <button type="button" class="settings-btn">
+                            <button (click)="setPreferences('No preferences')" [class.selected]="preferences() === 'No preferences'" type="button" class="settings-btn">
                                 No preferences
                             </button>
                         </div>
