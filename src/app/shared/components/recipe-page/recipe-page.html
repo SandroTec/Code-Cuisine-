@@ -9,10 +9,15 @@
     <main>
         <div class="hl-desc">
             <div>
-                <span></span>
-                <h1></h1>
-                <div></div>
+                <span id="recipe-time"></span>
+                <h1 id="recipeTitle"></h1>
+                <div>
+                    <p></p>
+                    <p><img src="" alt="chef icon"></p>
+                    <p><img src="" alt="chef icon"></p>
+                </div>
             </div>
+        </div>
 
             <section>
                 <div>
@@ -21,8 +26,24 @@
                     <img src="" alt="">
                 </div>
                 <div>
-                    <div></div>
-                    <div></div>
+                    <div>
+                        <p></p>
+                        <ul>
+                            @for (ingredient of ingredients; track $index) {
+                                <li></li>
+                            }
+                            
+                        </ul>
+                    </div>
+                    <div>
+                        <p></p>
+                        <ul>
+                            @for (extraIngredient of extraIngredients; track $index) {
+                                <li></li>
+                            }
+                            
+                        </ul>
+                    </div>
                 </div>
             </section>
 
@@ -33,10 +54,28 @@
                     <img src="" alt="">
                 </div>
                 <div>
-                    <div></div>
-                    <div></div>
+                    <p></p>
+                    <ul>
+                        @for (direction of directions; track $index) {
+                            <li></li>
+                        }                    
+                    </ul>
                 </div>
             </section>
-        </div>
+        
+            <div>
+                <p>Just finished this meal?</p>
+                <span>Give it a heart, so that the others know this is delicious.</span>
+                <img src="" alt="green heart">
+            </div>
     </main>
+
+    <footer>
+        <p>Find inspiration for your next culinary adventure!</p>
+        <button>Cookbook</button>
+    </footer>
+
+    <div>
+        <a href="">Generate new recipe <img src="" alt="green arrow"></a>
+    </div>
 </body>

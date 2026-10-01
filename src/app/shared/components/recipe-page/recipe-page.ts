@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './recipe-page.html',
   styleUrl: './recipe-page.scss',
 })
-export class RecipePage {}
+export class RecipePage {
+  ingredients = [];
+  extraIngredients = [];
+  directions = [];
+}
