@@ -38,7 +38,7 @@ form {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 20px;
+    gap: 40px;
 }
 
 button {
@@ -184,6 +184,20 @@ button {
     cursor: pointer;
 }
 
+.link-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.link-container a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
 h2 {
     font-family: Quicksand;
     font-weight: 600;
@@ -301,4 +315,34 @@ h3 {
 
 .settings-btn:active {
     background: #39603933;
+}
+
+.settings-btn.selected {
+  background: #39603933;
+}
+
+.form-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-footer button {
+    margin-top: 40px;
+    width: auto;
+    height: 62px;
+    padding-top: 16px;
+    padding-right: 26px;
+    padding-bottom: 16px;
+    padding-left: 26px;
+    background: #396039;
+    
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #FAF0E6;
 }

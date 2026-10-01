@@ -2,8 +2,8 @@ import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ingredient } from '../../interfaces/ingredient';
-//import { RecipeSettings } from '../../interfaces/recipe-settings.interface';
-//import { RecipeRequest } from '../../interfaces/recipe-request.interface';
+import { RecipeSettings } from '../../interfaces/recipe-settings';
+//import { RecipeRequest } from '../../interfaces/recipe-request';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -14,9 +14,13 @@ import { Ingredient } from '../../interfaces/ingredient';
 export class GenerateRecipePage {
 
   ingredients: Ingredient[] = [];
-  portionCounter = signal(1);
+  portionCounter = signal(2);
   personCounter = signal(1);
 
+  //Cuisine settings:
+  complexity = signal<RecipeSettings['complexity'] | null> (null);
+  cuisine = signal<RecipeSettings['cuisine'] | null> (null);
+  preferences = signal<RecipeSettings['preferences']>('No preferences');
 
   ingredientForm = new FormGroup({
     name: new FormControl('', {
@@ -91,4 +95,11 @@ export class GenerateRecipePage {
     
     this.personCounter.update(value => Math.max(1, value - 1));
   }
+
+  setComplexity(complexityLevel: RecipeSettings['complexity']) {
+    this.complexity.set(complexityLevel);
+  }
+
+  
+
 }

@@ -47,11 +47,9 @@
                     <ul>
                         @for (ingredient of ingredients; track $index) {
                         <li>
-                            {{ ingredient.name }}
-                            -
                             {{ ingredient.amount }}
                             {{ ingredient.unit }}
-
+                            {{ ingredient.name }}
                             <img class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon">
 
                             <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
@@ -68,6 +66,9 @@
         </main>
 
         <main id="settingsForm" class="d-none">
+            <div class="link-container">
+                <a (click)="toggleDesign()"><img src="/assets/img/Arrow-green.png" alt="green arrow"> Ingredients</a>
+            </div>
             <form class="settings-form" ngSubmit="">
                 <h2>Choose your preferences</h2>
                 <div class="grid-container">
@@ -102,7 +103,7 @@
                         <h3><img src="/assets/img/time-icon.png" alt="cooking-time-icon"> Cooking time:</h3>
                         <div class="flex-container">
                             <div class="fld-c-container">
-                                <button type="button" class="settings-btn">
+                                <button (click)="setComplexity('Quick')" [class.selected]="complexity() === 'Quick'" type="button" class="settings-btn">
                                     Quick
                                 </button>
                                 <span>
@@ -110,7 +111,7 @@
                                 </span>
                             </div>
                             <div class="fld-c-container">
-                                <button type="button" class="settings-btn">
+                                <button (click)="setComplexity('Medium')" [class.selected]="complexity() === 'Medium'" type="button" class="settings-btn">
                                     Medium
                                 </button>
                                 <span>
@@ -118,7 +119,7 @@
                                 </span>
                             </div>
                             <div class="fld-c-container">
-                                <button type="button" class="settings-btn">
+                                <button (click)="setComplexity('Complex')" [class.selected]="complexity() === 'Complex'" type="button" class="settings-btn">
                                     Complex
                                 </button>
                                 <span>
@@ -169,6 +170,10 @@
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit">Generate a recipe</button>
                 </div>
             </form>
         </main>
