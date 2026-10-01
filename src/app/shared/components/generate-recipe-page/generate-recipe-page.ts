@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ingredient } from '../../interfaces/ingredient';
 import { RecipeSettings } from '../../interfaces/recipe-settings';
 import { RecipeRequest } from '../../interfaces/recipe-request';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -21,6 +22,8 @@ export class GenerateRecipePage {
   complexity = signal<RecipeSettings['complexity'] | null> (null);
   cuisine = signal<RecipeSettings['cuisine'] | null> (null);
   preferences = signal<RecipeSettings['preferences']>('No preferences');
+
+  private recipeService = inject(RecipeService);
 
   ingredientForm = new FormGroup({
     name: new FormControl('', {
@@ -128,6 +131,15 @@ export class GenerateRecipePage {
       settings: settings
     }
     console.log(request);
+
+    this.recipeService.generateRecipe(request).subscribe({
+      next: response => {
+        console.log('n8n response:', response);
+      },
+      error: error => {
+        console.error('n8n error:', error);
+      }
+    });
   }
 
 }
