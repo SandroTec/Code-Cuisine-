@@ -1,22 +1,37 @@
 <body>
-    <header>
-        <img src="" alt="">
-        <a href=""></a>
+    <header class="max-content">
+        <img src="/assets/img/logo-green.png" alt="logo green">
+        <a><img src="/assets/img/Arrow-green.png" alt="green arrow"> Cookbook</a>
     </header>
     <div class="btn-container">
         <button>Generate a recipe</button>
     </div>
 
-    <main>
+    <main class="max-content">
         <div class="cuisine-hl-visuals">
-            <img src="" alt="">
-            <img src="" alt="">
-            <h1></h1>
-            <img src="" alt="">
-            <img src="" alt="">
+            <img src="/assets/img/cuisine-list-hero.png" alt="hero image">
+            <h1>cusine: {{ cusine }}</h1>
         </div>
         <div class="list-container">
-            
+            <ul>
+                @for (cusineItem of cusineList; track $index) {
+                    <li>
+                        <div class="meal-container">
+                            <div>
+                                <p><img src="" alt="time icon"> Cooking time: <span id="cookingTimeDisplay"></span></p>
+                                <h2> {{ cusineItem }} </h2>
+                            </div>
+                            <div class="stats-container">
+                                <p class="preference"></p>
+                                <p class="complexity"></p>
+                                <p class="like-counter"><img src="" alt="green heart"></p>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+                
+            </ul>
         </div>
     </main>
 

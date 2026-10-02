@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cookbook-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './cookbook-page.html',
   styleUrl: './cookbook-page.scss',
 })
-export class CookbookPage {}
+export class CookbookPage {
+
+  cusine = signal('');
+
+}
