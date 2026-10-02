@@ -18,6 +18,34 @@ header {
     gap: 20px;
 }
 
+.btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.btn-container button {
+    margin-right: 5%;
+    width: auto;
+    height: 62px;
+    padding-top: 16px;
+    padding-right: 26px;
+    padding-bottom: 16px;
+    padding-left: 26px;
+    background: #396039;
+    color: #FAF0E6;
+    cursor: pointer;
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+
+}
+
 .cuisine-hl-visuals {
     display: flex;
     flex-direction: column;
@@ -25,12 +53,20 @@ header {
 }
 
 .cuisine-hl-visuals h1 {
-    margin-top: 50px;
+    margin-top: 60px;
     position: absolute;
+
+    font-family: Quicksand;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 40px;
+    line-height: 104%;
+    letter-spacing: 0%;
+    color: #10310B;
 }
 
 .cuisine-hl-visuals img {
-    width: 80%;
+    width: 90%;
 }
 
 .list-container {
@@ -38,4 +74,116 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.flex-container {
+    display: flex;
+    gap: 20px;
+}
+
+ul {
+  list-style: none;
+  counter-reset: meal-counter;
+  padding: 0;
+}
+
+li {
+  counter-increment: meal-counter;
+  position: relative;
+  padding-left: 60px;
+  margin: 18px 0;
+  cursor: pointer;
+}
+
+li::before {
+  content: counter(meal-counter);
+
+  position: absolute;
+  left: 0;
+  top: 70%;
+  transform: translateY(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  background: #F6E3CF;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+.meal-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+
+    height: 66px;
+    border-radius: 16px;
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+}
+
+.cooking-time-txt {
+    display: flex;
+    align-items: center;
+
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+}
+
+.cooking-time-txt img {
+    width: 18px;
+    height: 18px;
+}
+
+h2 {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #1E5515;
+}
+
+.stats-container {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.preference, .complexity, .like-counter {
+    background: #39603933;
+    width: auto;
+    height: 32px;
+    border-radius: 30px;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #10310B;
+}
+
+.like-counter img {
+    width: 18px;
+    height: 18px;
 }
