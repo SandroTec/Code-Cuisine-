@@ -1,33 +1,52 @@
 <body>
-    <header>
+    <header class="max-content">
         <div>
             <img class="logo" src="/assets/img/logo-green.png" alt="logo green">
             <a href=""> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
         </div>
     </header>
 
-    <main>
-        <div class="hl-desc">
+    <main class="max-content">
+        <div class="hl-desc grid-container-2">
             <div>
-                <span id="recipe-time"></span>
-                <h1 id="recipeTitle"></h1>
-                <div>
-                    <p></p>
+                <p><img src="" alt="time-icon"> Cooking time <span id="recipe-time"></span></p>
+                <h1 id="recipeTitle">Recipe title</h1>
+                <div class="flex-container">
+                    <p>Cooking person <span id="personCounter"></span></p>
                     <p><img src="" alt="chef icon"></p>
                     <p><img src="" alt="chef icon"></p>
+                </div>
+            </div>
+            <div>
+                <div class="flex-container">
+                    <p>preference</p>
+                    <p>complexity</p>
+                    <p id="like-counter"><img src="" alt="green heart"></p>
+                </div>
+                <span>Nutritianl information</span>
+
+                <div class="grid-container-4">
+                    <p>Energie</p>
+                    <p>Protein</p>
+                    <p>Fat</p>
+                    <p>Carbs</p>
+
+                    <p id="e-display"></p>
+                    <p id="p-display"></p>
+                    <p id="f-display"></p>
+                    <p id="c-display"></p>
                 </div>
             </div>
         </div>
 
             <section>
-                <div>
-                    <img src="" alt="">
+                <div class="section-header">
+                    <img src="/assets/img/directions-hero.png" alt="ingredients hero image">
                     <h2>Ingredients</h2>
-                    <img src="" alt="">
                 </div>
-                <div>
-                    <div>
-                        <p></p>
+                <div class="grid-container-2">
+                    <div class="centered-list">
+                        <p>Your Ingredients</p>
                         <ul>
                             @for (ingredient of ingredients; track $index) {
                                 <li></li>
@@ -35,8 +54,8 @@
                             
                         </ul>
                     </div>
-                    <div>
-                        <p></p>
+                    <div class="centered-list">
+                        <p>Extra Ingredients</p>
                         <ul>
                             @for (extraIngredient of extraIngredients; track $index) {
                                 <li></li>
@@ -48,34 +67,38 @@
             </section>
 
             <section>
-                <div>
-                    <img src="" alt="">
+                <div class="section-header">
+                    <img src="/assets/img/ingredients-hero.png" alt="directions hero image">
                     <h2>Directions</h2>
-                    <img src="" alt="">
                 </div>
-                <div>
-                    <p></p>
+                <div class="grid-container-2">
                     <ul>
                         @for (direction of directions; track $index) {
-                            <li></li>
+                            <li>
+                                <div class="flex-container">
+                                    <h3 class="step-hl"></h3>
+                                    <img src="" alt="chef icon">
+                                </div>
+                                <p class="step-desc"></p>
+                            </li>
                         }                    
                     </ul>
                 </div>
             </section>
         
-            <div>
+            <div class="flex-container center-container">
                 <p>Just finished this meal?</p>
                 <span>Give it a heart, so that the others know this is delicious.</span>
                 <img src="" alt="green heart">
             </div>
     </main>
 
-    <footer>
+    <footer class="max-content">
         <p>Find inspiration for your next culinary adventure!</p>
         <button>Cookbook</button>
     </footer>
 
-    <div>
+    <div class="max-content under-footer">
         <a href="">Generate new recipe <img src="" alt="green arrow"></a>
     </div>
 </body>
