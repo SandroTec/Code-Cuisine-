@@ -18,6 +18,18 @@ header {
     gap: 20px;
 }
 
+.logo{
+    cursor: pointer;
+}
+
+header a {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 8px;
+}
+
 .btn-container {
     width: 100%;
     display: flex;

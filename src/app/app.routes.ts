@@ -11,6 +11,6 @@ export const routes: Routes = [
     {path:"cookbook", component:CookbookPage},
     {path:"generate-recipe", component:GenerateRecipePage},
     {path:"recipe-result", component:RecipeResultPage},
-    {path:"recipe", component:RecipePage},
+    {path:"recipe/cuisine.id", component:RecipePage},
     {path:"cuisine-list/:cuisine", component:CuisineListPage},
 ]

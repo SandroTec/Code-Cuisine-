@@ -10,4 +10,6 @@ export class RecipePage {
   ingredients = [];
   extraIngredients = [];
   directions = [];
+
+  
 }

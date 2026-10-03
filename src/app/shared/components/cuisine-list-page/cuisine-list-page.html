@@ -1,7 +1,7 @@
 <body>
     <header class="max-content">
-        <img src="/assets/img/logo-green.png" alt="logo green">
-        <a><img src="/assets/img/Arrow-green.png" alt="green arrow"> Cookbook</a>
+        <img class="logo" [routerLink]="['']" role="link" src="/assets/img/logo-green.png" alt="logo green">
+        <a [routerLink]="['../../cookbook']" role="link"><img src="/assets/img/Arrow-green.png" alt="green arrow"> Cookbook</a>
     </header>
     <div class="btn-container max-content">
         <button [routerLink]="['../../generate-recipe']" role="link">Generate a recipe</button>
