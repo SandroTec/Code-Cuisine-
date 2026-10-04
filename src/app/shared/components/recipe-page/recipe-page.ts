@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { Recipe } from '../../interfaces/recipe';
+import { Nutrition } from '../../interfaces/nutrition';
 
 @Component({
   selector: 'app-recipe-page',
@@ -12,13 +13,18 @@ import { Recipe } from '../../interfaces/recipe';
 export class RecipePage {
   
   recipeService = inject(RecipeService);
+  private router = inject(Router);
 
-  currentRecipe = this.recipeService.currentRecipe();
+  ngOnInit() {
+    const recipe = this.recipeService.currentRecipe();
+    if (!recipe) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+  }
+
+  currentRecipe = this.recipeService.currentRecipe;
   
 
-  //ngOnInit() {
-  //  this.ingredients = this.recipeService.ingredients;
-  //  this.extraIngredients = this.recipeService.extraIngredients;
-  //  this.directions = this.recipeService.directions;
-  //}
 }

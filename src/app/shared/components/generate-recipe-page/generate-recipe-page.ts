@@ -5,6 +5,7 @@ import { Ingredient } from '../../interfaces/ingredient';
 import { RecipeSettings } from '../../interfaces/recipe-settings';
 import { RecipeRequest } from '../../interfaces/recipe-request';
 import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../interfaces/recipe';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -133,12 +134,11 @@ export class GenerateRecipePage {
       ingredients: this.ingredients,
       settings: settings
     }
-    console.log(request);
 
     this.recipeService.generateRecipe(request).subscribe({
     next: response => {
-      const recipe = response.output;
-      console.log(recipe);
+      const recipe:Recipe = JSON.parse(response.output);
+
       this.recipeService.setRecipe(recipe);
       this.router.navigate(['/recipe']);
     },

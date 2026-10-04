@@ -1,15 +1,19 @@
 <body>
+
+
     <header class="max-content">
         <div>
             <img class="logo" src="/assets/img/logo-green.png" alt="logo green">
             <a href=""> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
         </div>
     </header>
+
+    @if (currentRecipe(); as recipe) {
     <main class="max-content">
         <div class="hl-desc grid-container-2">
             <div>
-                <p><img src="" alt="time-icon"> Cooking time <span id="recipe-time"></span></p>
-                <h1 id="recipeTitle">Recipe title</h1>
+                <p><img src="" alt="time-icon"> Cooking time <span id="recipe-time"> {{ recipe.cookingTime }} </span> min</p>
+                <h1 id="recipeTitle">{{ recipe.name }}</h1>
                 <div class="flex-container">
                     <p>Cooking person <span id="personCounter"></span></p>
                     <p><img src="" alt="chef icon"></p>
@@ -18,22 +22,22 @@
             </div>
             <div>
                 <div class="flex-container">
-                    <p>preference</p>
-                    <p>complexity</p>
+                    <p> {{ recipe.preferences }} </p>
+                    <p> {{ recipe.complexity }} </p>
                     <p id="like-counter"><img src="" alt="green heart"></p>
                 </div>
                 <span>Nutritianl information</span>
 
                 <div class="grid-container-4">
-                    <p>Energie</p>
-                    <p>Protein</p>
-                    <p>Fat</p>
-                    <p>Carbs</p>
+                    <p> calories </p>
+                    <p>protein</p>
+                    <p>fat</p>
+                    <p>carbs</p>
 
-                    <p id="e-display"></p>
-                    <p id="p-display"></p>
-                    <p id="f-display"></p>
-                    <p id="c-display"></p>
+                    <p id="e-display"> {{ recipe.nutritions.calories }} </p>
+                    <p id="p-display"> {{  recipe.nutritions.protein  }} </p>
+                    <p id="f-display"> {{ recipe.nutritions.fat }} </p>
+                    <p id="c-display"> {{ recipe.nutritions.carbohydrates }} </p>
                 </div>
             </div>
         </div>
@@ -47,8 +51,8 @@
                     <div class="centered-list">
                         <p>Your Ingredients</p>
                         <ul>
-                            @for (ingredient of currentRecipe().ingredients; track $index) {
-                                <li></li>
+                            @for (ingredient of recipe.ingredients; track $index) {
+                                <li> {{ ingredient.name }} </li>
                             }
                             
                         </ul>
@@ -56,8 +60,12 @@
                     <div class="centered-list">
                         <p>Extra Ingredients</p>
                         <ul>
-                            @for (extraIngredient of extraIngredients; track $index) {
-                                <li></li>
+                            @for (extraIngredient of recipe.extraIngredients; track $index) {
+                                <li> 
+                                    {{ extraIngredient.name }} 
+                                    {{ extraIngredient.amount }} 
+                                    {{ extraIngredient.unit }}
+                                </li>
                             }
                             
                         </ul>
@@ -72,13 +80,13 @@
                 </div>
                 <div class="grid-container-2">
                     <ul>
-                        @for (direction of directions; track $index) {
+                        @for (direction of recipe.directions; track $index) {
                             <li>
                                 <div class="flex-container">
                                     <h3 class="step-hl"></h3>
                                     <img src="" alt="chef icon">
                                 </div>
-                                <p class="step-desc"></p>
+                                <p class="step-desc">{{ direction }}</p>
                             </li>
                         }                    
                     </ul>
@@ -91,6 +99,7 @@
                 <img src="/assets/img/heart-default.png" alt="green heart">
             </div>
     </main>
+}
     
 
     <footer class="max-content">
