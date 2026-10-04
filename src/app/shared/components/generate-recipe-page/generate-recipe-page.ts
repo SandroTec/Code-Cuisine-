@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ingredient } from '../../interfaces/ingredient';
 import { RecipeSettings } from '../../interfaces/recipe-settings';
@@ -23,7 +23,10 @@ export class GenerateRecipePage {
   cuisine = signal<RecipeSettings['cuisine'] | null> (null);
   preferences = signal<RecipeSettings['preferences']>('No preferences');
 
-  private recipeService = inject(RecipeService);
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router
+  ) {}
 
   ingredientForm = new FormGroup({
     name: new FormControl('', {
@@ -133,13 +136,18 @@ export class GenerateRecipePage {
     console.log(request);
 
     this.recipeService.generateRecipe(request).subscribe({
-      next: response => {
-        console.log('n8n response:', response);
-      },
-      error: error => {
-        console.error('n8n error:', error);
-      }
-    });
+    next: response => {
+      const recipe = response.output;
+      console.log(recipe);
+      this.recipeService.setRecipe(recipe);
+      this.router.navigate(['/recipe']);
+    },
+
+    error: error => {
+      console.error('n8n error:', error);
+    }
+  });
+
   }
 
 }

@@ -1,19 +1,27 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { RecipeRequest } from '../interfaces/recipe-request';
 import { CuisineItem } from '../interfaces/cuisine-item';
+import { Recipe } from '../interfaces/recipe';
+import { RecipeResponse } from '../interfaces/recipeResponse';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  
+
   private http = inject(HttpClient);
   private webhookUrl = 'http://localhost:5678/webhook-test/ec7e4e3a-0690-443c-9347-e51b9e8c0ee2';
 
+  currentRecipe = signal<Recipe | null>(null);
+
   generateRecipe(request: RecipeRequest) {
-    return this.http.post(this.webhookUrl, request);
+    return this.http.post<RecipeResponse>(this.webhookUrl, request);
+  }
+
+  setRecipe(recipe: Recipe) {
+    this.currentRecipe.set(recipe);
   }
 
   germanCuisines: CuisineItem[] = [

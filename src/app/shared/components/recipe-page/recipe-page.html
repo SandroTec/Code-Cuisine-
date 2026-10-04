@@ -5,7 +5,6 @@
             <a href=""> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
         </div>
     </header>
-
     <main class="max-content">
         <div class="hl-desc grid-container-2">
             <div>
@@ -48,7 +47,7 @@
                     <div class="centered-list">
                         <p>Your Ingredients</p>
                         <ul>
-                            @for (ingredient of ingredients; track $index) {
+                            @for (ingredient of currentRecipe().ingredients; track $index) {
                                 <li></li>
                             }
                             
@@ -92,6 +91,7 @@
                 <img src="/assets/img/heart-default.png" alt="green heart">
             </div>
     </main>
+    
 
     <footer class="max-content">
         <p>Find inspiration for your next culinary adventure!</p>
@@ -99,6 +99,6 @@
     </footer>
 
     <div class="max-content under-footer">
-        <a [routerLink]="['../../generate-recipe']" role="link">Generate new recipe <img class="rotate" src="/assets/img/Arrow-green.png" alt="green arrow"></a>
+        <a [routerLink]="['/generate-recipe']" role="link">Generate new recipe <img class="rotate" src="/assets/img/Arrow-green.png" alt="green arrow"></a>
     </div>
 </body>

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { RouterLink } from '@angular/router';
+import { Recipe } from '../../interfaces/recipe';
 
 @Component({
   selector: 'app-recipe-page',
@@ -9,11 +10,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './recipe-page.scss',
 })
 export class RecipePage {
-  ingredients = [];
-  extraIngredients = [];
-  directions = [];
-
+  
   recipeService = inject(RecipeService);
+
+  currentRecipe = this.recipeService.currentRecipe();
+  
 
   //ngOnInit() {
   //  this.ingredients = this.recipeService.ingredients;
