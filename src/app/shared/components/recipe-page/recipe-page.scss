@@ -131,3 +131,16 @@ footer button {
     display: flex;
     justify-content: flex-end;
 }
+
+.under-footer a {
+    text-decoration: none;
+    color: #396039;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
