@@ -107,6 +107,11 @@ li {
   cursor: pointer;
 }
 
+li:hover {
+    background: #faf0e6;
+    border-radius: 12px;
+}
+
 li::before {
   content: counter(meal-counter);
 

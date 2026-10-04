@@ -15,7 +15,7 @@
         <div class="list-container">
             <ul>
                 @for (cuisineItem of cuisineList; track $index) {
-                    <li>
+                    <li [routerLink]="['../../recipe/', cuisineItem.id]" role="link">
                         <div class="meal-container flex-container">
                             <div>
                                 <p class="cooking-time-txt"><img src="/assets/img/time-icon.png" alt="time icon"> Cooking time: <span id="cookingTimeDisplay">  {{ cuisineItem.cookingTime }} min</span></p>
