@@ -51,6 +51,11 @@ main {
 .grid-container-2 {
     display: grid;
     grid-template-columns: auto auto;
+    gap: 20px;
+}
+
+.direction-li {
+    list-style: numeric;
 }
 
 .centered-list{
@@ -63,6 +68,8 @@ main {
     display: grid;
     grid-template-columns: auto auto auto auto;
 }
+
+
 
 section {
     width: 100%;

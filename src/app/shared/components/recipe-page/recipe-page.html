@@ -52,7 +52,11 @@
                         <p>Your Ingredients</p>
                         <ul>
                             @for (ingredient of recipe.ingredients; track $index) {
-                                <li> {{ ingredient.name }} </li>
+                                <li> 
+                                    {{ ingredient.name }} 
+                                    {{ ingredient.amount }} 
+                                    {{ ingredient.unit }} 
+                                </li>
                             }
                             
                         </ul>
@@ -78,10 +82,10 @@
                     <img src="/assets/img/ingredients-hero.png" alt="directions hero image">
                     <h2>Directions</h2>
                 </div>
-                <div class="grid-container-2">
-                    <ul>
+                <div>
+                    <ul class="grid-container-2">
                         @for (direction of recipe.directions; track $index) {
-                            <li>
+                            <li class="direction-li">
                                 <div class="flex-container">
                                     <h3 class="step-hl"></h3>
                                     <img src="" alt="chef icon">
@@ -104,7 +108,7 @@
 
     <footer class="max-content">
         <p>Find inspiration for your next culinary adventure!</p>
-        <button>Cookbook</button>
+        <button [routerLink]="['/cookbook']" role="link">Cookbook</button>
     </footer>
 
     <div class="max-content under-footer">
