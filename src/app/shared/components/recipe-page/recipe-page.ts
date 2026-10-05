@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { RouterLink, Router } from '@angular/router';
-import { Recipe } from '../../interfaces/recipe';
-import { Nutrition } from '../../interfaces/nutrition';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-page',
@@ -11,20 +9,34 @@ import { Nutrition } from '../../interfaces/nutrition';
   styleUrl: './recipe-page.scss',
 })
 export class RecipePage {
-  
+
   recipeService = inject(RecipeService);
+
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
+  currentRecipe = this.recipeService.currentRecipe;
 
   ngOnInit() {
-    const recipe = this.recipeService.currentRecipe();
-    if (!recipe) {
-      this.router.navigate(['/']);
+
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      const recipe = this.recipeService.getRecipeById(id);
+
+      if (!recipe) {
+        this.router.navigate(['/']);
+        return;
+      }
+
+      this.recipeService.setRecipe(recipe);
       return;
     }
 
+    const recipe = this.recipeService.currentRecipe();
+
+    if (!recipe) {
+      this.router.navigate(['/']);
+    }
   }
-
-  currentRecipe = this.recipeService.currentRecipe;
-  
-
 }
