@@ -12,3 +12,7 @@ export interface Recipe {
   directions: string[];
   nutritions: Nutrition;
 }
+
+export interface CuisineRecipe extends Recipe {
+  id: string;
+}
