@@ -2,51 +2,36 @@
     <header class="max-content">
         <img src="/assets/img/logo-cream-color.png" alt="cream colored logo">
     </header>
+     @if (currentRecipe(); as recipe) {
+        <main class="max-content">
+            <div class="result-desc">
+                <div>
+                    <h1>The recipe results</h1>
+                    <p>We took what you have and let our AI do the thinking. <br>
+                    Here are 3 easy recipes you can make right now!</p>
+                    <div class="settings-container">
+                        <div class="setting-state">cuisine setting</div>
+                        <div class="setting-state">time setting</div>
+                    </div>
+                </div>
+                <img class="desc-image" src="/assets/img/robot-servent.png" alt="service-image">
+            </div>
 
-    <main class="max-content">
-        <div class="result-desc">
-            <div>
-                <h1>The recipe results</h1>
-                <p>We took what you have and let our AI do the thinking. <br>
-                Here are 3 easy recipes you can make right now!</p>
-                <div class="settings-container">
-                    <div class="setting-state">cuisine setting</div>
-                    <div class="setting-state">time setting</div>
-                </div>
-            </div>
-            <img class="desc-image" src="/assets/img/robot-servent.png" alt="service-image">
-        </div>
-        <div class="card-row">
-            <div class="card">
-                <div class="flex-container">
-                    <img src="/assets/img/bell-icon.png" alt="bell icon">
-                    <span class="recipe-indicator">Recipe 1</span>
-                </div>
-                <h2 class="recipe-title"></h2>
-                <p class="time-indicator"><img src="/assets/img/time-icon.png" alt="">Cooking time</p>
-                <button>View</button>
-            </div>
-            <div class="card">
-                <div class="flex-container">
-                    <img src="/assets/img/bell-icon.png" alt="bell icon">
-                    <span class="recipe-indicator">Recipe 2</span>
-                </div>
-                <h2 class="recipe-title">bsp title</h2>
-                <p class="time-indicator"><img src="/assets/img/time-icon.png" alt="">Cooking time</p>
-                <button>View</button>
-            </div>
-            <div class="card">
-                <div class="flex-container">
-                    <img src="/assets/img/bell-icon.png" alt="bell icon">
-                    <span class="recipe-indicator">Recipe 3</span>
-                </div>
-                <h2 class="recipe-title"></h2>
-                <p class="time-indicator"><img src="/assets/img/time-icon.png" alt=""> Cooking time</p>
-                <button>View</button>
-            </div>
-        </div>
+        
+            <div class="card-row">
+                <div class="card">
+                    <div class="flex-container">
+                        <img src="/assets/img/bell-icon.png" alt="bell icon">                                <span class="recipe-indicator">Recipe 1</span>
+                    </div>
 
-    </main>
+                    <h2 class="recipe-title"> {{ recipe.name }} </h2>
+                    <p class="time-indicator"><img src="/assets/img/time-icon.png" alt="">Cooking time {{recipe.cookingTime}} min</p>
+                    <button routerLink="/recipe">View</button>
+                </div>
+            </div>
+            
+        </main>
+    }
 
     <footer class="max-content">
         <a >Generate new recipe<img class="white-arrow" src="/assets/img/Arrow 18.png" alt="white arrow"></a>

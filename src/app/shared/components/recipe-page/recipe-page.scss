@@ -12,6 +12,18 @@ body {
 
 header {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+header a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #396039;
 }
 
 main {
@@ -46,6 +58,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 70px;
 }
 
 .grid-container-2 {

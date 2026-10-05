@@ -1,18 +1,14 @@
 <body>
-
-
     <header class="max-content">
-        <div>
             <img class="logo" src="/assets/img/logo-green.png" alt="logo green">
-            <a href=""> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
-        </div>
+            <a routerLink="/recipe-result"> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
     </header>
 
     @if (currentRecipe(); as recipe) {
     <main class="max-content">
         <div class="hl-desc grid-container-2">
             <div>
-                <p><img src="" alt="time-icon"> Cooking time <span id="recipe-time"> {{ recipe.cookingTime }} </span> min</p>
+                <p><img src="/assets/img/time-icon.png" alt="time-icon"> Cooking time <span id="recipe-time"> {{ recipe.cookingTime }} </span> min</p>
                 <h1 id="recipeTitle">{{ recipe.name }}</h1>
                 <div class="flex-container">
                     <p>Cooking person <span id="personCounter"></span></p>
@@ -29,7 +25,7 @@
                 <span>Nutritianl information</span>
 
                 <div class="grid-container-4">
-                    <p> calories </p>
+                    <p>calories </p>
                     <p>protein</p>
                     <p>fat</p>
                     <p>carbs</p>

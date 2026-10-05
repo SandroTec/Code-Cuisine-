@@ -140,7 +140,7 @@ export class GenerateRecipePage {
       const recipe:Recipe = JSON.parse(response.output);
 
       this.recipeService.setRecipe(recipe);
-      this.router.navigate(['/recipe']);
+      this.router.navigate(['/recipe-result']);
     },
 
     error: error => {
