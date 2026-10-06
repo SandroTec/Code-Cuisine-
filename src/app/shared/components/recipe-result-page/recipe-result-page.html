@@ -2,7 +2,8 @@
     <header class="max-content">
         <img src="/assets/img/logo-cream-color.png" alt="cream colored logo">
     </header>
-     @if (currentRecipe(); as recipe) {
+     @if (aiRecipes(); as recipes) {
+    @if (generationSettings(); as settings) {
         <main class="max-content">
             <div class="result-desc">
                 <div>
@@ -10,27 +11,30 @@
                     <p>We took what you have and let our AI do the thinking. <br>
                     Here are 3 easy recipes you can make right now!</p>
                     <div class="settings-container">
-                        <div class="setting-state">cuisine setting</div>
-                        <div class="setting-state">time setting</div>
+                        <div class="setting-state"> {{ settings.cuisine}} </div>
+                        <div class="setting-state"> {{ settings.complexity }} </div>
+                        
                     </div>
                 </div>
                 <img class="desc-image" src="/assets/img/robot-servent.png" alt="service-image">
             </div>
-
         
             <div class="card-row">
-                <div class="card">
-                    <div class="flex-container">
-                        <img src="/assets/img/bell-icon.png" alt="bell icon">                                <span class="recipe-indicator">Recipe 1</span>
-                    </div>
+                    @for (aiRecipe of recipes; track $index) {
+                        <div class="card">
+                            <div class="flex-container">
+                                <img src="/assets/img/bell-icon.png" alt="bell icon">                                
+                                <span class="recipe-indicator">Recipe </span>
+                            </div>
 
-                    <h2 class="recipe-title"> {{ recipe.name }} </h2>
-                    <p class="time-indicator"><img src="/assets/img/time-icon.png" alt="">Cooking time {{recipe.cookingTime}} min</p>
-                    <button routerLink="/recipe">View</button>
-                </div>
+                            <h2 class="recipe-title"> {{ aiRecipe.name }} </h2>
+                            <p class="time-indicator"><img src="/assets/img/time-icon.png" alt="">Cooking time {{aiRecipe.cookingTime}} min</p>
+                            <button (click)="selectRecipe(aiRecipe)">View</button>
+                        </div>
+                    }
             </div>
-            
         </main>
+    }
     }
 
     <footer class="max-content">

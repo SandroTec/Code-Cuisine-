@@ -6,6 +6,7 @@ import { RecipeSettings } from '../../interfaces/recipe-settings';
 import { RecipeRequest } from '../../interfaces/recipe-request';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../interfaces/recipe';
+import { RecipeGenerationResult } from '../../interfaces/recipe-generation-result';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -133,21 +134,17 @@ export class GenerateRecipePage {
     const request: RecipeRequest = {
       ingredients: this.ingredients,
       settings: settings
-    }
-
+    };
+    this.recipeService.setGenerationSettings(settings);
     this.recipeService.generateRecipe(request).subscribe({
-    next: response => {
-      const recipe:Recipe = JSON.parse(response.output);
+      next: response => {
+        const result: RecipeGenerationResult = JSON.parse(response.output);
+        console.log(result.recipes);
 
-      this.recipeService.setRecipe(recipe);
-      this.router.navigate(['/recipe-result']);
-    },
-
-    error: error => {
-      console.error('n8n error:', error);
-    }
-  });
-
+        this.recipeService.setAiRecipes(result.recipes);
+        this.router.navigate(['/recipe-result']);
+      },
+      error: error => {console.error('n8n error:', error);}});
   }
-
+  
 }

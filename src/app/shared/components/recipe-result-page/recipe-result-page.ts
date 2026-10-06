@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../interfaces/recipe';
 
 
 @Component({
@@ -17,13 +18,18 @@ export class RecipeResultPage {
   private route = inject(ActivatedRoute);
 
   currentRecipe = this.recipeService.currentRecipe;
+  aiRecipes = this.recipeService.aiRecipes;
+  generationSettings = this.recipeService.generationSettings;
 
   ngOnInit() {
-
-    const recipe = this.recipeService.currentRecipe();
-
+    const recipe = this.recipeService.aiRecipes();
     if (!recipe) {
       this.router.navigate(['/']);
     }
+  }
+
+  selectRecipe(recipe: Recipe) {
+    this.recipeService.setRecipe(recipe);
+    this.router.navigate(['/recipe']);
   }
 }
