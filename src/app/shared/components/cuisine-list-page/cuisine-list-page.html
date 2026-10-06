@@ -10,21 +10,21 @@
     <main class="max-content">
         <div class="cuisine-hl-visuals">
             <img src="/assets/img/cuisine-list-hero.png" alt="hero image">
-            <h1>{{ cuisine }} cuisine</h1>
+            <h1>{{ cuisineName }} cuisine</h1>
         </div>
         <div class="list-container">
             <ul>
-                @for (cuisineItem of cuisineList; track $index) {
-                    <li [routerLink]="['/recipe/', cuisineItem.id]" role="link">
+                @for (recipe of recipes(); track recipe.id) {
+                    <li [routerLink]="['/recipe/', recipe.id]" role="link">
                         <div class="meal-container flex-container">
                             <div>
-                                <p class="cooking-time-txt"><img src="/assets/img/time-icon.png" alt="time icon"> Cooking time: <span id="cookingTimeDisplay">  {{ cuisineItem.cookingTime }} min</span></p>
-                                <h2> {{ cuisineItem.name }} </h2>
+                                <p class="cooking-time-txt"><img src="/assets/img/time-icon.png" alt="time icon"> Cooking time: <span id="cookingTimeDisplay">  {{ recipe.cookingTime }} min</span></p>
+                                <h2> {{ recipe.name }} </h2>
                             </div>
                             <div class="stats-container flex-container">
-                                <p class="preference"> {{ cuisineItem.preferences }} </p>
-                                <p class="complexity"> {{ cuisineItem.complexity }} </p>
-                                <p class="like-counter"><img src="/assets/img/heart-default.png" alt="green heart"> {{ cuisineItem.likes }} </p>
+                                <p class="preference"> {{ recipe.preferences }} </p>
+                                <p class="complexity"> {{ recipe.complexity }} </p>
+                                <p class="like-counter"><img src="/assets/img/heart-default.png" alt="green heart"> {{ recipe.likes }} </p>
                             </div>
                         </div>
                     </li>

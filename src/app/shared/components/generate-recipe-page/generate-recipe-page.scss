@@ -41,6 +41,18 @@ form {
     gap: 40px;
 }
 
+label {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: #10310B;
+    margin-bottom: 8px;
+    margin-left: 8px;
+}
+
 button {
     cursor: pointer;
 }
@@ -177,6 +189,16 @@ button {
     padding-bottom: 25px;
     background: #3960394D;
     padding-left: 30px;
+}
+
+.ingedients-container p {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: #10310B;
 }
 
 .edit-icon:hover {

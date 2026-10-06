@@ -1,6 +1,6 @@
 <body>
     <header class="max-content">
-        <img src="/assets/img/logo-cream-color.png" alt="cream colored logo">
+        <img class="logo" routerLink="/" src="/assets/img/logo-cream-color.png" alt="cream colored logo">
     </header>
      @if (aiRecipes(); as recipes) {
     @if (generationSettings(); as settings) {
@@ -38,6 +38,6 @@
     }
 
     <footer class="max-content">
-        <a >Generate new recipe<img class="white-arrow" src="/assets/img/Arrow 18.png" alt="white arrow"></a>
+        <a routerLink="/generate-recipe">Generate new recipe<img class="white-arrow" src="/assets/img/Arrow 18.png" alt="white arrow"></a>
     </footer>
 </body>
