@@ -22,8 +22,9 @@ export class RecipeResultPage {
   generationSettings = this.recipeService.generationSettings;
 
   ngOnInit() {
-    const recipe = this.recipeService.aiRecipes();
-    if (!recipe) {
+    const aiRecipes = this.recipeService.aiRecipes();
+
+    if (!aiRecipes) {
       this.router.navigate(['/']);
     }
   }

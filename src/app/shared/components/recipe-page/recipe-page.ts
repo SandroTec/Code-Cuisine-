@@ -18,23 +18,25 @@ export class RecipePage {
   currentRecipe = this.recipeService.currentRecipe;
 
   ngOnInit() {
-
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
-      const recipe = this.recipeService.getRecipeById(id);
-
-      if (!recipe) {
-        this.router.navigate(['/']);
-        return;
-      }
-
-      this.recipeService.setRecipe(recipe);
+      this.recipeService.getRecipeById(id).subscribe({
+        next: recipe => {
+          if (!recipe) {
+            this.router.navigate(['/']);
+            return;
+          }
+          this.recipeService.setRecipe(recipe);
+        },
+        error: error => {
+          console.error('Firebase error:', error);
+          this.router.navigate(['/']);
+        }
+      });
       return;
     }
-
     const recipe = this.recipeService.currentRecipe();
-
     if (!recipe) {
       this.router.navigate(['/']);
     }

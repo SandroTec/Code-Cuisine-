@@ -4,7 +4,9 @@ import { Nutrition } from './nutrition';
 export interface Recipe {
   id:string;
   name: string;
-  cookingTime: number;
+  cuisine:string;
+  cookingTime:number;
+  cookingPerson:number;
   preferences: 'Vegetarian' | 'Vegan' | 'Keto' | 'No preferences';
   complexity: 'Quick' | 'Medium' | 'Complex';
   likes: number;
