@@ -41,6 +41,26 @@ main {
     align-items: center;
 }
 
+.ingredients-hl {
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #008000;
+}
+
+.ingredients-li {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #10310B;
+}
+
 .hl-desc {
     box-sizing: border-box;
     padding: 20px;
@@ -105,6 +125,26 @@ main {
     line-height: 20px;
     letter-spacing: 0%;
     color: #396039;
+}
+
+.step-hl {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #10310B;
+}
+
+.step-desc {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
 }
 
 section {

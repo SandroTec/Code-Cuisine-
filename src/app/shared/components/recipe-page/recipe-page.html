@@ -45,10 +45,10 @@
                 </div>
                 <div class="grid-container-2">
                     <div class="centered-list">
-                        <p>Your Ingredients</p>
+                        <p class="ingredients-hl">Your Ingredients</p>
                         <ul>
                             @for (ingredient of recipe.ingredients; track $index) {
-                                <li> 
+                                <li class="ingredients-li"> 
                                     {{ ingredient.name }} 
                                     {{ ingredient.amount }} 
                                     {{ ingredient.unit }} 
@@ -58,10 +58,10 @@
                         </ul>
                     </div>
                     <div class="centered-list">
-                        <p>Extra Ingredients</p>
+                        <p class="ingredients-hl">Extra Ingredients</p>
                         <ul>
                             @for (extraIngredient of recipe.extraIngredients; track $index) {
-                                <li> 
+                                <li class="ingredients-li"> 
                                     {{ extraIngredient.name }} 
                                     {{ extraIngredient.amount }} 
                                     {{ extraIngredient.unit }}

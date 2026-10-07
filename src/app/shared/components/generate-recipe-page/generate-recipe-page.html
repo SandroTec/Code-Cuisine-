@@ -47,12 +47,16 @@
                     <ul>
                         @for (ingredient of ingredients; track $index) {
                         <li>
-                            {{ ingredient.amount }}
-                            {{ ingredient.unit }}
-                            {{ ingredient.name }}
-                            <img class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon">
+                            <div>
+                                {{ ingredient.amount }}
+                                {{ ingredient.unit }}
+                                {{ ingredient.name }}
+                            </div>
 
-                            <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
+                            <div class="icon-container">
+                                <img class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon">
+                                <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
+                            </div>
                         </li>
                         }
                     </ul>

@@ -57,6 +57,22 @@ button {
     cursor: pointer;
 }
 
+li {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.icon-container {
+    display: flex;
+    gap: 8px;
+    margin-right: 12px;
+}
+
+.icon-container img {
+    cursor: pointer;
+}
+
 .flex-container-space {
     width: 100%;
     display: flex;
@@ -404,4 +420,8 @@ h3 {
     line-height: 20px;
     letter-spacing: 0%;
     color: #FAF0E6;
+}
+
+.form-footer button:hover {
+    color: white;
 }
