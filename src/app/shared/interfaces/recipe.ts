@@ -1,5 +1,6 @@
 import { Ingredient } from './ingredient';
 import { Nutrition } from './nutrition';
+import { DirectionStep } from './direction-step';
 
 export interface Recipe {
   id:string;
@@ -12,7 +13,7 @@ export interface Recipe {
   likes: number;
   ingredients: Ingredient[];
   extraIngredients: Ingredient[];
-  directions: string[];
+  directions: DirectionStep[];
   nutritions: Nutrition;
 }
 
