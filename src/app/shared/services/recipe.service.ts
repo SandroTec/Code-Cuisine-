@@ -5,7 +5,7 @@ import { CuisineItem } from '../interfaces/cuisine-item';
 import { CuisineRecipe, Recipe } from '../interfaces/recipe';
 import { RecipeResponse } from '../interfaces/recipeResponse';
 import { RecipeSettings } from '../interfaces/recipe-settings';
-
+import { map } from 'rxjs';
 
 
 @Injectable({
@@ -38,9 +38,8 @@ export class RecipeService {
 
   private firebaseUrl = 'https://code-a-cuisine-db-default-rtdb.europe-west1.firebasedatabase.app/recipes';
 
-  
   getRecipes() {
-    return this.http.get<FirebaseRecipesResponse>(
+    return this.http.get<Record<string, CuisineRecipe>>(
       `${this.firebaseUrl}.json`
     );
   }
@@ -58,7 +57,17 @@ export class RecipeService {
     );
   }
 
-  
+  mostLikedRecipes() {
+  return this.getRecipes().pipe(
+    map(recipes => {
+      const recipeArray = Object.values(recipes);
+
+      return recipeArray.sort(
+        (a, b) => b.likes - a.likes
+      );
+    })
+  );
+}
 }
 
 export interface FirebaseRecipesResponse {

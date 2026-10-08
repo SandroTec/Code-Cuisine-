@@ -16,35 +16,24 @@
             <div class="most-liked-container">
                 <p>Most liked recipes <img class="heart" src="/assets/img/heart-default.png" alt="green heart"></p>
                 <div class="liked-recipes-container">
-                    <div class="liked-recipes-div">
-                        <div>
-                            <img src="" alt="">
-                            <span>Cooking time:</span>
-                            <img src="" alt="">
-                            <span id="likeCount"></span>
-                        </div>
-                        <p id="mealName"></p>
-                    </div>
+                    
+                    @for (recipe of mostLikedRecipes; track recipe.id) {
+                        @if (recipe) {  
+                            <div class="liked-recipes-div" >
+                                <div>
+                                    <img src="/assets/img/time-icon.png" alt="time icon">
+                                    <span>Cooking time: {{recipe.cookingTime}} min</span>
+                                    <img src="/assets/img/heart-default.png" alt="heart icon">
+                                    <span id="likeCount"> {{recipe.likes}} </span>
+                                </div>
+                                <p id="mealName"> {{recipe.name}} </p>
 
-                    <div class="liked-recipes-div">
-                        <div>
-                            <img src="" alt="">
-                            <span>Cooking time:</span>
-                            <img src="" alt="">
-                            <span id="likeCount"></span>
-                        </div>
-                        <p id="mealName"></p>
-                    </div>
-
-                    <div class="liked-recipes-div">
-                        <div>
-                            <img src="" alt="">
-                            <span>Cooking time:</span>
-                            <img src="" alt="">
-                            <span id="likeCount"></span>
-                        </div>
-                        <p id="mealName"></p>
-                    </div>
+                                
+                            </div>
+                        }@else {
+                            No liked Recipes
+                        }
+                    }
                 </div>
             </div>
         </div>
