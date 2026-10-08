@@ -242,10 +242,26 @@ li {
 }
 
 .next-step-btn {
-    background: #396039;
-    color: white;
-    padding: 10px;
     cursor: pointer;
+    width: auto;
+    height: 62px;
+    padding-top: 16px;
+    padding-right: 26px;
+    padding-bottom: 16px;
+    padding-left: 26px;
+    background: #396039;
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: #FAF0E6;
+}
+
+.next-step-btn:hover {
+    color: white;
+    background: #045e04;
 }
 
 .link-container {
@@ -424,4 +440,5 @@ h3 {
 
 .form-footer button:hover {
     color: white;
+    background: #045e04;
 }
