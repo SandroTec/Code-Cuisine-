@@ -45,22 +45,22 @@ export class RecipePage {
   }
 
   likeMeal() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.recipeService.getRecipeById(id).subscribe({
-        next: recipe => {
-          if (!recipe) {
-            this.router.navigate(['/']);
-            return;
-          }
-          this.recipeService.likeRecipe(recipe.id, recipe.likes);
+    const recipe = this.currentRecipe();
+
+    if (!recipe || !('id' in recipe)) {
+      return;
+    }
+
+    this.recipeService
+      .likeRecipe(recipe.id, recipe.likes)
+      .subscribe({
+        next: newLikes => {
+          recipe.likes = newLikes;
+          this.recipeService.setRecipe({ ...recipe });
         },
         error: error => {
-          console.error('Firebase error:', error);
-          this.router.navigate(['/']);
+          console.error('Like update failed:', error);
         }
       });
-    return;
-    }
   }
 }
