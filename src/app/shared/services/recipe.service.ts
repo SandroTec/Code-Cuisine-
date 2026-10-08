@@ -7,6 +7,7 @@ import { RecipeResponse } from '../interfaces/recipeResponse';
 import { RecipeSettings } from '../interfaces/recipe-settings';
 
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -50,6 +51,12 @@ export class RecipeService {
     );
   }
 
+  likeRecipe(recipeId: string, currentLikes: number) {
+    return this.http.put<number>(
+      `${this.firebaseUrl}/${recipeId}/likes.json`,
+      currentLikes + 1
+    );
+  }
 
   
 }
