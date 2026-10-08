@@ -1,7 +1,7 @@
 body {
     box-sizing: border-box;
-    height: 100dvh;
-    width: 100dvw;
+    height: auto;
+    width: auto;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -104,15 +104,17 @@ h1 {
 }
 
 .cuisine-container {
+    width: 100%;
     margin-top: 50px;
     display: grid; 
     grid-template-columns: auto auto auto;
+    justify-content: space-between;
     gap: 50px;
 }
 
 .cuisine-container div {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 446px;
     cursor: pointer;
     overflow: hidden;
 }
@@ -132,10 +134,10 @@ h1 {
     width: 100%;
     height: 100%;
     transition: transform 0.3s ease;
-    
+       
 }
 
-.cuisine-image:hover {
+.cuisine-container div:hover .cuisine-image {
     transform: scale(1.05);
 }
 
@@ -159,7 +161,11 @@ footer a {
     font-size: 20px;
     line-height: 20px;
     letter-spacing: 0%;
+    padding: 10px;
+}
 
+footer a:hover {
+    background: #3960391A;
 }
 
 .footer-link-arrow {
