@@ -41,6 +41,22 @@ main {
     align-items: center;
 }
 
+h1 {
+    font-family: Quicksand;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 54px;
+    line-height: 65px;
+    letter-spacing: 0%;
+    color: #1E5515;
+}
+
+.right-hand-side {
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
+}
+
 .ingredients-hl {
     font-family: Quicksand;
     font-weight: 600;
@@ -78,6 +94,35 @@ main {
     background: #39603933;
     padding: 10px;
     border-radius: 25px;
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #10310B;
+}
+
+.right-hand-side {
+    p {
+        font-family: Quicksand;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 0%;
+        text-align: center;
+        color: #10310B;
+    }
+    span {
+        font-family: Quicksand;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 18px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
 }
 
 .flex-container {
@@ -95,11 +140,11 @@ main {
 
 .grid-container-2 {
     display: grid;
-    grid-template-columns: 450px 500px;
+    grid-template-columns: 50% 50%;
     gap: 20px;
     text-align: left;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .direction-li {
@@ -114,6 +159,7 @@ main {
 }
 
 .grid-container-4 {
+    width: 400px;
     display: grid;
     grid-template-columns: auto auto auto auto;
 }

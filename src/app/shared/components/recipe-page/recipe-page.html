@@ -1,6 +1,6 @@
 <body>
     <header class="max-content">
-            <img class="logo" src="/assets/img/logo-green.png" alt="logo green">
+            <img routerLink="/" class="logo" src="/assets/img/logo-green.png" alt="logo green">
             <a routerLink="/recipe-result"> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
     </header>
 
@@ -16,7 +16,7 @@
                     <p><img src="" alt="chef icon"></p>
                 </div>
             </div>
-            <div>
+            <div class="right-hand-side">
                 <div class="flex-container">
                     <p class="tag"> {{ recipe.preferences }} </p>
                     <p class="tag"> {{ recipe.complexity }} </p>
@@ -25,15 +25,15 @@
                 <span>Nutritianl information</span>
 
                 <div class="grid-container-4">
-                    <p>calories </p>
-                    <p>protein</p>
-                    <p>fat</p>
-                    <p>carbs</p>
+                    <p><strong>Energie</strong></p>
+                    <p><strong>Protein</strong></p>
+                    <p><strong>Fat</strong></p>
+                    <p><strong>Carbs</strong></p>
 
-                    <p id="e-display"> {{ recipe.nutritions.calories }} </p>
-                    <p id="p-display"> {{  recipe.nutritions.protein  }} </p>
-                    <p id="f-display"> {{ recipe.nutritions.fat }} </p>
-                    <p id="c-display"> {{ recipe.nutritions.carbohydrates }} </p>
+                    <p id="e-display"> {{ recipe.nutritions.calories }}kcal</p>
+                    <p id="p-display"> {{  recipe.nutritions.protein  }}g</p>
+                    <p id="f-display"> {{ recipe.nutritions.fat }}g</p>
+                    <p id="c-display"> {{ recipe.nutritions.carbohydrates }}g</p>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
             <div class="flex-container center-container">
                 <p>Just finished this meal?</p>
                 <span>Give it a heart, so that the others know this is delicious.</span>
-                <img src="/assets/img/heart-default.png" alt="green heart">
+                <button (click)="likeMeal()"><img src="/assets/img/heart-default.png" alt="green heart"></button>
             </div>
     </main>
 }
