@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { Recipe } from '../../interfaces/recipe';
 
 @Component({
   selector: 'app-recipe-page',
@@ -15,13 +16,15 @@ export class RecipePage {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
+  liked = signal(false);
+
   currentRecipe = this.recipeService.currentRecipe;
 
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-
     if (id) {
+      this.checkIfLiked(id);
       this.recipeService.getRecipeById(id).subscribe({
         next: recipe => {
           if (!recipe) {
@@ -44,22 +47,37 @@ export class RecipePage {
     }
   }
 
+  checkIfLiked(id:string) {
+    const likedRecipes = JSON.parse(
+      localStorage.getItem('likedRecipes') ?? '[]'
+    ) as string[];
+    this.liked.set(likedRecipes.includes(id));
+  }
+
   likeMeal() {
     const recipe = this.currentRecipe();
+    const id = this.route.snapshot.paramMap.get('id');
 
-    if (!recipe || !('id' in recipe)) {
+    if (!id || !recipe || this.liked()) {
       return;
     }
 
     this.recipeService
-      .likeRecipe(recipe.id, recipe.likes)
+      .likeRecipe(id, recipe.likes)
       .subscribe({
         next: newLikes => {
           recipe.likes = newLikes;
           this.recipeService.setRecipe({ ...recipe });
+          const likedRecipes = JSON.parse(localStorage.getItem('likedRecipes') ?? '[]') as string[]
+          likedRecipes.push(id);
+          localStorage.setItem(
+            'likedRecipes',
+            JSON.stringify(likedRecipes)
+          );
+          this.liked.set(true);
         },
         error: error => {
-          console.error('Like update failed:', error);
+          console.error('Like failed:', error);
         }
       });
   }

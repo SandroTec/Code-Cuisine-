@@ -294,3 +294,15 @@ footer button {
     transform: rotate(180deg);
 }
 
+.like-btn {
+    background: transparent;
+    border: none;
+}
+
+.like-btn img {
+    cursor: pointer;
+}
+
+.like-btn:hover .like-img {
+    content: url('/assets/img/heart-hover.png');
+}

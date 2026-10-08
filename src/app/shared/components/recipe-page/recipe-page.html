@@ -98,7 +98,14 @@
             <div class="flex-container center-container">
                 <p>Just finished this meal?</p>
                 <span>Give it a heart, so that the others know this is delicious.</span>
-                <button (click)="likeMeal()"><img src="/assets/img/heart-default.png" alt="green heart"></button>
+                <button class="like-btn" (click)="likeMeal()">
+                    @if (liked()) {
+                        <img src="/assets/img/heart-clicked.png" alt="green heart">
+                    }@else {
+                        <img class="like-img" src="/assets/img/heart-default.png" alt="green heart">
+                    }
+                    
+                </button>
             </div>
     </main>
 }
@@ -110,6 +117,6 @@
     </footer>
 
     <div class="max-content under-footer">
-        <a [routerLink]="['/generate-recipe']" role="link">Generate new recipe <img class="rotate" src="/assets/img/Arrow-green.png" alt="green arrow"></a>
+        <a [routerLink]="['/generate-recipe']" role="link">Generate new recipe <img class="rotate like-image" src="/assets/img/Arrow-green.png" alt="green arrow"></a>
     </div>
 </body>
