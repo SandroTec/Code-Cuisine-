@@ -71,6 +71,40 @@ export class GenerateRecipePage {
     this.ingredients.splice(index, 1);
   }
 
+  editingIndex:number | null = null;
+
+  editForm = new FormGroup({
+    amount: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(0.1)
+    ]),
+    unit: new FormControl('g', Validators.required)
+  });
+
+  editIngredient(index:number) {
+    const ingredient = this.ingredients[index];
+    this.editingIndex = index;
+    this.editForm.patchValue({
+      amount: ingredient.amount,
+      unit: ingredient.unit
+    });
+  }
+
+  saveIngredient() {
+    if (this.editForm.invalid || this.editingIndex === null) {
+      this.editForm.markAllAsTouched();
+      return;
+    }
+    const { amount, unit } = this.editForm.getRawValue();
+    if (amount === null) return;
+    this.ingredients[this.editingIndex] = {
+      ...this.ingredients[this.editingIndex],
+      amount,
+      unit: unit as Ingredient['unit']
+    };
+    this.editingIndex = null;
+  }
+
   toggleDesign() {
     const ingredientDesign = document.getElementById('ingredientsForm');
     const settingsDesign = document.getElementById('settingsForm');
@@ -88,11 +122,17 @@ export class GenerateRecipePage {
   }
 
   addToPersonCounter() {
-    this.personCounter.update(value => value + 1);
+    if (this.personCounter() <= 3) {
+      this.personCounter.update(value => value + 1);
+    }else {return}
+    
   }
 
   addToPortionCounter() {
-    this.portionCounter.update(value => value + 1);
+    if (this.portionCounter() <= 11) {
+      this.portionCounter.update(value => value + 1);
+    }else {return}
+    
   }
 
   reducePortionCounter() {

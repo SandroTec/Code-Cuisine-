@@ -46,18 +46,41 @@
 
                     <ul>
                         @for (ingredient of ingredients; track $index) {
-                        <li>
-                            <div>
-                                {{ ingredient.amount }}
-                                {{ ingredient.unit }}
-                                {{ ingredient.name }}
-                            </div>
+                        
+                            @if (editingIndex === $index) {
+                                <div class="ingedients-container-div" [formGroup]="editForm">
+                                    <div class="flex-container">
+                                        <input type="number" formControlName="amount" min="1" step="1"/>
 
-                            <div class="icon-container">
-                                <img class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon">
-                                <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
-                            </div>
-                        </li>
+                                        <select formControlName="unit">
+                                            <option value="g">g</option>
+                                            <option value="ml">ml</option>
+                                            <option value="piece">piece</option>
+                                        </select>
+
+                                        <span>{{ ingredient.name }}</span>
+                                    </div>
+
+                                    <div class="icon-container">
+                                        <img (click)="saveIngredient()" class="save-icon" src="/assets/img/check-default.png" alt="edit icon">
+                                        <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
+                                    </div>
+                                </div>
+                            } @else {
+                                <li class="ingedients-container-list">
+                                    <div>
+                                        {{ ingredient.amount }}
+                                        {{ ingredient.unit }}
+                                        {{ ingredient.name }}
+                                    </div>
+
+                                    <div class="icon-container">
+                                        <img (click)="editIngredient($index)" class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon">
+                                        <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
+                                    </div>
+                                </li>
+                            }
+                        
                         }
                     </ul>
                 </div>

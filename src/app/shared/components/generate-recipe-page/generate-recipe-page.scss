@@ -73,6 +73,11 @@ li {
     cursor: pointer;
 }
 
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
 .flex-container-space {
     width: 100%;
     display: flex;
@@ -194,6 +199,14 @@ li {
     content: url('/assets/img/add-buttons/button-on-click.png');
 }
 
+.save-icon:hover {
+    content: url('/assets/img/check-hover.png');
+}
+
+.save-icon:active {
+    content: url('/assets/img/check-onClick.png');
+}
+
 .ingedients-container {
     max-width: 577px;
     width: 100%;
@@ -205,6 +218,48 @@ li {
     padding-bottom: 25px;
     background: #3960394D;
     padding-left: 30px;
+}
+
+.ingedients-container-div {
+    padding: 6px;
+    list-style: circle;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.ingedients-container-div {
+    input {
+        background: #FAF0E6CC;
+        border: none;
+        height: 36px;
+        border-radius: 20px;
+        padding-left: 8px;
+    }
+
+    select {
+        background: #FAF0E6CC;
+        border: none;
+        height: 36px;
+        border-radius: 20px;
+        padding-left: 8px;
+    }
+}
+    
+.ingedients-container-list {
+    padding: 6px;
+    list-style: circle;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.ingedients-container-list:hover {
+    background: #efe9df;
 }
 
 .ingedients-container p {
