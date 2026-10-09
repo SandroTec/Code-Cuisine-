@@ -8,6 +8,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../interfaces/recipe';
 import { RecipeGenerationResult } from '../../interfaces/recipe-generation-result';
 import { INGREDIENT_SUGGESTIONS } from '../../ingredients.data';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -21,6 +22,7 @@ export class GenerateRecipePage {
   portionCounter = signal(2);
   personCounter = signal(1);
   searchTerm = signal('');
+  isGenerating = signal(false);
 
   //Cuisine settings:
   complexity = signal<RecipeSettings['complexity'] | null> (null);
@@ -206,15 +208,17 @@ export class GenerateRecipePage {
       settings: settings
     };
     this.recipeService.setGenerationSettings(settings);
-    this.recipeService.generateRecipe(request).subscribe({
-      next: response => {
-        const result: RecipeGenerationResult = JSON.parse(response.output);
-        console.log(result.recipes);
+    this.isGenerating.set(true);
 
-        this.recipeService.setAiRecipes(result.recipes);
-        this.router.navigate(['/recipe-result']);
-      },
-      error: error => {console.error('n8n error:', error);}});
+    this.recipeService.generateRecipe(request)
+      .pipe(finalize(() => this.isGenerating.set(false)))
+      .subscribe({
+        next: response => {
+          const result: RecipeGenerationResult = JSON.parse(response.output);
+          this.recipeService.setAiRecipes(result.recipes);
+          this.router.navigate(['/recipe-result']);
+        },
+        error: error => {console.error('n8n error:', error);}});
   }
   
 }

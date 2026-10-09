@@ -539,3 +539,139 @@ h3 {
     color: white;
     background: #045e04;
 }
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(12, 20, 16, 0.94);
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+
+  h2 {
+    color: #f6e3cf;
+    font-size: 28px;
+  }
+
+  p {
+    color: #b7c7bb;
+  }
+}
+
+.cooking-pot {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 12px;
+}
+
+.pot-body {
+  position: absolute;
+  bottom: 8px;
+  left: 25px;
+
+  width: 110px;
+  height: 75px;
+
+  background: #9fbdaa;
+  border-radius: 10px 10px 36px 36px;
+
+  animation: pot-bounce 1.8s ease-in-out infinite;
+}
+
+.pot-lid {
+  position: absolute;
+  left: 20px;
+  top: 65px;
+
+  width: 120px;
+  height: 12px;
+
+  background: #dce9da;
+  border-radius: 10px;
+  z-index: 2;
+
+  animation: lid-bounce 1.8s ease-in-out infinite;
+}
+
+.steam {
+  position: absolute;
+  bottom: 105px;
+
+  width: 9px;
+  height: 35px;
+
+  border-radius: 50%;
+  background: rgba(220, 233, 218, 0.6);
+
+  animation: steam-rise 1.8s ease-out infinite;
+}
+
+.steam-1 {
+  left: 55px;
+}
+
+.steam-2 {
+  left: 80px;
+  animation-delay: 0.4s;
+}
+
+.steam-3 {
+  left: 105px;
+  animation-delay: 0.8s;
+}
+
+@keyframes steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.6);
+  }
+
+  40% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(1.3);
+  }
+}
+
+@keyframes pot-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes lid-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(-3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pot-body,
+  .pot-lid,
+  .steam {
+    animation: none;
+  }
+}

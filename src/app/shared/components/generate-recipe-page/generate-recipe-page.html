@@ -209,9 +209,26 @@
                 </div>
 
                 <div class="form-footer">
-                    <button type="button" (click)="generateRecipe()">Generate a recipe</button>
+                    <button type="button" [disabled]="isGenerating()" (click)="generateRecipe()">Generate a recipe</button>
                 </div>
             </form>
         </main>
     </div>
+
+    @if (isGenerating()) {
+        <div class="loading-overlay">
+            <div class="loading-content">
+            <div class="cooking-pot">
+                <span class="steam steam-1"></span>
+                <span class="steam steam-2"></span>
+                <span class="steam steam-3"></span>
+                <span class="pot-lid"></span>
+                <span class="pot-body"></span>
+            </div>
+
+            <h2>Your recipe is cooking...</h2>
+            <p>Our AI chef is preparing something delicious!</p>
+            </div>
+        </div>
+    }
 </body>
