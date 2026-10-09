@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, computed } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ingredient } from '../../interfaces/ingredient';
@@ -7,6 +7,7 @@ import { RecipeRequest } from '../../interfaces/recipe-request';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../interfaces/recipe';
 import { RecipeGenerationResult } from '../../interfaces/recipe-generation-result';
+import { INGREDIENT_SUGGESTIONS } from '../../ingredients.data';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -19,6 +20,7 @@ export class GenerateRecipePage {
   ingredients: Ingredient[] = [];
   portionCounter = signal(2);
   personCounter = signal(1);
+  searchTerm = signal('');
 
   //Cuisine settings:
   complexity = signal<RecipeSettings['complexity'] | null> (null);
@@ -28,13 +30,38 @@ export class GenerateRecipePage {
   constructor(
     private recipeService: RecipeService,
     private router: Router
-  ) {}
+  ) {
+      this.ingredientForm.controls.name.valueChanges.subscribe(value => {this.searchTerm.set(value ?? '')
+    });
+    this.showSuggestions = true;
+  }
+
+  ingredientSuggestions = INGREDIENT_SUGGESTIONS;
+  showSuggestions = false;
+
+  selectIngredient(ingredient: string) {
+    this.ingredientForm.patchValue(
+      { name: ingredient },
+      { emitEvent: false }
+    );
+
+    this.searchTerm.set(ingredient);
+    this.showSuggestions = false;
+  }
+
+  filteredIngredients = computed(() => {
+    const search = this.searchTerm().trim().toLowerCase();
+    if (search.length < 2) return [];
+    return this.ingredientSuggestions.filter(ingredient => ingredient.toLowerCase().includes(search)
+    ).slice(0,5);
+  });
 
   ingredientForm = new FormGroup({
     name: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required]
     }),
+    
 
     amount: new FormControl<number | null>(null, {
       validators: [
@@ -48,6 +75,8 @@ export class GenerateRecipePage {
       validators: [Validators.required]
     })
   });
+
+  
 
   addIngredient() {
     if (this.ingredientForm.invalid) {
@@ -65,6 +94,7 @@ export class GenerateRecipePage {
     };
     this.ingredients.push(ingredient);
     this.ingredientForm.reset({name: '', amount: null, unit: 'g'});
+    this.showSuggestions = false;
   }
 
   deleteIngredient(index:number) {

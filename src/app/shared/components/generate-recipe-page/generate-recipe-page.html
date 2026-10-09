@@ -17,7 +17,16 @@
                         Ingredient
                         </label>
 
-                        <input id="ingredient" type="text" formControlName="name">
+                        <input (blur)="showSuggestions = false" id="ingredient" type="text" autocomplete="off" (focus)="showSuggestions = true" formControlName="name">
+                         @if (showSuggestions && filteredIngredients().length > 0) {
+                            <ul class="ingredient-suggestions">
+                                @for (ingredient of filteredIngredients(); track ingredient) {
+                                    <li (mousedown)="$event.preventDefault()" (click)="selectIngredient(ingredient)">
+                                    {{ ingredient }}
+                                    </li>
+                                }
+                            </ul>
+                        }
                     </div>
 
                     <div class="generate-form-div">
