@@ -1,4 +1,4 @@
-import { Component, signal, inject, computed } from '@angular/core';
+import { Component, signal, inject, computed, Injectable } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ingredient } from '../../interfaces/ingredient';
@@ -8,7 +8,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../interfaces/recipe';
 import { RecipeGenerationResult } from '../../interfaces/recipe-generation-result';
 import { INGREDIENT_SUGGESTIONS } from '../../ingredients.data';
-import { finalize } from 'rxjs';
+import { finalize, firstValueFrom  } from 'rxjs';
 
 @Component({
   selector: 'app-generate-recipe-page',
@@ -200,6 +200,12 @@ export class GenerateRecipePage {
     }
   }
 
+ 
+
+  getAllRecipes() {
+      
+  }
+
   generateRecipe() {
     const settings = this.getSettigns();
     if (!settings) return;
@@ -210,26 +216,38 @@ export class GenerateRecipePage {
     this.recipeService.setGenerationSettings(settings);
     this.isGenerating.set(true);
 
-    this.recipeService.generateRecipe(request)
-      .pipe(finalize(() => this.isGenerating.set(false)))
-      .subscribe({
-        next: response => {
-          const result: RecipeGenerationResult = JSON.parse(response.output);
-          if (!Array.isArray(result.recipes) || result.recipes.length !== 3) {
-            console.error('Invalid recipe response');
-            return;
+    this.recipeService.generateRecipe(request).subscribe({
+        next: async response => {
+          try {
+            const result: RecipeGenerationResult = JSON.parse(response.output);
+            if (!Array.isArray(result.recipes) || result.recipes.length !== 3) {
+              throw new Error('Invalid recipe response');
+            }
+            const validatedRecipes = result.recipes.map(recipe => ({
+              ...recipe,
+              cuisine: this.recipeService.validateCuisine(recipe.cuisine),
+              cookingPerson: settings.persons
+            }));
+            if (!validatedRecipes.every(recipe => this.recipeService.hasBasicRecipeFields(recipe))) {
+              throw new Error('Recipe validation failed');
+            }
+            await firstValueFrom(this.recipeService.getRecipes());
+            const newRecipes = this.recipeService.filterNewRecipes(validatedRecipes);
+            if (newRecipes.length > 0) {
+              await this.recipeService.saveRecipes(newRecipes);
+            }
+            this.recipeService.setAiRecipes(validatedRecipes);
+            await this.router.navigate(['/recipe-result']);
+          } catch (error) {
+            console.error('Recipe processing error:', error);
+          } finally {
+            this.isGenerating.set(false);
           }
-          const validatedRecipes = result.recipes.map(recipe => ({
-            ...recipe, cuisine: this.recipeService.validateCuisine(recipe.cuisine)
-          }));
-          if (!validatedRecipes.every(recipe => this.recipeService.hasBasicRecipeFields(recipe))) {
-            console.error('At least one recipe is invalid');
-            return;
-          }
-          this.recipeService.setAiRecipes(validatedRecipes);
-          this.router.navigate(['/recipe-result']);
         },
-        error: error => {console.error('n8n error:', error);}});
+        error: error => {
+          console.error('n8n error:', error);
+          this.isGenerating.set(false);
+        }});
   }
   
 }

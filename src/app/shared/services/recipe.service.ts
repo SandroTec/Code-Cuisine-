@@ -7,8 +7,8 @@ import { RecipeResponse } from '../interfaces/recipeResponse';
 import { RecipeSettings } from '../interfaces/recipe-settings';
 import { Preferences } from '../interfaces/recipe';
 import { Complexity } from '../interfaces/recipe';
-import { map } from 'rxjs';
-
+import { map, tap } from 'rxjs';
+import { Database, ref, push, update } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +18,27 @@ export class RecipeService {
   private http = inject(HttpClient);
   private webhookUrl = 'http://localhost:5678/webhook-test/ec7e4e3a-0690-443c-9347-e51b9e8c0ee2';
 
+
+  private db = inject(Database);
+
+  async saveRecipes(recipes: Recipe[]): Promise<void> {
+    const updates: Record<string, Recipe> = {};
+    for (const recipe of recipes) {
+      const recipeRef = push(ref(this.db, 'recipes'));
+      const id = recipeRef.key;
+
+      if (!id) {
+        throw new Error('Could not generate recipe ID');
+      }
+      updates[`recipes/${recipe.cuisine}/${id}`] = recipe;
+    }
+    await update(ref(this.db), updates);
+  }
+
   currentRecipe = signal<Recipe | null>(null);
   aiRecipes = signal<Recipe[] | null>(null);
   generationSettings = signal<RecipeSettings | null>(null);
+  allRecipes = signal<Record<string, CuisineRecipe>>({});
 
   generateRecipe(request: RecipeRequest) {
     return this.http.post<RecipeResponse>(this.webhookUrl, request);
@@ -41,9 +59,13 @@ export class RecipeService {
   private firebaseUrl = 'https://code-a-cuisine-db-default-rtdb.europe-west1.firebasedatabase.app/recipes';
 
   getRecipes() {
-    return this.http.get<Record<string, CuisineRecipe>>(
-      `${this.firebaseUrl}.json`
-    );
+    return this.http
+      .get<Record<string, CuisineRecipe> | null>(`${this.firebaseUrl}.json`)
+      .pipe(
+        tap(recipes => {
+          this.allRecipes.set(recipes ?? {});
+        })
+      );
   }
 
   getRecipeById(id: string) {
@@ -60,14 +82,10 @@ export class RecipeService {
   }
 
   mostLikedRecipes() {
-    return this.getRecipes().pipe(
-      map(recipes => {
-        const recipeArray = Object.values(recipes);
-
-        return recipeArray.sort(
-          (a, b) => b.likes - a.likes
-        );
-      })
+    return this.getRecipes().pipe(map(recipes => {
+      const recipeArray = Object.values(recipes ?? {});
+      return recipeArray.sort((a, b) => b.likes - a.likes);
+    })
     );
   }
 
@@ -93,7 +111,10 @@ export class RecipeService {
     'Complex'
   ];
 
-  validateCuisine(cuisine: string): Cuisine {
+  validateCuisine(cuisine: unknown): Cuisine {
+    if (typeof cuisine !== 'string') {
+    return 'fusion';
+  }
     const aiCuisine = cuisine.toLowerCase().trim();
       if (this.allowedCuisines.some(allowed => allowed === aiCuisine)) {
         return aiCuisine as Cuisine;
@@ -103,16 +124,16 @@ export class RecipeService {
   }
 
   hasBasicRecipeFields(recipe: unknown): boolean {
-    if (typeof recipe !== 'object' || recipe === null) {
+    if (typeof recipe !== 'object' || recipe === null || Array.isArray(recipe)) {
       return false;
     }
-    if (!('name' in recipe) || typeof recipe.name !== 'string') {
+    if (!('name' in recipe) || typeof recipe.name !== 'string' || recipe.name.trim() === '') {
       return false;
     }
-    if (!('cookingTime' in recipe) || typeof recipe.cookingTime !== 'number') {
+    if (!('cookingTime' in recipe) || typeof recipe.cookingTime !== 'number' || !Number.isFinite(recipe.cookingTime) || recipe.cookingTime <= 0) {
       return false;
     }
-    if (!('cookingPerson' in recipe) || typeof recipe.cookingPerson !== 'number') {
+    if (!('cookingPerson' in recipe) || typeof recipe.cookingPerson !== 'number' || !Number.isInteger(recipe.cookingPerson) ||recipe.cookingPerson <= 0) {
       return false;
     }
     if (!('preferences' in recipe) || typeof recipe.preferences !== 'string' || !this.allowedPreferences.some(value => value === recipe.preferences)) {
@@ -121,23 +142,54 @@ export class RecipeService {
     if (!('complexity' in recipe) || typeof recipe.complexity !== 'string' || !this.allowedComplexities.some(value => value === recipe.complexity)) {
       return false;
     }
-    if (!('likes' in recipe) || typeof recipe.likes !== 'number') {
+    if (!('likes' in recipe) || typeof recipe.likes !== 'number' || !Number.isInteger(recipe.likes) ||recipe.likes < 0) {
       return false;
     }
-    if (!('ingredients' in recipe) || !Array.isArray(recipe.ingredients)) {
+    if (!('cuisine' in recipe) || typeof recipe.cuisine !== 'string' || !this.allowedCuisines.some(value => value === recipe.cuisine)) {
       return false;
     }
-    if (!('extraIngredients' in recipe) || !Array.isArray(recipe.extraIngredients)) {
+    if (!('ingredients' in recipe) || !Array.isArray(recipe.ingredients) || recipe.ingredients.length === 0 || !recipe.ingredients.every(ingredient => this.isValidIngredient(ingredient))) {
       return false;
     }
-    if (!('directions' in recipe) || !Array.isArray(recipe.directions)) {
+    if (!('extraIngredients' in recipe) || !Array.isArray(recipe.extraIngredients) || !recipe.extraIngredients.every(ingredient => this.isValidIngredient(ingredient))) {
       return false;
     }
-   if (!('nutritions' in recipe) || typeof recipe.nutritions !== 'object' || recipe.nutritions === null || Array.isArray(recipe.nutritions)) {
-    return false;
-  }
+    if (!('directions' in recipe) || !Array.isArray(recipe.directions) || recipe.directions.length === 0 || !recipe.directions.every(direction => typeof direction === 'string' && direction.trim() !== '')) {
+      return false;
+    }
+    if (!('nutritions' in recipe) || typeof recipe.nutritions !== 'object' || recipe.nutritions === null || Array.isArray(recipe.nutritions)) {
+      return false;
+    }
     return true;
   }
+
+  private isValidIngredient(value: unknown): boolean {
+    if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+      return false;
+    }
+    if (!('name' in value) || typeof value.name !== 'string' || value.name.trim() === '') {
+      return false;
+    }
+    if (!('amount' in value) || typeof value.amount !== 'number' || !Number.isFinite(value.amount) || value.amount <= 0) {
+      return false;
+    }
+    if (!('unit' in value) || typeof value.unit !== 'string' || value.unit.trim() === '') {
+      return false;
+    }
+    return true;
+  }
+
+  filterNewRecipes(newRecipes: Recipe[]): Recipe[] {
+    const existingRecipes = Object.values(this.allRecipes());
+
+    return newRecipes.filter(newRecipe => {
+      return !existingRecipes.some(existingRecipe =>
+        existingRecipe.name.trim().toLowerCase() ===
+        newRecipe.name.trim().toLowerCase()
+      );
+    });
+  }
+
 }
 
 export interface FirebaseRecipesResponse {

@@ -27,18 +27,14 @@ export class CuisineListPage {
         this.recipes.set([]);
         return;
       }
-
       this.recipeService.getRecipes().subscribe({
         next: data => {
-          const allRecipes = Object.values(data);
-
+          const allRecipes = Object.values(data ?? {});
           const filteredRecipes = allRecipes.filter(recipe =>
             recipe.cuisine?.toLowerCase() === cuisine.toLowerCase()
           );
-
           this.recipes.set(filteredRecipes);
         },
-
         error: error => {
           console.error('Firebase error:', error);
           this.recipes.set([]);
