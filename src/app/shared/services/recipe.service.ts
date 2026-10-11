@@ -2,9 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { RecipeRequest } from '../interfaces/recipe-request';
 import { CuisineItem } from '../interfaces/cuisine-item';
-import { CuisineRecipe, Recipe } from '../interfaces/recipe';
+import { Cuisine, CuisineRecipe, Recipe } from '../interfaces/recipe';
 import { RecipeResponse } from '../interfaces/recipeResponse';
 import { RecipeSettings } from '../interfaces/recipe-settings';
+import { Preferences } from '../interfaces/recipe';
+import { Complexity } from '../interfaces/recipe';
 import { map } from 'rxjs';
 
 
@@ -58,16 +60,84 @@ export class RecipeService {
   }
 
   mostLikedRecipes() {
-  return this.getRecipes().pipe(
-    map(recipes => {
-      const recipeArray = Object.values(recipes);
+    return this.getRecipes().pipe(
+      map(recipes => {
+        const recipeArray = Object.values(recipes);
 
-      return recipeArray.sort(
-        (a, b) => b.likes - a.likes
-      );
-    })
-  );
-}
+        return recipeArray.sort(
+          (a, b) => b.likes - a.likes
+        );
+      })
+    );
+  }
+
+  private readonly allowedCuisines: Cuisine[] = [
+    'german',
+    'italian',
+    'indian',
+    'japanese',
+    'gourmet',
+    'fusion'
+  ];
+
+  private readonly allowedPreferences: Preferences[] = [
+    'Vegetarian',
+    'Vegan',
+    'Keto',
+    'No preferences'
+  ];
+
+  private readonly allowedComplexities: Complexity[] = [
+    'Quick',
+    'Medium',
+    'Complex'
+  ];
+
+  validateCuisine(cuisine: string): Cuisine {
+    const aiCuisine = cuisine.toLowerCase().trim();
+      if (this.allowedCuisines.some(allowed => allowed === aiCuisine)) {
+        return aiCuisine as Cuisine;
+      } else {
+        return 'fusion'
+      }
+  }
+
+  hasBasicRecipeFields(recipe: unknown): boolean {
+    if (typeof recipe !== 'object' || recipe === null) {
+      return false;
+    }
+    if (!('name' in recipe) || typeof recipe.name !== 'string') {
+      return false;
+    }
+    if (!('cookingTime' in recipe) || typeof recipe.cookingTime !== 'number') {
+      return false;
+    }
+    if (!('cookingPerson' in recipe) || typeof recipe.cookingPerson !== 'number') {
+      return false;
+    }
+    if (!('preferences' in recipe) || typeof recipe.preferences !== 'string' || !this.allowedPreferences.some(value => value === recipe.preferences)) {
+      return false;
+    }
+    if (!('complexity' in recipe) || typeof recipe.complexity !== 'string' || !this.allowedComplexities.some(value => value === recipe.complexity)) {
+      return false;
+    }
+    if (!('likes' in recipe) || typeof recipe.likes !== 'number') {
+      return false;
+    }
+    if (!('ingredients' in recipe) || !Array.isArray(recipe.ingredients)) {
+      return false;
+    }
+    if (!('extraIngredients' in recipe) || !Array.isArray(recipe.extraIngredients)) {
+      return false;
+    }
+    if (!('directions' in recipe) || !Array.isArray(recipe.directions)) {
+      return false;
+    }
+   if (!('nutritions' in recipe) || typeof recipe.nutritions !== 'object' || recipe.nutritions === null || Array.isArray(recipe.nutritions)) {
+    return false;
+  }
+    return true;
+  }
 }
 
 export interface FirebaseRecipesResponse {

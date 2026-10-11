@@ -215,7 +215,18 @@ export class GenerateRecipePage {
       .subscribe({
         next: response => {
           const result: RecipeGenerationResult = JSON.parse(response.output);
-          this.recipeService.setAiRecipes(result.recipes);
+          if (!Array.isArray(result.recipes) || result.recipes.length !== 3) {
+            console.error('Invalid recipe response');
+            return;
+          }
+          const validatedRecipes = result.recipes.map(recipe => ({
+            ...recipe, cuisine: this.recipeService.validateCuisine(recipe.cuisine)
+          }));
+          if (!validatedRecipes.every(recipe => this.recipeService.hasBasicRecipeFields(recipe))) {
+            console.error('At least one recipe is invalid');
+            return;
+          }
+          this.recipeService.setAiRecipes(validatedRecipes);
           this.router.navigate(['/recipe-result']);
         },
         error: error => {console.error('n8n error:', error);}});
