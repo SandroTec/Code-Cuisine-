@@ -160,3 +160,49 @@ p {
     width: 40px;
     height: 20px;
 }
+
+@media (max-width: 950px) {
+    .cookbook-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+    }
+
+    h1 {
+        font-family: Ubuntu;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 64px;
+        line-height: 72px;
+        letter-spacing: 0%;
+    }
+
+    p {
+        font-family: Quicksand;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 24px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+
+    .left-hand-side button {
+        font-family: Quicksand;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+    }
+
+    .cookbook-container p {
+        font-family: Ubuntu;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 24px;
+        line-height: 120%;
+        letter-spacing: 0%;
+    }
+}
