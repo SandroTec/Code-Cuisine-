@@ -17,7 +17,7 @@
                 <p>Most liked recipes <img class="heart" src="/assets/img/heart-default.png" alt="green heart"></p>
                 <div class="liked-recipes-container">
                     
-                    @for (recipe of mostLikedRecipes; track recipe.id) {
+                    @for (recipe of mostLikedRecipes(); track recipe.id) {
                         @if (recipe) {  
                             <div class="liked-recipes-div" >
                                 <div class="liked-container-layout">

@@ -14,13 +14,17 @@ export class CookbookPage {
 
   cusine = signal('');
   recipeService = inject(RecipeService);
-  mostLikedRecipes:CuisineRecipe[] = [];
+  mostLikedRecipes = signal<CuisineRecipe[]>([]);
 
   ngOnInit() {
+     console.log('Starte Firebase-Abfrage');
     this.recipeService.getMostLikedRecipes().subscribe({
       next: recipes => {
-        this.mostLikedRecipes = Object.values(recipes ?? {})
+        const sortedRecipes = Object.values(recipes ?? {})
         .sort((a,b) => b.likes -a.likes)
+        console.log('sortiere Firebase-Response')
+        
+        this.mostLikedRecipes.set(sortedRecipes)
       },
       error: error => {
         console.error('LOAD ERROR:', error);
