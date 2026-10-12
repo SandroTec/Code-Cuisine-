@@ -79,7 +79,7 @@ h1 {
 
 .liked-recipes-container {
     display: flex;
-    
+    overflow-x: auto;
 }
 
 .most-liked-container p {
@@ -88,6 +88,15 @@ h1 {
     font-weight: 500;
     font-style: Medium;
     font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+#mealName {
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
     line-height: 100%;
     letter-spacing: 0%;
 
@@ -170,4 +179,57 @@ footer a:hover {
 
 .footer-link-arrow {
     transform: rotate(180deg);
+}
+
+@media (max-width: 950px) {
+    h1 {
+        font-family: Quicksand;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 40px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+
+    .description-container p {
+        font-family: Quicksand;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 18px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+
+    .most-liked-container p {
+        font-family: Quicksand;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 24px;
+        line-height: 100%;
+        letter-spacing: 0%;
+
+    }
+
+    .cookbook-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cuisine-container {
+        grid-template-columns: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    
+    .cuisine-container div {
+        width: auto;
+        height: 300px;
+    }
+
+    .cuisine-image {
+        width: 100%;
+        box-sizing: border-box;
+        height: auto;
+    }
 }
