@@ -20,11 +20,15 @@
                     @for (recipe of mostLikedRecipes; track recipe.id) {
                         @if (recipe) {  
                             <div class="liked-recipes-div" >
-                                <div>
-                                    <img src="/assets/img/time-icon.png" alt="time icon">
-                                    <span>Cooking time: {{recipe.cookingTime}} min</span>
-                                    <img src="/assets/img/heart-default.png" alt="heart icon">
-                                    <span id="likeCount"> {{recipe.likes}} </span>
+                                <div class="liked-container-layout">
+                                    <div>
+                                        <img src="/assets/img/time-icon.png" alt="time icon">
+                                        <span>Cooking time: {{recipe.cookingTime}} min</span>
+                                    </div>
+                                    <div class="like-container-bg">
+                                        <img src="/assets/img/heart-default.png" alt="heart icon">
+                                        <span id="likeCount"> {{recipe.likes}} </span>
+                                    </div>
                                 </div>
                                 <p id="mealName"> {{recipe.name}} </p>
 

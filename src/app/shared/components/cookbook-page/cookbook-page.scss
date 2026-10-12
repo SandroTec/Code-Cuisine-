@@ -78,8 +78,20 @@ h1 {
 }
 
 .liked-recipes-container {
+    width: 70%;
     display: flex;
     overflow-x: auto;
+    gap: 10px;
+}
+
+.liked-recipes-container img {
+    width: 20px;
+    height: 20px;
+}
+
+.most-liked-container {
+    width: 100%;
+    height: 124px;
 }
 
 .most-liked-container p {
@@ -105,6 +117,41 @@ h1 {
 .liked-recipes-div {
     background: #e4e8e4;
     color: #1e5515;
+    gap: 24px;
+    padding-top: 16px;
+    padding-right: 12px;
+    padding-bottom: 16px;
+    padding-left: 12px;
+    border-radius: 16px;
+    
+    
+    }
+
+.liked-container-layout {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 370px;
+    padding: 8px;
+}
+
+.liked-container-layout div {
+    display: flex;
+    align-items: flex-start;
+    
+}
+
+.like-container-bg {
+    background: #b0c0b0;
+    width: 64px;
+    height: 32px;
+    display: flex;
+    align-items: center !important;
+    justify-content: center;
+}
+
+#mealName {
+    padding: 8px;
 }
 
 .heart {
@@ -181,6 +228,13 @@ footer a:hover {
     transform: rotate(180deg);
 }
 
+@media (max-width: 1350px) {
+    .cuisine-container {
+        grid-template-columns: auto auto; 
+        justify-content: center;
+    }
+}
+
 @media (max-width: 950px) {
     h1 {
         font-family: Quicksand;
@@ -200,6 +254,10 @@ footer a:hover {
         letter-spacing: 0%;
     }
 
+    .liked-recipes-container {
+        width: 100%;
+    }
+
     .most-liked-container p {
         font-family: Quicksand;
         font-weight: 600;
@@ -213,23 +271,29 @@ footer a:hover {
     .cookbook-container {
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
     .cuisine-container {
         grid-template-columns: auto;
+        justify-content: center;
     }
 }
 
 @media (max-width: 500px) {
     
     .cuisine-container div {
-        width: auto;
+        width: 300px;
         height: 300px;
     }
 
     .cuisine-image {
         width: 100%;
         box-sizing: border-box;
-        height: auto;
+        height: 100%;
+    }
+
+    footer {
+        justify-content: center;
     }
 }

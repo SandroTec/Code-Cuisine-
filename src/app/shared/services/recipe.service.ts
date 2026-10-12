@@ -81,11 +81,16 @@ export class RecipeService {
     );
   }
 
-  mostLikedRecipes() {
-    return this.getRecipes().pipe(map(recipes => {
-      const recipeArray = Object.values(recipes ?? {});
-      return recipeArray.sort((a, b) => b.likes - a.likes);
-    })
+  getMostLikedRecipes() {
+    const params = {
+      orderBy: '"likes"',
+      startAt: '10',
+      limitToLast: '10'
+    };
+
+    return this.http.get<Record<string, CuisineRecipe> | null>(
+      `${this.firebaseUrl}.json`,
+      { params }
     );
   }
 

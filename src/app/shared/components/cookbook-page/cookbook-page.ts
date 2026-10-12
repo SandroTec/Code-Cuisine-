@@ -14,12 +14,13 @@ export class CookbookPage {
 
   cusine = signal('');
   recipeService = inject(RecipeService);
-  mostLikedRecipes:Recipe[] = [];
+  mostLikedRecipes:CuisineRecipe[] = [];
 
   ngOnInit() {
-    this.recipeService.mostLikedRecipes().subscribe({
+    this.recipeService.getMostLikedRecipes().subscribe({
       next: recipes => {
-        this.mostLikedRecipes = recipes;
+        this.mostLikedRecipes = Object.values(recipes ?? {})
+        .sort((a,b) => b.likes -a.likes)
       },
       error: error => {
         console.error('LOAD ERROR:', error);
