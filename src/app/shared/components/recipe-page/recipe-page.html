@@ -7,7 +7,7 @@
     @if (currentRecipe(); as recipe) {
     <main class="max-content">
         <div class="hl-desc grid-container-2">
-            <div>
+            <div class="basic-info-header">
                 <p class="time-container"><img src="/assets/img/time-icon.png" alt="time-icon"> Cooking time <span id="recipe-time"> {{ recipe.cookingTime }} </span> min</p>
                 <h1 id="recipeTitle">{{ recipe.name }}</h1>
                 <div class="flex-container">
@@ -22,18 +22,20 @@
                     <p class="tag"> {{ recipe.complexity }} </p>
                     <p class="tag" id="like-counter"><img src="/assets/img/heart-default.png" alt="green heart">{{ recipe.likes }}</p>
                 </div>
-                <span>Nutritianl information</span>
+                <div>
+                    <span>Nutritianl information</span>
 
-                <div class="grid-container-4">
-                    <p><strong>Energie</strong></p>
-                    <p><strong>Protein</strong></p>
-                    <p><strong>Fat</strong></p>
-                    <p><strong>Carbs</strong></p>
+                    <div class="grid-container-4">
+                        <p><strong>Energie</strong></p>
+                        <p><strong>Protein</strong></p>
+                        <p><strong>Fat</strong></p>
+                        <p><strong>Carbs</strong></p>
 
-                    <p id="e-display"> {{ recipe.nutritions.calories }}kcal</p>
-                    <p id="p-display"> {{  recipe.nutritions.protein  }}g</p>
-                    <p id="f-display"> {{ recipe.nutritions.fat }}g</p>
-                    <p id="c-display"> {{ recipe.nutritions.carbohydrates }}g</p>
+                        <p id="e-display"><strong> {{ recipe.nutritions.calories }}kcal</strong></p>
+                        <p id="p-display"> <strong>{{  recipe.nutritions.protein  }}g</strong></p>
+                        <p id="f-display"><strong> {{ recipe.nutritions.fat }}g</strong></p>
+                        <p id="c-display"><strong> {{ recipe.nutritions.carbohydrates }}g</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,7 +118,7 @@
         <button [routerLink]="['/cookbook']" role="link">Cookbook</button>
     </footer>
 
-    <div class="max-content under-footer">
+    <div class="max-content under-footer d-none-mobile">
         <a [routerLink]="['/generate-recipe']" role="link">Generate new recipe <img class="rotate like-image" src="/assets/img/Arrow-green.png" alt="green arrow"></a>
     </div>
 </body>
