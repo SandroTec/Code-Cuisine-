@@ -11,3 +11,21 @@
 .logo {
     cursor: pointer;
 }
+
+.d-none-desktop {
+    display: none !important;
+}
+
+.d-none-mobile {
+    display: flex !important;
+}
+
+@media (max-width: 950px) {
+    .d-none-desktop {
+        display: flex !important;
+    }
+
+    .d-none-mobile {
+        display: none !important;
+    }
+}

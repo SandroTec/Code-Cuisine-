@@ -329,6 +329,11 @@ footer button {
 }
 
 @media (max-width: 950px) {
+
+    main {
+        padding: 8px 12px;
+    }
+
     h1 {
         font-family: Quicksand;
         font-weight: 600;
@@ -350,6 +355,7 @@ footer button {
 
     .right-hand-side {
         flex-direction: column-reverse;
+        margin-left: 0;
     }
 
     .right-hand-side span {

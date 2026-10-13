@@ -1,7 +1,8 @@
 <body>
     <header class="max-content">
             <img routerLink="/" class="logo" src="/assets/img/logo-green.png" alt="logo green">
-            <a routerLink="/recipe-result"> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
+            <a routerLink="/recipe-result" class="d-none-mobile"> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
+            <a routerLink="/recipe-result" class="d-none-desktop"> <img src="/assets/img/Arrow-green.png" alt="arrow green"></a>
     </header>
 
     @if (currentRecipe(); as recipe) {

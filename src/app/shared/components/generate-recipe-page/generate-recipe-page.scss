@@ -696,4 +696,17 @@ h3 {
             flex-wrap: wrap;
         }
     }
+
+    .generate-form input {
+        max-width: 100%;
+    }
+
+    .serving-size-input {
+        width: 80px;
+    }
+
+    .generate-form-div {
+        display: flex;
+        flex-direction: column;
+    }
 }
