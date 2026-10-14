@@ -3,7 +3,7 @@
         <img class="logo" [routerLink]="['']" role="link" src="/assets/img/logo-green.png" alt="logo green">
         <a [routerLink]="['/cookbook']" role="link"><img src="/assets/img/Arrow-green.png" alt="green arrow"> Cookbook</a>
     </header>
-    <div class="btn-container max-content">
+    <div class="btn-container max-content d-none-mobile">
         <button [routerLink]="['/generate-recipe']" role="link">Generate a recipe</button>
     </div>
 
@@ -15,7 +15,7 @@
             <ul>
                 @for (recipe of recipes(); track recipe.id) {
                     <li [routerLink]="['/recipe/', recipe.id]" role="link">
-                        <div class="meal-container flex-container">
+                        <div class="meal-container flex-container fld-mobile">
                             <div>
                                 <p class="cooking-time-txt"><img src="/assets/img/time-icon.png" alt="time icon"> Cooking time: <span id="cookingTimeDisplay">  {{ recipe.cookingTime }} min</span></p>
                                 <h2> {{ recipe.name }} </h2>
@@ -34,4 +34,7 @@
         </div>
     </main>
 
+    <div class="btn-container max-content d-none-desktop">
+        <button [routerLink]="['/generate-recipe']" role="link">Generate a recipe</button>
+    </div>
 </body>

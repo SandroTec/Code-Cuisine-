@@ -77,7 +77,8 @@ header a {
     color: #10310B;
 }
 
-.hero-images {
+.hero-image {
+    max-width: 1440px;
     width: 90%;
 }
 
@@ -203,4 +204,30 @@ h2 {
 .like-counter img {
     width: 18px;
     height: 18px;
+}
+
+@media (max-width: 950px) {
+    .btn-container {
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .btn-container button {
+        font-family: Quicksand;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+    }
+
+    .fld-mobile {
+        flex-direction: column;
+    }
+
+    .meal-container {
+        height: auto;
+        align-items: flex-start;
+    }
 }

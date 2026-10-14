@@ -187,3 +187,10 @@ footer a {
 footer a:hover {
     background: #69856975;
 }
+
+@media (max-width: 950px) {
+    .card-row {
+        flex-direction: column;
+        align-items: center;
+    }
+}
