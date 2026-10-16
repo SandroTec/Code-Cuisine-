@@ -232,6 +232,16 @@ export class GenerateRecipePage {
               throw new Error('Recipe validation failed');
             }
             await firstValueFrom(this.recipeService.getRecipes());
+            console.log(
+              'New recipes:',
+              validatedRecipes
+            );
+
+            console.log(
+              'Existing recipes:',
+              this.recipeService.allRecipes()
+            );
+            
             const newRecipes = this.recipeService.filterNewRecipes(validatedRecipes);
             if (newRecipes.length > 0) {
               await this.recipeService.saveRecipes(newRecipes);

@@ -30,7 +30,7 @@ export class RecipeService {
       if (!id) {
         throw new Error('Could not generate recipe ID');
       }
-      updates[`recipes/${recipe.cuisine}/${id}`] = recipe;
+      updates[`recipes/${id}`] = recipe;
     }
     await update(ref(this.db), updates);
   }
@@ -150,7 +150,7 @@ export class RecipeService {
     if (!('likes' in recipe) || typeof recipe.likes !== 'number' || !Number.isInteger(recipe.likes) ||recipe.likes < 0) {
       return false;
     }
-    if (!('cuisine' in recipe) || typeof recipe.cuisine !== 'string' || !this.allowedCuisines.some(value => value === recipe.cuisine)) {
+    if (!('cuisine' in recipe) || typeof recipe.cuisine !== 'string' || !this.allowedCuisines.some(value => value == recipe.cuisine)) {
       return false;
     }
     if (!('ingredients' in recipe) || !Array.isArray(recipe.ingredients) || recipe.ingredients.length === 0 || !recipe.ingredients.every(ingredient => this.isValidIngredient(ingredient))) {
@@ -159,7 +159,7 @@ export class RecipeService {
     if (!('extraIngredients' in recipe) || !Array.isArray(recipe.extraIngredients) || !recipe.extraIngredients.every(ingredient => this.isValidIngredient(ingredient))) {
       return false;
     }
-    if (!('directions' in recipe) || !Array.isArray(recipe.directions) || recipe.directions.length === 0 || !recipe.directions.every(direction => typeof direction === 'string' && direction.trim() !== '')) {
+    if (!('directions' in recipe) || !Array.isArray(recipe.directions) || recipe.directions.length < 3 || !recipe.directions.every(direction => typeof direction === 'object' && direction !== null && !Array.isArray(direction) && 'headline' in direction && typeof direction.headline === 'string' && direction.headline.trim().length > 0 && 'description' in direction && typeof direction.description === 'string' && direction.description.trim().length > 0)) {
       return false;
     }
     if (!('nutritions' in recipe) || typeof recipe.nutritions !== 'object' || recipe.nutritions === null || Array.isArray(recipe.nutritions)) {
