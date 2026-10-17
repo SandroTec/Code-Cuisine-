@@ -16,7 +16,7 @@ import { Database, ref, push, update } from '@angular/fire/database';
 export class RecipeService {
 
   private http = inject(HttpClient);
-  private webhookUrl = 'http://localhost:5678/webhook-test/ec7e4e3a-0690-443c-9347-e51b9e8c0ee2';
+  private webhookUrl = 'http://localhost:5678/webhook/ec7e4e3a-0690-443c-9347-e51b9e8c0ee2';
 
 
   private db = inject(Database);
