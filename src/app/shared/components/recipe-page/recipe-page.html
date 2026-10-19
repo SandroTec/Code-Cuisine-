@@ -13,8 +13,9 @@
                 <h1 id="recipeTitle">{{ recipe.name }}</h1>
                 <div class="flex-container">
                     <p>Cooking person <span id="personCounter"> {{ recipe.cookingPerson }} </span></p>
-                    <p><img src="" alt="chef icon"></p>
-                    <p><img src="" alt="chef icon"></p>
+                    @for (icons of chefIcons.slice(0, recipe.cookingPerson); track $index) {
+                        <img [src]="icons" alt="chef icon">
+                    }
                 </div>
             </div>
             <div class="right-hand-side">
@@ -88,7 +89,7 @@
                                 <li class="direction-li">
                                     <div class="flex-container">
                                         <h3 class="step-hl"> {{ direction.headline }} </h3>
-                                        <img src="" alt="chef icon">
+                                        <img [src]="chefIcons[direction.chef -1]" alt="chef icon">
                                     </div>
                                     <p class="step-desc">{{ direction.description }}</p>
                                 </li>

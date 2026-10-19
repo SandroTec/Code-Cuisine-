@@ -20,6 +20,12 @@ export class RecipePage {
 
   currentRecipe = this.recipeService.currentRecipe;
 
+  chefIcons: string[] = [
+    '/assets/img/chef-icons/Cook-01.png',
+    '/assets/img/chef-icons/Cook-02.png',
+    '/assets/img/chef-icons/Cook-03.png',
+    '/assets/img/chef-icons/Cook-04.png'
+  ];
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
