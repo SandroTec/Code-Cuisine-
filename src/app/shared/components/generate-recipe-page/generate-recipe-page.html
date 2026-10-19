@@ -210,7 +210,11 @@
 
                 <div class="form-footer">
                     <button type="button" [disabled]="isGenerating()" (click)="generateRecipe()">Generate a recipe</button>
+                    @if (errorMessage()) {
+                        <p> {{ errorMessage() }} </p>
+                    }
                 </div>
+
             </form>
         </main>
     </div>

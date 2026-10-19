@@ -24,6 +24,8 @@ export class GenerateRecipePage {
   searchTerm = signal('');
   isGenerating = signal(false);
 
+  errorMessage = signal('');
+
   //Cuisine settings:
   complexity = signal<RecipeSettings['complexity'] | null> (null);
   cuisine = signal<RecipeSettings['cuisine'] | null> (null);
@@ -215,6 +217,7 @@ export class GenerateRecipePage {
     };
     this.recipeService.setGenerationSettings(settings);
     this.isGenerating.set(true);
+    this.errorMessage.set('');
 
     this.recipeService.generateRecipe(request).subscribe({
         next: async response => {
@@ -256,6 +259,9 @@ export class GenerateRecipePage {
         },
         error: error => {
           console.error('n8n error:', error);
+          if (error.status === 429) {
+            this.errorMessage.set(error.error?.message ?? 'Daily limit reached.');
+          }
           this.isGenerating.set(false);
         }});
   }
