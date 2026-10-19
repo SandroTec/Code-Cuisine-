@@ -189,7 +189,7 @@ export class GenerateRecipePage {
   }
 
   getSettigns(): RecipeSettings | null {
-    if (!this.complexity() || !this.cuisine) return null;
+    if (!this.complexity() || !this.cuisine()) return null;
     
     return {
       portions: this.portionCounter(),

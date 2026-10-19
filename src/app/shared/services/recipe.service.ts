@@ -84,7 +84,7 @@ export class RecipeService {
   getMostLikedRecipes() {
     const params = {
       orderBy: '"likes"',
-      startAt: '5',
+      startAt: '1',
       limitToLast: '10'
     };
 
