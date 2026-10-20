@@ -47,28 +47,24 @@
                     <img src="/assets/img/directions-hero.png" alt="ingredients hero image">
                     <h2>Ingredients</h2>
                 </div>
-                <div class="grid-container-2">
-                    <div class="centered-list">
+                <div class="ingredients-grid">
+                    <div class="ingredients-column">
                         <p class="ingredients-hl">Your Ingredients</p>
                         <ul>
                             @for (ingredient of recipe.ingredients; track $index) {
                                 <li class="ingredients-li"> 
-                                    {{ ingredient.name }} 
-                                    {{ ingredient.amount }} 
-                                    {{ ingredient.unit }} 
+                                    {{ ingredient.amount }}{{ ingredient.unit }} {{ ingredient.name }}
                                 </li>
                             }
                             
                         </ul>
                     </div>
-                    <div class="centered-list">
+                    <div class="ingredients-column">
                         <p class="ingredients-hl">Extra Ingredients</p>
                         <ul>
                             @for (extraIngredient of recipe.extraIngredients; track $index) {
                                 <li class="ingredients-li"> 
-                                    {{ extraIngredient.name }} 
-                                    {{ extraIngredient.amount }} 
-                                    {{ extraIngredient.unit }}
+                                    {{ extraIngredient.amount }}{{ extraIngredient.unit }} {{ extraIngredient.name }}
                                 </li>
                             }
                             
@@ -82,21 +78,18 @@
                     <img src="/assets/img/ingredients-hero.png" alt="directions hero image">
                     <h2>Directions</h2>
                 </div>
-                <div>
-                    <ul class="grid-container-2">
+                <ol class="directions-grid">
                         @for (direction of recipe.directions; track $index) {
-                            <div class="centered-list">
-                                <li class="direction-li">
-                                    <div class="flex-container">
-                                        <h3 class="step-hl"> {{ direction.headline }} </h3>
-                                        <img [src]="chefIcons[direction.chef -1]" alt="chef icon">
-                                    </div>
-                                    <p class="step-desc">{{ direction.description }}</p>
-                                </li>
-                            </div>
+                            <li class="direction-step">
+                                <div class="step-heading">
+                                    <span class="step-number">{{ $index + 1 }}</span>
+                                    <h3 class="step-hl">{{ direction.headline }}</h3>
+                                    <img class="step-chef" [src]="chefIcons[direction.chef -1]" alt="chef icon">
+                                </div>
+                                <p class="step-desc">{{ direction.description }}</p>
+                            </li>
                         }                    
-                    </ul>
-                </div>
+                </ol>
             </section>
         
             <div class="flex-container center-container">
