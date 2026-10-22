@@ -17,7 +17,10 @@ export class CuisineListPage {
   recipeService = inject(RecipeService);
   private route = inject(ActivatedRoute);
   cuisineName:string | null = "";
+
   recipes = signal<Recipe[]>([]);
+  currentPage: number = 1;
+  pageSize: number = 15;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -43,5 +46,20 @@ export class CuisineListPage {
     });
   }
 
+  get paginatedRecipes() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.recipes().slice(startIndex, endIndex);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.recipes().length / this.pageSize);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
   
 }
