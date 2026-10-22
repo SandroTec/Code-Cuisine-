@@ -50,14 +50,14 @@
                     </div>
                 </form>
 
-                <div class="ingedients-container">
+                <div class="ingredients-container">
                     <p>List of your ingredients.</p>
 
                     <ul>
                         @for (ingredient of ingredients; track $index) {
                         
                             @if (editingIndex === $index) {
-                                <div class="ingedients-container-div" [formGroup]="editForm">
+                                <div class="ingredients-container-div" [formGroup]="editForm">
                                     <div class="flex-container">
                                         <input type="number" formControlName="amount" min="1" step="1"/>
 
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                             } @else {
-                                <li class="ingedients-container-list">
+                                <li class="ingredients-container-list">
                                     <div>
                                         {{ ingredient.amount }}
                                         {{ ingredient.unit }}

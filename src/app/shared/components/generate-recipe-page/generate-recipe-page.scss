@@ -207,11 +207,12 @@ li {
     content: url('/assets/img/check-onClick.png');
 }
 
-.ingedients-container {
+.ingredients-container {
     max-width: 577px;
     width: 100%;
     margin-top: 70px;
-    height: 176px;
+    height: auto;
+    min-height: 176px;
     gap: 32px;
     border-radius: 20px;
     padding-top: 25px;
@@ -220,7 +221,7 @@ li {
     padding-left: 30px;
 }
 
-.ingedients-container-div {
+.ingredients-container-div {
     padding: 6px;
     list-style: circle;
     width: 100%;
@@ -232,7 +233,7 @@ li {
     gap: 8px;
 }
 
-.ingedients-container-div {
+.ingredients-container-div {
     input {
         background: #FAF0E6CC;
         border: none;
@@ -292,7 +293,7 @@ li {
 }
 
         
-.ingedients-container-list {
+.ingredients-container-list {
     padding: 6px;
     list-style: circle;
     width: 100%;
@@ -300,11 +301,11 @@ li {
     border-radius: 8px;
 }
 
-.ingedients-container-list:hover {
+.ingredients-container-list:hover {
     background: #efe9df;
 }
 
-.ingedients-container p {
+.ingredients-container p {
     font-family: Quicksand;
     font-weight: 500;
     font-style: Medium;
