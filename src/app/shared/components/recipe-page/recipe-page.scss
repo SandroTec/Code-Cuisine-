@@ -199,6 +199,10 @@ h1 {
     min-width: 0;
 }
 
+.section-toggle {
+    display: none;
+}
+
 .step-heading {
     display: grid;
     grid-template-columns: 24px minmax(0, 1fr) auto;
@@ -436,6 +440,41 @@ footer button {
         letter-spacing: 0%;
     }
 
+    .hl-desc {
+        padding: 16px;
+    }
+
+    .basic-info-header {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    #recipeTitle {
+        width: 100%;
+        font-size: 24px;
+        line-height: 1.15;
+        text-align: left;
+    }
+
+    .time-container {
+        font-size: 16px;
+        line-height: 1.2;
+    }
+
+    .right-hand-side {
+        width: 100%;
+    }
+
+    .right-hand-side > .flex-container {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .right-hand-side .tag {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
     .ingredients-hl {
         font-family: Quicksand;
         font-weight: 600;
@@ -476,16 +515,31 @@ footer button {
     .directions-grid {
         grid-template-columns: minmax(0, 1fr);
         row-gap: 18px;
-        width: 50%;
+        width: 100%;
     }
 
     .ingredients-column {
-        align-items: center;
+        align-items: flex-start;
     }
 
     .directions-grid {
-        justify-content: center;
+        justify-content: stretch;
+        align-items: start;
+    }
+
+    .section-toggle {
+        display: flex;
         align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin: 12px auto 0;
+        padding: 6px 10px;
+        border: 0;
+        background: transparent;
+        color: #396039;
+        font-family: Quicksand;
+        font-size: 14px;
+        cursor: pointer;
     }
 
     .hl-desc.grid-container-2 {
@@ -507,6 +561,29 @@ footer button {
 
     .step-desc {
         margin-left: 30px;
+    }
+
+    .center-container {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 8px 12px;
+        margin-top: 32px;
+    }
+
+    .center-container p {
+        grid-column: 1;
+        margin: 0;
+    }
+
+    .center-container span {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .center-container .like-btn {
+        grid-column: 2;
+        grid-row: 1;
     }
 
     .grid-container-4 {

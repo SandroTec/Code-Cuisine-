@@ -207,9 +207,66 @@ h2 {
 }
 
 @media (max-width: 950px) {
+    body {
+        height: auto;
+        min-height: 100dvh;
+    }
+
+    main {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px 16px 24px;
+    }
+
+    header {
+        padding: 16px;
+        gap: 8px;
+    }
+
+    header a {
+        margin-top: 4px;
+    }
+
+    .btn-container {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .hero-image {
+        width: 100%;
+    }
+
+    .list-container {
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .list-container > ul {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 720px;
+    }
+
+    .list-container > ul > li {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 10px 10px 12px 38px;
+        border-radius: 12px;
+    }
+
+    .list-container > ul > li:nth-of-type(even) {
+        background: #FAF0E6;
+    }
+
+    .list-container > ul > li::before {
+        top: 20px;
+        left: 6px;
+        width: 22px;
+        height: 22px;
+    }
+
     .btn-container {
         justify-content: center;
-        margin-top: 40px;
     }
 
     .btn-container button {
@@ -227,7 +284,108 @@ h2 {
     }
 
     .meal-container {
+        box-sizing: border-box;
+        width: 100%;
         height: auto;
         align-items: flex-start;
+        gap: 8px;
+        padding: 0;
+    }
+
+    .cooking-time-txt {
+        gap: 6px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .cooking-time-txt img {
+        width: 16px;
+        height: 16px;
+    }
+
+    h2 {
+        margin-top: 4px;
+        font-size: 18px;
+        line-height: 1.2;
+    }
+
+    .stats-container {
+        height: auto;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .preference,
+    .complexity,
+    .like-counter {
+        box-sizing: border-box;
+        height: auto;
+        min-height: 28px;
+        padding: 5px 10px;
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    .like-counter img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .pagination-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 18px 0 8px;
+    }
+
+    .pagination-controls button {
+        min-width: 30px;
+        padding: 6px 8px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: #10310B;
+        font-family: Quicksand;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .pagination-controls button.active {
+        background: #39603933;
+    }
+
+    .pagination-controls button:disabled {
+        opacity: 0.45;
+        cursor: default;
+    }
+
+    .pagination-controls button:first-child,
+    .pagination-controls button:last-child {
+        min-width: 24px;
+        padding-inline: 4px;
+        font-size: 0;
+    }
+
+    .pagination-controls button:first-child::before {
+        content: '<';
+        font-size: 16px;
+    }
+
+    .pagination-controls button:last-child::before {
+        content: '>';
+        font-size: 16px;
+    }
+
+    .pagination-controls:has(button:nth-child(7)) button:nth-child(4)::after {
+        content: '…';
+        margin-left: 8px;
+    }
+
+    .pagination-controls button:nth-child(n + 5):not(:nth-last-child(2)) {
+        display: none;
     }
 }

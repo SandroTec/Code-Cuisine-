@@ -17,8 +17,18 @@ export class RecipePage {
   private route = inject(ActivatedRoute);
 
   liked = signal(false);
+  ingredientsVisible = signal(true);
+  directionsVisible = signal(true);
 
   currentRecipe = this.recipeService.currentRecipe;
+
+  toggleIngredients() {
+    this.ingredientsVisible.update(visible => !visible);
+  }
+
+  toggleDirections() {
+    this.directionsVisible.update(visible => !visible);
+  }
 
   chefIcons: string[] = [
     '/assets/img/chef-icons/Cook-01.png',

@@ -8,7 +8,6 @@ body {
     width: 100dvw;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -709,5 +708,11 @@ h3 {
     .generate-form-div {
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media (max-width: 950px) {
+    .bg-color-form {
+        width: 90%;
     }
 }

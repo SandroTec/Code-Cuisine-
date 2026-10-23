@@ -6,9 +6,12 @@
     @if (generationSettings(); as settings) {
         <main class="max-content">
             <div class="result-desc">
-                <div>
-                    <h1>The recipe results</h1>
-                    <p>We took what you have and let our AI do the thinking. <br>
+                <div class="result-copy">
+                    <h1>
+                        <span class="desktop-title">The recipe results</span>
+                        <span class="mobile-title">Generated recipes</span>
+                    </h1>
+                    <p class="result-description">We took what you have and let our AI do the thinking. <br>
                     Here are 3 easy recipes you can make right now!</p>
                     <div class="settings-container">
                         <div class="setting-state"> {{ settings.cuisine}} </div>

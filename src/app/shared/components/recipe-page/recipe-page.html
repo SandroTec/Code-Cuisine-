@@ -47,6 +47,7 @@
                     <img src="/assets/img/directions-hero.png" alt="ingredients hero image">
                     <h2>Ingredients</h2>
                 </div>
+                @if (ingredientsVisible()) {
                 <div class="ingredients-grid">
                     <div class="ingredients-column">
                         <p class="ingredients-hl">Your Ingredients</p>
@@ -71,6 +72,11 @@
                         </ul>
                     </div>
                 </div>
+                }
+                <button class="section-toggle" type="button" (click)="toggleIngredients()">
+                    {{ ingredientsVisible() ? 'Hide ingredients' : 'Show ingredients' }}
+                    <span aria-hidden="true">{{ ingredientsVisible() ? '▲' : '▼' }}</span>
+                </button>
             </section>
 
             <section>
@@ -78,6 +84,7 @@
                     <img src="/assets/img/ingredients-hero.png" alt="directions hero image">
                     <h2>Directions</h2>
                 </div>
+                @if (directionsVisible()) {
                 <ol class="directions-grid">
                         @for (direction of recipe.directions; track $index) {
                             <li class="direction-step">
@@ -90,6 +97,11 @@
                             </li>
                         }                    
                 </ol>
+                }
+                <button class="section-toggle" type="button" (click)="toggleDirections()">
+                    {{ directionsVisible() ? 'Hide directions' : 'Show directions' }}
+                    <span aria-hidden="true">{{ directionsVisible() ? '▲' : '▼' }}</span>
+                </button>
             </section>
         
             <div class="flex-container center-container">
