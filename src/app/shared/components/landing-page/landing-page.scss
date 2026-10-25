@@ -161,6 +161,22 @@ p {
     height: 20px;
 }
 
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+footer a {
+    color: gray;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 20px;
+}
+footer a:hover {
+    color: gainsboro;
+}
+
 @media (max-width: 950px) {
     .cookbook-container {
         display: flex;
