@@ -6,6 +6,7 @@ import { RecipeResultPage } from './shared/components/recipe-result-page/recipe-
 import { RecipePage } from './shared/components/recipe-page/recipe-page';
 import { CuisineListPage } from './shared/components/cuisine-list-page/cuisine-list-page';
 
+/** Maps application URLs to their page components. */
 export const routes: Routes = [
     {path:"", component:LandingPage},
     {path:"cookbook", component:CookbookPage},

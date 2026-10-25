@@ -9,27 +9,40 @@ import { Recipe } from '../../interfaces/recipe';
   templateUrl: './recipe-page.html',
   styleUrl: './recipe-page.scss',
 })
+/** Displays a recipe and lets the user like it or collapse its sections. */
 export class RecipePage {
 
+  /** Provides the currently selected recipe and like operations. */
   recipeService = inject(RecipeService);
 
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
+  /** Whether the current recipe is already liked in this browser. */
   liked = signal(false);
+  /** Whether the ingredients section is expanded. */
   ingredientsVisible = signal(true);
+  /** Whether the directions section is expanded. */
   directionsVisible = signal(true);
 
+  /** Signal containing the currently selected recipe. */
   currentRecipe = this.recipeService.currentRecipe;
 
+  /** Toggles the ingredient list visibility.
+   * @returns {void}
+   */
   toggleIngredients() {
     this.ingredientsVisible.update(visible => !visible);
   }
 
+  /** Toggles the preparation directions visibility.
+   * @returns {void}
+   */
   toggleDirections() {
     this.directionsVisible.update(visible => !visible);
   }
 
+  /** Image paths used to identify the assigned chefs. */
   chefIcons: string[] = [
     '/assets/img/chef-icons/Cook-01.png',
     '/assets/img/chef-icons/Cook-02.png',
@@ -37,6 +50,7 @@ export class RecipePage {
     '/assets/img/chef-icons/Cook-04.png'
   ];
 
+  /** Loads the route recipe or redirects when no recipe is available. */
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -63,6 +77,10 @@ export class RecipePage {
     }
   }
 
+  /** Restores the liked state from this browser's local storage.
+   * @param id Recipe identifier to check.
+   * @returns {void}
+   */
   checkIfLiked(id:string) {
     const likedRecipes = JSON.parse(
       localStorage.getItem('likedRecipes') ?? '[]'
@@ -70,6 +88,9 @@ export class RecipePage {
     this.liked.set(likedRecipes.includes(id));
   }
 
+  /** Likes the current recipe once and stores the choice locally.
+   * @returns {void}
+   */
   likeMeal() {
     const recipe = this.currentRecipe();
     const id = this.route.snapshot.paramMap.get('id');

@@ -1,4 +1,5 @@
 
+/** Ingredient names offered by the recipe form's autocomplete. */
 export const INGREDIENT_SUGGESTIONS: string[] = [
   'Almond',
   'Almond flour',

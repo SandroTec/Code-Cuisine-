@@ -13,6 +13,7 @@ import { Database, ref, push, update } from '@angular/fire/database';
 @Injectable({
   providedIn: 'root',
 })
+/** Handles recipe state, generation requests, and Firebase recipe data. */
 export class RecipeService {
 
   private http = inject(HttpClient);
@@ -21,6 +22,10 @@ export class RecipeService {
 
   private db = inject(Database);
 
+  /** Saves recipes under generated Firebase database keys.
+   * @param recipes Recipes to persist.
+   * @returns A promise that resolves when the database update completes.
+   */
   async saveRecipes(recipes: Recipe[]): Promise<void> {
     const updates: Record<string, Recipe> = {};
     for (const recipe of recipes) {
@@ -35,29 +40,53 @@ export class RecipeService {
     await update(ref(this.db), updates);
   }
 
+  /** Currently selected recipe shared between pages. */
   currentRecipe = signal<Recipe | null>(null);
+  /** Recipes returned by the most recent generation request. */
   aiRecipes = signal<Recipe[] | null>(null);
+  /** Settings used by the most recent generation request. */
   generationSettings = signal<RecipeSettings | null>(null);
+  /** Cached recipes keyed by Firebase ID. */
   allRecipes = signal<Record<string, CuisineRecipe>>({});
 
+  /** Sends ingredients and settings to the recipe-generation endpoint.
+   * @param request Ingredients and preferences for recipe generation.
+   * @returns An observable of the generation endpoint response.
+   */
   generateRecipe(request: RecipeRequest) {
     return this.http.post<RecipeResponse>(this.webhookUrl, request);
   }
 
+  /** Sets the recipe currently displayed by the detail page.
+   * @param recipe Recipe to select.
+   * @returns {void}
+   */
   setRecipe(recipe: Recipe) {
     this.currentRecipe.set(recipe);
   }
 
+  /** Stores the recipes returned by generation.
+   * @param recipes Generated recipes to store.
+   * @returns {void}
+   */
   setAiRecipes(recipes: Recipe[]) {
     this.aiRecipes.set(recipes);
   }
 
+  /** Stores the settings used for the generation request.
+   * @param settings Settings to store.
+   * @returns {void}
+   */
   setGenerationSettings(settings: RecipeSettings) {
     this.generationSettings.set(settings);
   }
 
+  /** Firebase URL for the recipes collection. */
   private firebaseUrl = 'https://code-a-cuisine-db-default-rtdb.europe-west1.firebasedatabase.app/recipes';
 
+  /** Fetches all recipes and refreshes the local recipe cache.
+   * @returns An observable of recipes keyed by Firebase ID, or `null` when empty.
+   */
   getRecipes() {
     return this.http
       .get<Record<string, CuisineRecipe> | null>(`${this.firebaseUrl}.json`)
@@ -68,12 +97,21 @@ export class RecipeService {
       );
   }
 
+  /** Fetches one recipe by its Firebase ID.
+   * @param id Firebase ID of the recipe to fetch.
+   * @returns An observable of the recipe, or `null` when it does not exist.
+   */
   getRecipeById(id: string) {
     return this.http.get<Recipe | null>(
       `${this.firebaseUrl}/${id}.json`
     );
   }
 
+  /** Increments a recipe's like count in Firebase.
+   * @param recipeId Firebase ID of the recipe to update.
+   * @param currentLikes Current like count before the increment.
+   * @returns An observable containing the updated like count.
+   */
   likeRecipe(recipeId: string, currentLikes: number) {
     return this.http.put<number>(
       `${this.firebaseUrl}/${recipeId}/likes.json`,
@@ -81,6 +119,9 @@ export class RecipeService {
     );
   }
 
+  /** Fetches up to ten recipes with the highest like counts.
+   * @returns An observable of matching recipes keyed by Firebase ID, or `null` when empty.
+   */
   getMostLikedRecipes() {
     const params = {
       orderBy: '"likes"',
@@ -94,6 +135,7 @@ export class RecipeService {
     );
   }
 
+  /** Normalized cuisine values accepted from generated data. */
   private readonly allowedCuisines: Cuisine[] = [
     'german',
     'italian',
@@ -103,6 +145,7 @@ export class RecipeService {
     'fusion'
   ];
 
+  /** Dietary preference values accepted from generated data. */
   private readonly allowedPreferences: Preferences[] = [
     'Vegetarian',
     'Vegan',
@@ -110,12 +153,17 @@ export class RecipeService {
     'No preferences'
   ];
 
+  /** Difficulty values accepted from generated data. */
   private readonly allowedComplexities: Complexity[] = [
     'Quick',
     'Medium',
     'Complex'
   ];
 
+  /** Returns a supported cuisine or falls back to `fusion`.
+   * @param cuisine Untrusted cuisine value to validate.
+   * @returns A supported normalized cuisine value.
+   */
   validateCuisine(cuisine: unknown): Cuisine {
     if (typeof cuisine !== 'string') {
     return 'fusion';
@@ -128,6 +176,10 @@ export class RecipeService {
       }
   }
 
+  /** Checks that generated recipe data contains the required valid fields.
+   * @param recipe Untrusted value to validate.
+   * @returns `true` when the value has the required recipe fields.
+   */
   hasBasicRecipeFields(recipe: unknown): boolean {
     if (typeof recipe !== 'object' || recipe === null || Array.isArray(recipe)) {
       return false;
@@ -168,6 +220,10 @@ export class RecipeService {
     return true;
   }
 
+  /** Checks whether an unknown value has the required ingredient fields.
+   * @param value Untrusted ingredient value to validate.
+   * @returns `true` when the value is a valid ingredient.
+   */
   private isValidIngredient(value: unknown): boolean {
     if (typeof value !== 'object' || value === null || Array.isArray(value)) {
       return false;
@@ -184,6 +240,10 @@ export class RecipeService {
     return true;
   }
 
+  /** Removes recipes whose names already exist in the local cache.
+   * @param newRecipes Recipes to compare with the cache.
+   * @returns Recipes whose normalized names are not already present.
+   */
   filterNewRecipes(newRecipes: Recipe[]): Recipe[] {
     const existingRecipes = Object.values(this.allRecipes());
 
@@ -197,6 +257,8 @@ export class RecipeService {
 
 }
 
+/** Shape of a Firebase response containing recipe records. */
 export interface FirebaseRecipesResponse {
+  /** Recipe records keyed by their Firebase IDs. */
   recipes: Record<string, Recipe>;
 }

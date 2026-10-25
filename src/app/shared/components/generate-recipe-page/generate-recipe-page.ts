@@ -18,12 +18,18 @@ import { finalize, firstValueFrom  } from 'rxjs';
 })
 export class GenerateRecipePage {
 
+  /** Ingredients currently selected for the generation request. */
   ingredients: Ingredient[] = [];
+  /** Number of portions selected by the user. */
   portionCounter = signal(2);
+  /** Number of people selected as cooks. */
   personCounter = signal(1);
+  /** Current ingredient search query. */
   searchTerm = signal('');
+  /** Whether a recipe generation request is in progress. */
   isGenerating = signal(false);
 
+  /** User-facing error from a failed generation request. */
   errorMessage = signal('');
 
   //Cuisine settings:
@@ -40,9 +46,15 @@ export class GenerateRecipePage {
     this.showSuggestions = true;
   }
 
+  /** Ingredient names available for autocomplete. */
   ingredientSuggestions = INGREDIENT_SUGGESTIONS;
+  /** Whether the autocomplete suggestions are visible. */
   showSuggestions = false;
 
+  /** Sets the selected ingredient and closes the suggestion list.
+   * @param ingredient Ingredient name chosen from the suggestions.
+   * @returns {void}
+   */
   selectIngredient(ingredient: string) {
     this.ingredientForm.patchValue(
       { name: ingredient },
@@ -53,6 +65,7 @@ export class GenerateRecipePage {
     this.showSuggestions = false;
   }
 
+  /** Returns matching suggestions for the current search term. */
   filteredIngredients = computed(() => {
     const search = this.searchTerm().trim().toLowerCase();
     if (search.length < 2) return [];
@@ -82,6 +95,9 @@ export class GenerateRecipePage {
 
   
 
+  /** Adds the valid form values to the selected ingredients.
+   * @returns {void}
+   */
   addIngredient() {
     if (this.ingredientForm.invalid) {
       this.ingredientForm.markAllAsTouched();
@@ -101,6 +117,10 @@ export class GenerateRecipePage {
     this.showSuggestions = false;
   }
 
+  /** Removes the ingredient at the given array index.
+   * @param index Zero-based index of the ingredient to remove.
+   * @returns {void}
+   */
   deleteIngredient(index:number) {
     this.ingredients.splice(index, 1);
   }
@@ -115,6 +135,10 @@ export class GenerateRecipePage {
     unit: new FormControl('g', Validators.required)
   });
 
+  /** Opens the edit form with the selected ingredient's amount and unit.
+   * @param index Zero-based index of the ingredient to edit.
+   * @returns {void}
+   */
   editIngredient(index:number) {
     const ingredient = this.ingredients[index];
     this.editingIndex = index;
@@ -124,6 +148,9 @@ export class GenerateRecipePage {
     });
   }
 
+  /** Saves valid edit form values to the selected ingredient.
+   * @returns {void}
+   */
   saveIngredient() {
     if (this.editForm.invalid || this.editingIndex === null) {
       this.editForm.markAllAsTouched();
@@ -139,6 +166,9 @@ export class GenerateRecipePage {
     this.editingIndex = null;
   }
 
+  /** Switches between the ingredient and settings form panels.
+   * @returns {void}
+   */
   toggleDesign() {
     const ingredientDesign = document.getElementById('ingredientsForm');
     const settingsDesign = document.getElementById('settingsForm');
@@ -151,10 +181,14 @@ export class GenerateRecipePage {
     }
   }
 
+  /** Placeholder for setting-related form handling. */
   setSetting() {
     
   }
 
+  /** Increases the cook count up to its configured maximum.
+   * @returns {void}
+   */
   addToPersonCounter() {
     if (this.personCounter() <= 3) {
       this.personCounter.update(value => value + 1);
@@ -162,6 +196,9 @@ export class GenerateRecipePage {
     
   }
 
+  /** Increases the portion count up to its configured maximum.
+   * @returns {void}
+   */
   addToPortionCounter() {
     if (this.portionCounter() <= 11) {
       this.portionCounter.update(value => value + 1);
@@ -169,27 +206,48 @@ export class GenerateRecipePage {
     
   }
 
+  /** Decreases the portion count without going below one.
+   * @returns {void}
+   */
   reducePortionCounter() {
     this.portionCounter.update(value => Math.max(1, value - 1));
   }
 
+  /** Decreases the cook count without going below one.
+   * @returns {void}
+   */
   reducePersonCounter() {
     
     this.personCounter.update(value => Math.max(1, value - 1));
   }
 
+  /** Updates the requested preparation difficulty.
+   * @param complexityLevel Difficulty selected by the user.
+   * @returns {void}
+   */
   setComplexity(complexityLevel: RecipeSettings['complexity']) {
     this.complexity.set(complexityLevel);
   }
 
+  /** Updates the requested cuisine.
+   * @param cusineValue Cuisine selected by the user.
+   * @returns {void}
+   */
   setCusine(cusineValue: RecipeSettings['cuisine']) {
     this.cuisine.set(cusineValue);
   }
 
+  /** Updates the requested dietary preference.
+   * @param preferenceValue Dietary preference selected by the user.
+   * @returns {void}
+   */
   setPreferences(preferenceValue: RecipeSettings['preferences']) {
     this.preferences.set(preferenceValue);
   }
 
+  /** Builds the generation settings when required choices are available.
+   * @returns The selected settings, or `null` when cuisine or difficulty is missing.
+   */
   getSettigns(): RecipeSettings | null {
     if (!this.complexity() || !this.cuisine()) return null;
     
@@ -204,10 +262,14 @@ export class GenerateRecipePage {
 
  
 
+  /** Placeholder for loading recipes. */
   getAllRecipes() {
       
   }
 
+  /** Generates recipes, validates the response, saves new entries, and opens results.
+   * @returns {void}
+   */
   generateRecipe() {
     const settings = this.getSettigns();
     if (!settings) return;

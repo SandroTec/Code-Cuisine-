@@ -1,3 +1,4 @@
+/** Firebase project settings used to initialize the client SDK. */
 export const firebaseConfig = {
   apiKey: "AIzaSyDNNGIYa8nZWbFcdm3q1uHJ89-p62wej6I",
   authDomain: "code-a-cuisine-db.firebaseapp.com",

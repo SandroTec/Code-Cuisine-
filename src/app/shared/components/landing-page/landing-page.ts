@@ -7,4 +7,5 @@ import { RouterLink } from '@angular/router';
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.scss',
 })
+/** Displays the application landing page. */
 export class LandingPage {}

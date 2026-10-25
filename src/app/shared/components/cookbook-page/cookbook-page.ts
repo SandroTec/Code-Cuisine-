@@ -12,10 +12,14 @@ import { CuisineRecipe } from '../../interfaces/recipe';
 })
 export class CookbookPage {
 
+  /** Selected cuisine name, when one is active. */
   cusine = signal('');
+  /** Service used to load cookbook recipes. */
   recipeService = inject(RecipeService);
+  /** Recipes ordered by their like count. */
   mostLikedRecipes = signal<CuisineRecipe[]>([]);
 
+  /** Loads and sorts the most liked recipes when the page initializes. */
   ngOnInit() {
      console.log('Starte Firebase-Abfrage');
     this.recipeService.getMostLikedRecipes().subscribe({
