@@ -30,22 +30,17 @@
                         </li>
                 }
                         <div class="pagination-controls">
-                            <button 
-                                (click)="changePage(currentPage - 1)" 
-                                [disabled]="currentPage === 1">
+                            <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
                                 Zurück
                             </button>
 
-                            <button 
-                                *ngFor="let page of [].constructor(totalPages); let i = index"
-                                (click)="changePage(i + 1)"
-                                [class.active]="currentPage === (i + 1)">
-                                {{ i + 1 }}
-                            </button>
+                            @for (page of [].constructor(totalPages); track $index; let i = $index) {
+                                <button (click)="changePage(i + 1)" [class.active]="currentPage === i + 1">
+                                    {{ i + 1 }}
+                                </button>
+                            }
 
-                            <button 
-                                (click)="changePage(currentPage + 1)" 
-                                [disabled]="currentPage === totalPages">
+                            <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
                                 Weiter
                             </button>
                         </div>
