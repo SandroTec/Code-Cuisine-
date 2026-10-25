@@ -1,59 +1,70 @@
-# CodeCuisine
+# Code à Cuisine
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
+Code à Cuisine is a recipe discovery and generation web app built with Angular. Users can enter ingredients they have on hand, choose recipe preferences, and request recipe ideas. They can also browse recipes by cuisine, explore popular recipes in the cookbook, and open full recipes with ingredients and step-by-step directions.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Generate three recipe suggestions from selected ingredients and preferences.
+- Search ingredient suggestions while building a recipe request.
+- Choose portion count, number of cooks, cuisine, dietary preference, and cooking complexity.
+- View generated recipes with cooking time, preferences, complexity, and likes.
+- Browse cuisine collections and paginated recipe lists.
+- Open recipe details with ingredients, extra ingredients, nutrition information, and directions.
+- Like a recipe once per browser using local storage.
+- Responsive layouts for desktop and mobile screens.
 
-```bash
-ng serve
+## Application workflow
+
+1. Start from the landing page or open **Generate recipe**.
+2. Add ingredients and set the recipe preferences.
+3. Submit the request. The app sends it to an n8n webhook and validates the returned recipes.
+4. The generated recipes appear on the results page. New recipes are saved to Firebase Realtime Database.
+5. Open a recipe for its details, or browse the cookbook and cuisine lists.
+
+The generation request contains `ingredients` and `settings`. The webhook response is expected to contain an `output` string with JSON holding a `recipes` array.
+
+## Tech stack
+
+- Angular 21 with standalone components and the Angular Router
+- TypeScript and SCSS
+- Angular Signals and Reactive Forms
+- RxJS and Angular HttpClient
+- Firebase Realtime Database through AngularFire and its REST API
+- Vitest through the Angular CLI unit-test builder
+
+
+## Project structure
+
+```text
+src/
+├── app/
+│   ├── shared/
+│   │   ├── components/   # Landing, generation, results, recipe, cookbook, and cuisine pages
+│   │   ├── interfaces/   # Recipe, ingredient, nutrition, and settings types
+│   │   ├── services/     # Recipe generation, Firebase access, and shared recipe state
+│   │   └── ingredients.data.ts
+│   ├── app.config.ts     # Router and Firebase providers
+│   ├── app.routes.ts     # Page routes
+│   └── firebase.config.ts
+├── main.ts               # Application bootstrap
+└── styles.scss           # Global styles
+public/assets/            # Images and icons
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Routes
 
-## Code scaffolding
+| Path | Page |
+| --- | --- |
+| `/` | Landing page |
+| `/generate-recipe` | Ingredient entry and preferences |
+| `/recipe-result` | Generated recipe suggestions |
+| `/recipe/:id` | Recipe details loaded by ID |
+| `/recipe` | Details for the currently selected generated recipe |
+| `/cookbook` | Cookbook and cuisine overview |
+| `/cuisine-list/:cuisine` | Recipes in a cuisine collection |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Notes
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Recipe generation depends on the n8n workflow and is unavailable until that webhook is running.
+- Recipe data and likes use Firebase Realtime Database. The browser stores liked recipe IDs in local storage.
+- Firebase client configuration belongs to a browser application. Protect database access with Firebase security rules; never put service-account credentials in the frontend.
