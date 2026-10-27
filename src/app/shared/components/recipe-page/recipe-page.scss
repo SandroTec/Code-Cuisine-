@@ -235,8 +235,10 @@ h1 {
 }
 
 .time-container {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px;
     font-family: Quicksand;
     font-weight: 500;
@@ -467,6 +469,7 @@ footer button {
     .time-container {
         font-size: 16px;
         line-height: 1.2;
+        justify-content: center;
     }
 
     .right-hand-side {

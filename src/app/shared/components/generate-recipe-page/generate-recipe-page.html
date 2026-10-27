@@ -163,6 +163,9 @@
                                 </span>
                             </div>
                         </div>
+                        @if (generationAttempted() && !complexity()) {
+                            <p class="settings-validation-message" role="alert">Please choose a cooking time.</p>
+                        }
                     </div>
 
                     <div class="cuisine-container">
@@ -187,6 +190,9 @@
                                 Fusion
                             </button>
                         </div>
+                        @if (generationAttempted() && !cuisine()) {
+                            <p class="settings-validation-message" role="alert">Please choose a cuisine.</p>
+                        }
                     </div>
 
                     <div class="preferences-container">
@@ -211,7 +217,7 @@
                 <div class="form-footer">
                     <button type="button" [disabled]="isGenerating()" (click)="generateRecipe()">Generate a recipe</button>
                     @if (errorMessage()) {
-                        <p> {{ errorMessage() }} </p>
+                        <p class="generation-error" role="alert" aria-live="polite">{{ errorMessage() }}</p>
                     }
                 </div>
 

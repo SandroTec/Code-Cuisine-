@@ -31,6 +31,8 @@ export class GenerateRecipePage {
 
   /** User-facing error from a failed generation request. */
   errorMessage = signal('');
+  /** Whether the user has tried to generate with incomplete settings. */
+  generationAttempted = signal(false);
 
   //Cuisine settings:
   complexity = signal<RecipeSettings['complexity'] | null> (null);
@@ -271,6 +273,7 @@ export class GenerateRecipePage {
    * @returns {void}
    */
   generateRecipe() {
+    this.generationAttempted.set(true);
     const settings = this.getSettigns();
     if (!settings) return;
     const request: RecipeRequest = {
@@ -283,6 +286,7 @@ export class GenerateRecipePage {
 
     this.recipeService.generateRecipe(request).subscribe({
         next: async response => {
+          let recipeResponseValidated = false;
           try {
             const result: RecipeGenerationResult = JSON.parse(response.output);
             if (!Array.isArray(result.recipes) || result.recipes.length !== 3) {
@@ -296,6 +300,7 @@ export class GenerateRecipePage {
             if (!validatedRecipes.every(recipe => this.recipeService.hasBasicRecipeFields(recipe))) {
               throw new Error('Recipe validation failed');
             }
+            recipeResponseValidated = true;
             await firstValueFrom(this.recipeService.getRecipes());
             console.log(
               'New recipes:',
@@ -312,9 +317,21 @@ export class GenerateRecipePage {
               await this.recipeService.saveRecipes(newRecipes);
             }
             this.recipeService.setAiRecipes(validatedRecipes);
-            await this.router.navigate(['/recipe-result']);
+            const navigated = await this.router.navigate(['/recipe-result']);
+            if (!navigated) {
+              throw new Error('Could not open recipe results');
+            }
           } catch (error) {
             console.error('Recipe processing error:', error);
+            if (!recipeResponseValidated) {
+              this.errorMessage.set(
+                'The recipe service returned an invalid response. Please try again.'
+              );
+            } else {
+              this.errorMessage.set(
+                'Your recipes were created, but could not be saved or opened. Please try again.'
+              );
+            }
           } finally {
             this.isGenerating.set(false);
           }
@@ -322,7 +339,13 @@ export class GenerateRecipePage {
         error: error => {
           console.error('n8n error:', error);
           if (error.status === 429) {
-            this.errorMessage.set(error.error?.message ?? 'Daily limit reached.');
+            this.errorMessage.set('The daily recipe generation limit has been reached. Please try again later.');
+          } else if (error.status === 0) {
+            this.errorMessage.set('Could not connect to the recipe service. Please try again later.');
+          } else if (error.status >= 500) {
+            this.errorMessage.set('The recipe service is temporarily unavailable. Please try again later.');
+          } else {
+            this.errorMessage.set('The recipe request failed. Please check your selections and try again.');
           }
           this.isGenerating.set(false);
         }});
