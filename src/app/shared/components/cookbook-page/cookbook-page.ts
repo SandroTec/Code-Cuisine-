@@ -21,18 +21,13 @@ export class CookbookPage {
 
   /** Loads and sorts the most liked recipes when the page initializes. */
   ngOnInit() {
-     console.log('Starte Firebase-Abfrage');
     this.recipeService.getMostLikedRecipes().subscribe({
       next: recipes => {
         const sortedRecipes = Object.values(recipes ?? {})
-        .sort((a,b) => b.likes -a.likes)
-        console.log('sortiere Firebase-Response')
-        
+        .sort((a,b) => b.likes -a.likes)        
         this.mostLikedRecipes.set(sortedRecipes)
       },
-      error: error => {
-        console.error('LOAD ERROR:', error);
-      }
+      error: error => {console.error('LOAD ERROR:', error)}
     });
   }
 }
