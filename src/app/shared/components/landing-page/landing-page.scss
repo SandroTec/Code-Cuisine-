@@ -222,3 +222,10 @@ footer a:hover {
         letter-spacing: 0%;
     }
 }
+
+@media (min-width: 1600px) {
+    .image-container {
+        content: url('/assets/img/Visuals.png');
+        margin-top: -200px;
+    }
+}
