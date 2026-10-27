@@ -14,7 +14,7 @@
                 <div class="flex-container">
                     <p>Cooking person <span id="personCounter"> {{ recipe.cookingPerson }} </span></p>
                     @for (icons of chefIcons.slice(0, recipe.cookingPerson); track $index) {
-                        <img [src]="icons" alt="chef icon">
+                        <img class="chef-icon" [src]="icons" alt="chef icon">
                     }
                 </div>
             </div>
@@ -25,7 +25,7 @@
                     <p class="tag" id="like-counter"><img src="/assets/img/heart-default.png" alt="green heart">{{ recipe.likes }}</p>
                 </div>
                 <div>
-                    <span>Nutritianl information</span>
+                    <span class="header-span">Nutritianl information</span>
 
                     <div class="grid-container-4">
                         <p><strong>Energie</strong></p>

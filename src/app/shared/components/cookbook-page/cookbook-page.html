@@ -19,7 +19,7 @@
                     
                     @for (recipe of mostLikedRecipes(); track recipe.id) {
                         @if (recipe) {  
-                            <div class="liked-recipes-div" >
+                            <div class="liked-recipes-div" [routerLink]="['/recipe/', recipe.id]" role="link">
                                 <div class="liked-container-layout">
                                     <div>
                                         <img src="/assets/img/time-icon.png" alt="time icon">
