@@ -339,7 +339,15 @@ export class GenerateRecipePage {
         error: error => {
           console.error('n8n error:', error);
           if (error.status === 429) {
-            this.errorMessage.set('The daily recipe generation limit has been reached. Please try again later.');
+            if (error.error?.error === 'DAILY_LIMIT_REACHED') {
+              this.errorMessage.set(
+                'The daily recipe generation limit has been reached. Please try again after the next daily reset.'
+              );
+            } else {
+              this.errorMessage.set(
+                'The daily recipe generation limit has been reached. Please try again later.'
+              );
+            }
           } else if (error.status === 0) {
             this.errorMessage.set('Could not connect to the recipe service. Please try again later.');
           } else if (error.status >= 500) {
