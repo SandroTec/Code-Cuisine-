@@ -32,6 +32,7 @@ export class CuisineListPage {
     this.route.paramMap.subscribe(params => {
       const cuisine = params.get('cuisine');
       this.cuisineName = cuisine;
+      this.currentPage = 1;
       if (!cuisine) {
         this.recipes.set([]);
         return;
@@ -43,6 +44,7 @@ export class CuisineListPage {
             recipe.cuisine?.toLowerCase() === cuisine.toLowerCase()
           );
           this.recipes.set(filteredRecipes);
+          this.currentPage = 1;
         },
         error: error => {
           console.error('Firebase error:', error);
@@ -62,6 +64,26 @@ export class CuisineListPage {
   /** Returns the number of pages required for the current recipe collection. */
   get totalPages(): number {
     return Math.ceil(this.recipes().length / this.pageSize);
+  }
+
+  /** Returns a compact page-number sequence with ellipses for distant pages. */
+  get paginationItems(): (number | 'ellipsis')[] {
+    const total = this.totalPages;
+    const current = this.currentPage;
+
+    if (total <= 7) {
+      return Array.from({ length: total }, (_, index) => index + 1);
+    }
+    if (current <= 2) {
+      return [1, 2, 3, 'ellipsis', total];
+    }
+    if (current === 3) {
+      return [1, 2, 3, 4, 'ellipsis', total];
+    }
+    if (current >= total - 2) {
+      return [1, 'ellipsis', total - 2, total - 1, total];
+    }
+    return [1, 'ellipsis', current - 1, current, current + 1, 'ellipsis', total];
   }
 
   /** Selects a page when its index is within the available range.

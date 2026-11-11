@@ -29,24 +29,44 @@
                             </div>
                         </li>
                 }
-                        <div class="pagination-controls">
-                            <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
-                                Zurück
-                            </button>
-
-                            @for (page of [].constructor(totalPages); track $index; let i = $index) {
-                                <button (click)="changePage(i + 1)" [class.active]="currentPage === i + 1">
-                                    {{ i + 1 }}
-                                </button>
-                            }
-
-                            <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
-                                Weiter
-                            </button>
-                        </div>
-                    
-                
             </ul>
+            @if (totalPages > 1) {
+                <nav class="pagination-controls" aria-label="Recipe pages">
+                    <button
+                        type="button"
+                        class="pagination-arrow"
+                        aria-label="Previous page"
+                        (click)="changePage(currentPage - 1)"
+                        [disabled]="currentPage === 1">
+                        ‹
+                    </button>
+
+                    @for (item of paginationItems; track $index) {
+                        @if (item === 'ellipsis') {
+                            <span class="pagination-ellipsis" aria-hidden="true">…</span>
+                        } @else {
+                            <button
+                                type="button"
+                                class="pagination-page"
+                                (click)="changePage(item)"
+                                [class.active]="currentPage === item"
+                                [attr.aria-current]="currentPage === item ? 'page' : null"
+                                [attr.aria-label]="'Page ' + item">
+                                {{ item }}
+                            </button>
+                        }
+                    }
+
+                    <button
+                        type="button"
+                        class="pagination-arrow"
+                        aria-label="Next page"
+                        (click)="changePage(currentPage + 1)"
+                        [disabled]="currentPage === totalPages">
+                        ›
+                    </button>
+                </nav>
+            }
         </div>
     </main>
 
