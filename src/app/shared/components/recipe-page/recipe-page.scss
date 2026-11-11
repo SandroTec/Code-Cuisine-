@@ -378,6 +378,12 @@ footer button {
 .like-btn {
     background: transparent;
     border: none;
+    cursor: pointer;
+}
+
+.like-btn:disabled {
+    opacity: 0.65;
+    cursor: wait;
 }
 
 .like-btn img {

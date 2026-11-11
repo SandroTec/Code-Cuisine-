@@ -107,7 +107,13 @@
             <div class="flex-container center-container">
                 <p>Just finished this meal?</p>
                 <span>Give it a heart, so that the others know this is delicious.</span>
-                <button class="like-btn" (click)="likeMeal()">
+                <button
+                    class="like-btn"
+                    type="button"
+                    (click)="likeMeal()"
+                    [disabled]="likeUpdating()"
+                    [attr.aria-pressed]="liked()"
+                    [attr.aria-label]="liked() ? 'Remove like' : 'Like this recipe'">
                     @if (liked()) {
                         <img src="/assets/img/heart-clicked.png" alt="green heart">
                     }@else {

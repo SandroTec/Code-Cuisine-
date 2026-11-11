@@ -20,6 +20,8 @@ export class RecipePage {
 
   /** Whether the current recipe is already liked in this browser. */
   liked = signal(false);
+  /** Whether a like update is currently being saved. */
+  likeUpdating = signal(false);
   /** Whether the ingredients section is expanded. */
   ingredientsVisible = signal(true);
   /** Whether the directions section is expanded. */
@@ -62,7 +64,6 @@ export class RecipePage {
             return;
           }
           this.recipeService.setRecipe(recipe);
-          this.recipeService.likeRecipe(recipe.id, recipe.likes);
         },
         error: error => {
           console.error('Firebase error:', error);
@@ -82,40 +83,55 @@ export class RecipePage {
    * @returns {void}
    */
   checkIfLiked(id:string) {
-    const likedRecipes = JSON.parse(
-      localStorage.getItem('likedRecipes') ?? '[]'
-    ) as string[];
+    const likedRecipes = this.getStoredLikedRecipes();
     this.liked.set(likedRecipes.includes(id));
   }
 
-  /** Likes the current recipe once and stores the choice locally.
-   * @returns {void}
+  /** Adds or removes this browser's like and saves the updated count.
+   * @returns A promise that resolves after the Firebase update finishes.
    */
-  likeMeal() {
+  async likeMeal(): Promise<void> {
     const recipe = this.currentRecipe();
     const id = this.route.snapshot.paramMap.get('id');
 
-    if (!id || !recipe || this.liked()) {
+    if (!id || !recipe || this.likeUpdating()) {
       return;
     }
 
-    this.recipeService
-      .likeRecipe(id, recipe.likes)
-      .subscribe({
-        next: newLikes => {
-          recipe.likes = newLikes;
-          this.recipeService.setRecipe({ ...recipe });
-          const likedRecipes = JSON.parse(localStorage.getItem('likedRecipes') ?? '[]') as string[]
-          likedRecipes.push(id);
-          localStorage.setItem(
-            'likedRecipes',
-            JSON.stringify(likedRecipes)
-          );
-          this.liked.set(true);
-        },
-        error: error => {
-          console.error('Like failed:', error);
-        }
-      });
+    this.likeUpdating.set(true);
+    const wasLiked = this.liked();
+
+    try {
+      const newLikes = await this.recipeService.toggleRecipeLike(id, wasLiked);
+      const nextLiked = !wasLiked;
+      const likedRecipes = this.getStoredLikedRecipes();
+      const updatedLikedRecipes = nextLiked
+        ? [...new Set([...likedRecipes, id])]
+        : likedRecipes.filter(recipeId => recipeId !== id);
+
+      this.recipeService.setRecipe({ ...recipe, likes: newLikes });
+      this.liked.set(nextLiked);
+      try {
+        localStorage.setItem('likedRecipes', JSON.stringify(updatedLikedRecipes));
+      } catch (storageError) {
+        console.warn('Could not save the like state in this browser:', storageError);
+      }
+    } catch (error) {
+      console.error('Like update failed:', error);
+    } finally {
+      this.likeUpdating.set(false);
+    }
+  }
+
+  /** Reads and validates the locally stored recipe IDs liked in this browser. */
+  private getStoredLikedRecipes(): string[] {
+    try {
+      const storedValue: unknown = JSON.parse(localStorage.getItem('likedRecipes') ?? '[]');
+      return Array.isArray(storedValue)
+        ? storedValue.filter((id): id is string => typeof id === 'string')
+        : [];
+    } catch {
+      return [];
+    }
   }
 }

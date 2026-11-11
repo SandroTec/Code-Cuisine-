@@ -8,7 +8,7 @@ import { RecipeSettings } from '../interfaces/recipe-settings';
 import { Preferences } from '../interfaces/recipe';
 import { Complexity } from '../interfaces/recipe';
 import { map, tap } from 'rxjs';
-import { Database, ref, push, update } from '@angular/fire/database';
+import { Database, ref, push, update, runTransaction } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root',
@@ -107,16 +107,36 @@ export class RecipeService {
     );
   }
 
-  /** Increments a recipe's like count in Firebase.
+  /** Toggles a recipe's like count using an atomic Firebase transaction.
    * @param recipeId Firebase ID of the recipe to update.
-   * @param currentLikes Current like count before the increment.
-   * @returns An observable containing the updated like count.
+   * @param currentlyLiked Whether this browser currently considers the recipe liked.
+   * @returns A promise containing the updated like count.
    */
-  likeRecipe(recipeId: string, currentLikes: number) {
-    return this.http.put<number>(
-      `${this.firebaseUrl}/${recipeId}/likes.json`,
-      currentLikes + 1
+  async toggleRecipeLike(recipeId: string, currentlyLiked: boolean): Promise<number> {
+    const result = await runTransaction(
+      ref(this.db, `recipes/${recipeId}/likes`),
+      currentLikes => {
+        const currentCount = typeof currentLikes === 'number' && Number.isFinite(currentLikes)
+          ? currentLikes
+          : 0;
+
+        if (currentlyLiked && currentCount === 0) {
+          return;
+        }
+
+        return Math.max(0, currentCount + (currentlyLiked ? -1 : 1));
+      }
     );
+
+    const updatedLikes = result.snapshot.val();
+    if (typeof updatedLikes !== 'number') {
+      throw new Error('Firebase returned an invalid like count.');
+    }
+    if (!result.committed && !(currentlyLiked && updatedLikes === 0)) {
+      throw new Error('Firebase did not commit the like update.');
+    }
+
+    return updatedLikes;
   }
 
   /** Fetches up to ten recipes with the highest like counts.
