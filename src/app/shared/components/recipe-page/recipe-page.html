@@ -1,15 +1,15 @@
 <body>
     <header class="max-content">
-            <img routerLink="/" class="logo" src="/assets/img/logo-green.png" alt="logo green">
-            <a routerLink="/recipe-result" class="d-none-mobile"> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
-            <a routerLink="/recipe-result" class="d-none-desktop"> <img src="/assets/img/Arrow-green.png" alt="arrow green"></a>
+            <img routerLink="/" class="logo" src="assets/img/logo-green.png" alt="logo green">
+            <a routerLink="/recipe-result" class="d-none-mobile"> <img src="assets/img/Arrow-green.png" alt="arrow green"> Recipe results</a>
+            <a routerLink="/recipe-result" class="d-none-desktop"> <img src="assets/img/Arrow-green.png" alt="arrow green"></a>
     </header>
 
     @if (currentRecipe(); as recipe) {
     <main class="max-content">
         <div class="hl-desc grid-container-2">
             <div class="basic-info-header">
-                <p class="time-container"><img src="/assets/img/time-icon.png" alt="time-icon"> Cooking time <span id="recipe-time"> {{ recipe.cookingTime }} </span> min</p>
+                <p class="time-container"><img src="assets/img/time-icon.png" alt="time-icon"> Cooking time <span id="recipe-time"> {{ recipe.cookingTime }} </span> min</p>
                 <h1 id="recipeTitle">{{ recipe.name }}</h1>
                 <div class="flex-container">
                     <p>Cooking person <span id="personCounter"> {{ recipe.cookingPerson }} </span></p>
@@ -22,7 +22,7 @@
                 <div class="flex-container">
                     <p class="tag"> {{ recipe.preferences }} </p>
                     <p class="tag"> {{ recipe.complexity }} </p>
-                    <p class="tag" id="like-counter"><img src="/assets/img/heart-default.png" alt="green heart">{{ recipe.likes }}</p>
+                    <p class="tag" id="like-counter"><img src="assets/img/heart-default.png" alt="green heart">{{ recipe.likes }}</p>
                 </div>
                 <div>
                     <span class="header-span">Nutritianl information</span>
@@ -44,7 +44,7 @@
 
             <section>
                 <div class="section-header">
-                    <img src="/assets/img/directions-hero.png" alt="ingredients hero image">
+                    <img src="assets/img/directions-hero.png" alt="ingredients hero image">
                     <h2>Ingredients</h2>
                 </div>
                 @if (ingredientsVisible()) {
@@ -81,7 +81,7 @@
 
             <section>
                 <div class="section-header">
-                    <img src="/assets/img/ingredients-hero.png" alt="directions hero image">
+                    <img src="assets/img/ingredients-hero.png" alt="directions hero image">
                     <h2>Directions</h2>
                 </div>
                 @if (directionsVisible()) {
@@ -115,9 +115,9 @@
                     [attr.aria-pressed]="liked()"
                     [attr.aria-label]="liked() ? 'Remove like' : 'Like this recipe'">
                     @if (liked()) {
-                        <img src="/assets/img/heart-clicked.png" alt="green heart">
+                        <img src="assets/img/heart-clicked.png" alt="green heart">
                     }@else {
-                        <img class="like-img" src="/assets/img/heart-default.png" alt="green heart">
+                        <img class="like-img" src="assets/img/heart-default.png" alt="green heart">
                     }
                     
                 </button>
@@ -132,6 +132,6 @@
     </footer>
 
     <div class="max-content under-footer d-none-mobile">
-        <a [routerLink]="['/generate-recipe']" role="link">Generate new recipe <img class="rotate like-image" src="/assets/img/Arrow-green.png" alt="green arrow"></a>
+        <a [routerLink]="['/generate-recipe']" role="link">Generate new recipe <img class="rotate like-image" src="assets/img/Arrow-green.png" alt="green arrow"></a>
     </div>
 </body>

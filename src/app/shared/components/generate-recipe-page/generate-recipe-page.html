@@ -1,6 +1,6 @@
 <body>
     <header class="max-content">
-        <img class="logo" [routerLink]="['']" src="/assets/img/logo-green.png" alt="green logo">
+        <img class="logo" [routerLink]="['']" src="assets/img/logo-green.png" alt="green logo">
     </header>
 
     <div class="content max-content">
@@ -44,7 +44,7 @@
                         </select>
 
                         <button class="add-ingredient-btn" type="submit">
-                            <img class="add-icon" src="/assets/img/add-buttons/button-default.png" alt="plus icon">
+                            <img class="add-icon" src="assets/img/add-buttons/button-default.png" alt="plus icon">
                         </button>
                         </div>
                     </div>
@@ -71,8 +71,8 @@
                                     </div>
 
                                     <div class="icon-container">
-                                        <img (click)="saveIngredient()" class="save-icon" src="/assets/img/check-default.png" alt="edit icon">
-                                        <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
+                                        <img (click)="saveIngredient()" class="save-icon" src="assets/img/check-default.png" alt="edit icon">
+                                        <img (click)="deleteIngredient($index)" class="delete-icon" src="assets/img/delete-icon-default.png" alt="delete icon">
                                     </div>
                                 </div>
                             } @else {
@@ -84,8 +84,8 @@
                                     </div>
 
                                     <div class="icon-container">
-                                        <img (click)="editIngredient($index)" class="edit-icon" src="/assets/img/edit-icon-default.png" alt="edit icon">
-                                        <img (click)="deleteIngredient($index)" class="delete-icon" src="/assets/img/delete-icon-default.png" alt="delete icon">
+                                        <img (click)="editIngredient($index)" class="edit-icon" src="assets/img/edit-icon-default.png" alt="edit icon">
+                                        <img (click)="deleteIngredient($index)" class="delete-icon" src="assets/img/delete-icon-default.png" alt="delete icon">
                                     </div>
                                 </li>
                             }
@@ -103,7 +103,7 @@
 
         <main id="settingsForm" class="d-none">
             <div class="link-container">
-                <a (click)="toggleDesign()"><img src="/assets/img/Arrow-green.png" alt="green arrow"> Ingredients</a>
+                <a (click)="toggleDesign()"><img src="assets/img/Arrow-green.png" alt="green arrow"> Ingredients</a>
             </div>
             <form class="settings-form" ngSubmit="">
                 <h2>Choose your preferences</h2>
@@ -113,11 +113,11 @@
                             How many portions you need?
                         </p>
                         <div class="flex-container">
-                            <button class="counter-btn" type="button" (click)="reducePortionCounter()"><img class="minus-icon" src="/assets/img/minus-default.png" alt="minus-icon"></button>
+                            <button class="counter-btn" type="button" (click)="reducePortionCounter()"><img class="minus-icon" src="assets/img/minus-default.png" alt="minus-icon"></button>
                             <p class="settings-p"> 
                                 <span class="bg-counter">{{ portionCounter() }}</span> Portions
                             </p>
-                            <button class="counter-btn" type="button" (click)="addToPortionCounter()"><img class="plus-icon" src="/assets/img/plus-icon-default.png" alt="plus icon"></button>
+                            <button class="counter-btn" type="button" (click)="addToPortionCounter()"><img class="plus-icon" src="assets/img/plus-icon-default.png" alt="plus icon"></button>
                         </div>
                     </div>
                     <div class="gap-10">
@@ -125,18 +125,18 @@
                             How many are cooking?
                         </p>
                         <div class="flex-container">
-                            <button class="counter-btn" type="button" (click)="reducePersonCounter()"><img class="minus-icon" src="/assets/img/minus-default.png" alt="minus-icon"></button>
+                            <button class="counter-btn" type="button" (click)="reducePersonCounter()"><img class="minus-icon" src="assets/img/minus-default.png" alt="minus-icon"></button>
                             <p class="settings-p">
                                 <span class="bg-counter">{{ personCounter() }}</span> Person
                             </p>
-                            <button class="counter-btn" type="button" (click)="addToPersonCounter()"><img class="plus-icon" src="/assets/img/plus-icon-default.png" alt="plus icon"></button>
+                            <button class="counter-btn" type="button" (click)="addToPersonCounter()"><img class="plus-icon" src="assets/img/plus-icon-default.png" alt="plus icon"></button>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-color-form">
                     <div class="cooking-time-container">
-                        <h3><img src="/assets/img/time-icon.png" alt="cooking-time-icon"> Cooking time:</h3>
+                        <h3><img src="assets/img/time-icon.png" alt="cooking-time-icon"> Cooking time:</h3>
                         <div class="flex-container">
                             <div class="fld-c-container">
                                 <button (click)="setComplexity('Quick')" [class.selected]="complexity() === 'Quick'" type="button" class="settings-btn">
@@ -169,7 +169,7 @@
                     </div>
 
                     <div class="cuisine-container">
-                        <h3><img src="/assets/img/world-icon.png" alt="world-icon"> Cuisine</h3>
+                        <h3><img src="assets/img/world-icon.png" alt="world-icon"> Cuisine</h3>
                         <div class="flex-container">
                             <button (click)="setCusine('German')" [class.selected]="cuisine() === 'German'" type="button" class="settings-btn">
                                 German
@@ -196,7 +196,7 @@
                     </div>
 
                     <div class="preferences-container">
-                        <h3><img src="/assets/img/fork_spoon.png" alt="cuterly-icon"> Diet preferences</h3>
+                        <h3><img src="assets/img/fork_spoon.png" alt="cuterly-icon"> Diet preferences</h3>
                         <div class="flex-container">
                             <button (click)="setPreferences('Vegetarian')" [class.selected]="preferences() === 'Vegetarian'" type="button" class="settings-btn">
                                 Vegetarian

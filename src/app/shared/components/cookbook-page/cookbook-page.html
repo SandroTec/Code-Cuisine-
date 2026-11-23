@@ -1,8 +1,8 @@
 <body>
     <header class="max-content">
         <div>
-            <img class="logo" src="/assets/img/logo-green.png" alt="logo green">
-            <a href=""> <img src="/assets/img/Arrow-green.png" alt="arrow green"> Back</a>
+            <img class="logo" src="assets/img/logo-green.png" alt="logo green">
+            <a href=""> <img src="assets/img/Arrow-green.png" alt="arrow green"> Back</a>
         </div>
     </header>
 
@@ -14,7 +14,7 @@
             </div>
 
             <div class="most-liked-container">
-                <p>Most liked recipes <img class="heart" src="/assets/img/heart-default.png" alt="green heart"></p>
+                <p>Most liked recipes <img class="heart" src="assets/img/heart-default.png" alt="green heart"></p>
                 <div class="liked-recipes-container">
                     
                     @for (recipe of mostLikedRecipes(); track recipe.id) {
@@ -22,11 +22,11 @@
                             <div class="liked-recipes-div" [routerLink]="['/recipe/', recipe.id]" role="link">
                                 <div class="liked-container-layout">
                                     <div>
-                                        <img src="/assets/img/time-icon.png" alt="time icon">
+                                        <img src="assets/img/time-icon.png" alt="time icon">
                                         <span>Cooking time: {{recipe.cookingTime}} min</span>
                                     </div>
                                     <div class="like-container-bg">
-                                        <img src="/assets/img/heart-default.png" alt="heart icon">
+                                        <img src="assets/img/heart-default.png" alt="heart icon">
                                         <span id="likeCount"> {{recipe.likes}} </span>
                                     </div>
                                 </div>
@@ -46,37 +46,37 @@
             <div [routerLink]="['/cuisine-list', 'italian']" role="link">
                 <p class="cuisine-hl">Italian cuisine 🤌</p>
                 <div>
-                    <img class="cuisine-image" src="/assets/img/italian-cuisine.jpg" alt="cuisine-image">
+                    <img class="cuisine-image" src="assets/img/italian-cuisine.jpg" alt="cuisine-image">
                 </div>
             </div>
             <div [routerLink]="['/cuisine-list', 'german']" role="link">
                 <p class="cuisine-hl">German cuisine 🥨</p>
                 <div>
-                    <img class="cuisine-image" src="/assets/img/german-cuisine.jpg" alt="cuisine-image">
+                    <img class="cuisine-image" src="assets/img/german-cuisine.jpg" alt="cuisine-image">
                 </div>
             </div>
             <div  [routerLink]="['/cuisine-list', 'japanese']" role="link">
                 <p class="cuisine-hl">Japanese cusine 🥢</p>
                 <div>
-                    <img class="cuisine-image" src="/assets/img/japanese-cuisine.jpg" alt="cuisine-image">
+                    <img class="cuisine-image" src="assets/img/japanese-cuisine.jpg" alt="cuisine-image">
                 </div>
             </div>
             <div  [routerLink]="['/cuisine-list', 'gourmet']" role="link">
                 <p class="cuisine-hl">Gourmet cuisine ⭐</p>
                 <div>
-                    <img class="cuisine-image" src="/assets/img/gourmet-cuisine.jpg" alt="cuisine-image">
+                    <img class="cuisine-image" src="assets/img/gourmet-cuisine.jpg" alt="cuisine-image">
                 </div>
             </div>
             <div [routerLink]="['/cuisine-list', 'indian']" role="link">
                 <p class="cuisine-hl">Indian cuisine 🍛</p>
                 <div>
-                    <img class="cuisine-image" src="/assets/img/indian-cuisine.jpg" alt="cuisine-image">
+                    <img class="cuisine-image" src="assets/img/indian-cuisine.jpg" alt="cuisine-image">
                 </div>
             </div>
             <div [routerLink]="['/cuisine-list', 'fusion']" role="link">
                 <p class="cuisine-hl">Fusion cuisine 🍢</p>
                 <div>
-                    <img class="cuisine-image" src="/assets/img/fusion-cuisine.jpg" alt="cuisine-image">
+                    <img class="cuisine-image" src="assets/img/fusion-cuisine.jpg" alt="cuisine-image">
                 </div>
             </div>
         </div>

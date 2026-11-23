@@ -1,7 +1,7 @@
 <body>
     <header class="max-content">
-        <img class="logo" [routerLink]="['']" role="link" src="/assets/img/logo-green.png" alt="logo green">
-        <a [routerLink]="['/cookbook']" role="link"><img src="/assets/img/Arrow-green.png" alt="green arrow"> Cookbook</a>
+        <img class="logo" [routerLink]="['']" role="link" src="assets/img/logo-green.png" alt="logo green">
+        <a [routerLink]="['/cookbook']" role="link"><img src="assets/img/Arrow-green.png" alt="green arrow"> Cookbook</a>
     </header>
     <div class="btn-container max-content d-none-mobile">
         <button [routerLink]="['/generate-recipe']" role="link">Generate a recipe</button>
@@ -18,13 +18,13 @@
                         <li [routerLink]="['/recipe/', recipe.id]" role="link">
                             <div class="meal-container flex-container fld-mobile">
                                 <div>
-                                    <p class="cooking-time-txt"><img src="/assets/img/time-icon.png" alt="time icon"> Cooking time: <span id="cookingTimeDisplay">  {{ recipe.cookingTime }} min</span></p>
+                                    <p class="cooking-time-txt"><img src="assets/img/time-icon.png" alt="time icon"> Cooking time: <span id="cookingTimeDisplay">  {{ recipe.cookingTime }} min</span></p>
                                     <h2> {{ recipe.name }} </h2>
                                 </div>
                                 <div class="stats-container flex-container">
                                     <p class="preference"> {{ recipe.preferences }} </p>
                                     <p class="complexity"> {{ recipe.complexity }} </p>
-                                    <p class="like-counter"><img src="/assets/img/heart-default.png" alt="green heart"> {{ recipe.likes }} </p>
+                                    <p class="like-counter"><img src="assets/img/heart-default.png" alt="green heart"> {{ recipe.likes }} </p>
                                 </div>
                             </div>
                         </li>
