@@ -46,10 +46,10 @@ export class RecipePage {
 
   /** Image paths used to identify the assigned chefs. */
   chefIcons: string[] = [
-    '/assets/img/chef-icons/Cook-01.png',
-    '/assets/img/chef-icons/Cook-02.png',
-    '/assets/img/chef-icons/Cook-03.png',
-    '/assets/img/chef-icons/Cook-04.png'
+    'assets/img/chef-icons/Cook-01.png',
+    'assets/img/chef-icons/Cook-02.png',
+    'assets/img/chef-icons/Cook-03.png',
+    'assets/img/chef-icons/Cook-04.png'
   ];
 
   /** Loads the route recipe or redirects when no recipe is available. */
