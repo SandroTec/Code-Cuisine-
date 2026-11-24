@@ -5,6 +5,7 @@ import { GenerateRecipePage } from './shared/components/generate-recipe-page/gen
 import { RecipeResultPage } from './shared/components/recipe-result-page/recipe-result-page';
 import { RecipePage } from './shared/components/recipe-page/recipe-page';
 import { CuisineListPage } from './shared/components/cuisine-list-page/cuisine-list-page';
+import { LegalNotice } from './shared/components/legal-notice/legal-notice';
 
 /** Maps application URLs to their page components. */
 export const routes: Routes = [
@@ -15,4 +16,5 @@ export const routes: Routes = [
     {path:"recipe/:id", component:RecipePage},
     {path: 'recipe', component: RecipePage},
     {path:"cuisine-list/:cuisine", component:CuisineListPage},
+    {path:"legal-notice", component:LegalNotice},
 ]
