@@ -89,7 +89,7 @@ export class GenerateRecipePage {
       ]
     }),
 
-    unit: new FormControl<'g' | 'ml' | 'piece'>('g', {
+    unit: new FormControl<'g' | 'ml' | 'pieces' | 'kg'>('g', {
       nonNullable: true,
       validators: [Validators.required]
     })

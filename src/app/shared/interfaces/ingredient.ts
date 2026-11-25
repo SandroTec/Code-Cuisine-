@@ -6,5 +6,5 @@ export interface Ingredient {
     /** Required quantity. */
     amount:number,
     /** Unit used for the quantity. */
-    unit:'g' | 'ml' | 'piece';
+    unit:'g' | 'ml' | 'pieces' | 'kg';
 }
