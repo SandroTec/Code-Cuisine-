@@ -98,6 +98,8 @@ li {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
+    box-sizing: border-box;
 }
 
 .content {
@@ -181,6 +183,8 @@ li {
 
 .generate-form-div {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .grid-container {
@@ -715,6 +719,7 @@ h3 {
     .flex-container-space {
         flex-direction: column;
         align-items: center;
+        gap: 8px;
     }
 
     .generate-form {
@@ -724,6 +729,10 @@ h3 {
 
     .grid-container {
         grid-template-columns: auto;
+        text-align: center;
+        .flex-container {
+            justify-content: center;
+        }
     }
 
     .bg-color-form {
