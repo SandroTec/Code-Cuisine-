@@ -56,10 +56,27 @@ button {
     cursor: pointer;
 }
 
+input, select { 
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-top: 10px;
+    height: 46px;
+}
+
 li {
     display: flex;
     justify-content: space-between;
     margin-top: 4px;
+    font-family: Quicksand;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
 }
 
 .icon-container {
@@ -128,17 +145,16 @@ li {
     grid-template-columns: auto auto;
     align-items: flex-start;
     height: auto;
-    gap: 32px;
+    gap: 5px;
     border-radius: 20px;
     padding-top: 25px;
-    padding-bottom: 25px;
+    padding: 25px 8px;
     background: #3960394D;
-    padding: 20px;
+    box-sizing: border-box;
 }
 
 .generate-form input {
     background: #FAF0E6CC;
-    height: 36px;
     gap: 16px;
     border-radius: 20px;
     padding-left: 8px;
@@ -152,7 +168,6 @@ li {
 
 .generate-form select {
     background: #FAF0E6CC;
-    height: 36px;
     gap: 16px;
     border-radius: 20px;
     padding: 8px;

@@ -22,7 +22,7 @@
                             <ul class="ingredient-suggestions">
                                 @for (ingredient of filteredIngredients(); track ingredient) {
                                     <li (mousedown)="$event.preventDefault()" (click)="selectIngredient(ingredient)">
-                                    {{ ingredient }}
+                                        {{ ingredient }}
                                     </li>
                                 }
                             </ul>
@@ -35,12 +35,13 @@
                         </label>
 
                         <div class="flex-container">
-                        <input class="serving-size-input" id="size" type="number" formControlName="amount">
+                        <input max="10000" class="serving-size-input" id="size" type="number" formControlName="amount">
 
-                        <select formControlName="unit">
+                        <select formControlName="unit" aria-placeholder="gramm">
                             <option value="g">gram</option>
+                            <option value="kg">kg</option>
                             <option value="ml">ml</option>
-                            <option value="piece">piece</option>
+                            <option value="piece">pieces</option>
                         </select>
 
                         <button class="add-ingredient-btn" type="submit">
@@ -63,6 +64,7 @@
 
                                         <select formControlName="unit">
                                             <option value="g">g</option>
+                                            <option value="kg">kg</option>
                                             <option value="ml">ml</option>
                                             <option value="piece">piece</option>
                                         </select>
